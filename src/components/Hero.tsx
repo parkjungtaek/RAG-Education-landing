@@ -46,25 +46,25 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             </Badge>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             className="text-6xl md:text-8xl font-black leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <span className="text-white">클라우드 기반</span>{" "}
-            <span className="text-primary">AI 서비스</span>
+            <span className="text-white">GEN-AI RAG</span>{" "}
+            <span className="text-primary">문자·음성데이터</span>
             <br />
-            <span className="text-white">개발자 양성과정</span>
+            <span className="text-white">응용SW 개발자</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             className="text-2xl md:text-3xl text-white/80 font-bold"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            6개월 960시간 실무 집중 교육
+            RAG 기반 멀티모달 AI 전문가 양성과정
           </motion.p>
 
           <motion.div 

@@ -4,36 +4,36 @@ import { motion } from "framer-motion";
 
 const categories = [
   {
-    name: "Languages",
+    name: "RAG Core",
     color: "bg-blue-500",
     skills: [
-      { name: "Python", level: "Advanced", hours: 200 },
-      { name: "Java", level: "Intermediate", hours: 100 },
-      { name: "JavaScript", level: "Intermediate", hours: 80 },
+      { name: "LangChain", level: "Advanced", hours: 120 },
+      { name: "Vector DB", level: "Advanced", hours: 80, details: ["Pinecone", "Chroma", "FAISS"] },
+      { name: "임베딩 모델", level: "Advanced", hours: 60 },
     ],
   },
   {
-    name: "Cloud & Infra",
-    color: "bg-indigo-500",
+    name: "LLM & API",
+    color: "bg-green-500",
     skills: [
       {
-        name: "AWS",
+        name: "OpenAI API",
         level: "Advanced",
-        hours: 150,
-        details: ["EC2", "S3", "Lambda", "SageMaker", "RDS"],
+        hours: 100,
+        details: ["GPT-4", "GPT-4o", "Embeddings"],
       },
-      { name: "Docker", level: "Advanced", hours: 80 },
-      { name: "Kubernetes", level: "Intermediate", hours: 60 },
+      { name: "Claude", level: "Advanced", hours: 60 },
+      { name: "프롬프트 최적화", level: "Advanced", hours: 80 },
     ],
   },
   {
-    name: "AI/ML",
-    color: "bg-purple-500",
+    name: "멀티모달 처리",
+    color: "bg-orange-500",
     skills: [
-      { name: "OpenAI API", level: "Advanced", hours: 100 },
-      { name: "LangChain", level: "Advanced", hours: 80 },
-      { name: "RAG", level: "Advanced", hours: 60 },
-      { name: "Whisper", level: "Intermediate", hours: 40 },
+      { name: "Whisper STT", level: "Advanced", hours: 80 },
+      { name: "TTS API", level: "Intermediate", hours: 60 },
+      { name: "음성 신호 처리", level: "Intermediate", hours: 60 },
+      { name: "텍스트 NLP", level: "Advanced", hours: 80 },
     ],
   },
 ];
