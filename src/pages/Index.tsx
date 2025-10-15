@@ -6,7 +6,6 @@ import { TechStackSection } from "@/components/TechStackSection";
 import { BenefitsSection } from "@/components/BenefitsSection";
 import { CurriculumSection } from "@/components/CurriculumSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
-import { CompaniesSection } from "@/components/CompaniesSection";
 import { CTAFooter } from "@/components/CTAFooter";
 import { ConsultationModal } from "@/components/ConsultationModal";
 
@@ -22,7 +21,6 @@ const Index = () => {
       <BenefitsSection />
       <CurriculumSection />
       <ProjectsSection />
-      <CompaniesSection />
       <CTAFooter onOpenModal={() => setIsModalOpen(true)} />
       <ConsultationModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </div>
