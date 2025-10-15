@@ -122,19 +122,19 @@ const curriculum = [
 
 export const CurriculumSection = () => {
   return (
-    <section id="curriculum" className="py-20 px-4 bg-muted/30">
-      <div className="container mx-auto max-w-4xl">
+    <section id="curriculum" className="py-24 px-4 bg-secondary/30">
+      <div className="container mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">커리큘럼</span>
+          <h2 className="text-5xl font-black mb-4 text-foreground">
+            커리큘럼
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl text-muted-foreground font-medium">
             6개월간의 체계적인 학습 로드맵
           </p>
         </motion.div>
@@ -145,44 +145,44 @@ export const CurriculumSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-6">
             {curriculum.map((month, index) => (
               <AccordionItem
                 key={month.id}
                 value={month.id}
-                className="border rounded-lg px-6 bg-card shadow-card hover:shadow-elevated transition-smooth"
+                className="border border-border rounded-xl px-8 py-2 bg-card hover:border-primary/50 transition-smooth"
               >
                 <AccordionTrigger className="hover:no-underline">
                   <div className="flex-1 text-left">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold">{month.title}</h3>
-                      <Badge className="gradient-bg">{month.duration}</Badge>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-2xl font-black text-foreground">{month.title}</h3>
+                      <Badge className="bg-primary text-black font-black text-base px-4 py-1">{month.duration}</Badge>
                     </div>
                     <div className="flex items-center gap-4">
-                      <Progress value={month.progress} className="flex-1" />
-                      <span className="text-sm text-muted-foreground">{month.progress}%</span>
+                      <Progress value={month.progress} className="flex-1 h-3" />
+                      <span className="text-base text-muted-foreground font-bold">{month.progress}%</span>
                     </div>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="space-y-4 pt-4">
+                  <div className="space-y-6 pt-6">
                     {month.modules.map((module, i) => (
-                      <div key={i} className="border-l-4 border-primary pl-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-semibold">{module.name}</h4>
-                          <Badge variant="outline">{module.hours}시간</Badge>
+                      <div key={i} className="border-l-4 border-primary pl-6">
+                        <div className="flex justify-between items-start mb-3">
+                          <h4 className="font-bold text-lg text-foreground">{module.name}</h4>
+                          <Badge className="bg-primary/10 text-primary border-primary/30 font-bold">{module.hours}시간</Badge>
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {module.topics.map((topic, j) => (
-                            <Badge key={j} variant="secondary">
+                            <Badge key={j} className="bg-secondary text-white border-border font-medium">
                               {topic}
                             </Badge>
                           ))}
                         </div>
                       </div>
                     ))}
-                    <div className="mt-4 p-4 rounded-lg gradient-card-bg border border-primary/30">
-                      <p className="text-sm font-semibold">
+                    <div className="mt-6 p-5 rounded-xl bg-primary/10 border-2 border-primary/30">
+                      <p className="text-base font-bold text-foreground">
                         🎯 마일스톤: {month.milestone}
                       </p>
                     </div>

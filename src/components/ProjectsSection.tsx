@@ -48,19 +48,19 @@ const projects = [
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-24 px-4 bg-background">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">프로젝트</span>
+          <h2 className="text-5xl font-black mb-4 text-foreground">
+            프로젝트
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl text-muted-foreground font-medium">
             실무 중심의 팀 프로젝트로 포트폴리오 완성
           </p>
         </motion.div>
@@ -74,47 +74,47 @@ export const ProjectsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <Card className="h-full shadow-card hover:shadow-elevated transition-smooth">
+              <Card className="h-full bg-card border border-border hover:border-primary/50 transition-smooth">
                 <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <CardTitle className="text-2xl">{project.title}</CardTitle>
+                  <div className="flex items-center justify-between mb-3">
+                    <CardTitle className="text-2xl font-black">{project.title}</CardTitle>
                   </div>
-                  <div className="flex gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
+                  <div className="flex gap-6 text-base text-muted-foreground font-medium">
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-5 h-5" />
                       {project.duration}
                     </div>
-                    <div className="flex items-center gap-1">
-                      <UsersIcon className="w-4 h-4" />
+                    <div className="flex items-center gap-2">
+                      <UsersIcon className="w-5 h-5" />
                       {project.teamSize}
                     </div>
                   </div>
-                  <CardDescription className="text-base mt-2">
+                  <CardDescription className="text-base mt-3 font-medium">
                     {project.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-8">
                   <div>
-                    <h4 className="font-semibold mb-3">주요 기능</h4>
-                    <ul className="space-y-2">
+                    <h4 className="font-bold text-lg mb-4 text-foreground">주요 기능</h4>
+                    <ul className="space-y-3">
                       {project.features.map((feature, i) => (
                         <li key={i} className="flex items-start">
-                          <span className="text-primary mr-2">✓</span>
-                          <span className="text-sm">{feature}</span>
+                          <span className="text-primary mr-3 font-bold">✓</span>
+                          <span className="text-base">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold mb-3">기술 스택</h4>
-                    <div className="space-y-2">
+                    <h4 className="font-bold text-lg mb-4 text-foreground">기술 스택</h4>
+                    <div className="space-y-3">
                       {Object.entries(project.techStack).map(([category, techs]) => (
                         <div key={category}>
-                          <p className="text-xs text-muted-foreground capitalize mb-1">{category}</p>
-                          <div className="flex flex-wrap gap-1">
+                          <p className="text-sm text-muted-foreground capitalize mb-2 font-bold">{category}</p>
+                          <div className="flex flex-wrap gap-2">
                             {(techs as string[]).map((tech, i) => (
-                              <Badge key={i} variant="secondary">
+                              <Badge key={i} className="bg-secondary text-white border-border font-medium">
                                 {tech}
                               </Badge>
                             ))}

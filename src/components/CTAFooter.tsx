@@ -20,12 +20,18 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
   ];
 
   return (
-    <section className="relative py-20 px-4 overflow-hidden gradient-hero-bg">
-      {/* Background decoration */}
+    <section className="relative py-32 px-4 overflow-hidden bg-black">
+      {/* Tech grid background */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(hsl(184 91% 55% / 0.1) 1px, transparent 1px),
+                           linear-gradient(90deg, hsl(184 91% 55% / 0.1) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }} />
       </div>
+
+      {/* Glow effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[100px] rounded-full" />
 
       <div className="container mx-auto relative z-10">
         <motion.div
@@ -33,14 +39,14 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto text-center space-y-8"
+          className="max-w-5xl mx-auto text-center space-y-10"
         >
           {/* Title */}
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
               AI 전문가로 성장하는 기회
             </h2>
-            <p className="text-xl text-white/90">
+            <p className="text-2xl text-white/80 font-bold">
               국민내일배움카드로 전액 무료 수강
             </p>
           </div>
@@ -51,13 +57,13 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
             transition={{ duration: 2, repeat: Infinity }}
             className="inline-block"
           >
-            <div className="px-6 py-3 rounded-full bg-destructive text-white font-bold text-lg shadow-glow">
+            <div className="px-8 py-4 rounded-full bg-primary text-black font-black text-xl shadow-glow">
               ⚡ 조기 마감 임박 - 선착순 30명
             </div>
           </motion.div>
 
           {/* Benefits */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
@@ -65,10 +71,10 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-4 rounded-lg backdrop-blur-sm bg-white/10 border border-white/20"
+                className="p-6 rounded-xl bg-secondary/50 border-2 border-primary/30"
               >
-                <p className="text-white font-semibold flex items-center justify-center gap-2">
-                  <span className="text-primary">✓</span>
+                <p className="text-white font-bold text-lg flex items-center justify-center gap-2">
+                  <span className="text-primary font-black">✓</span>
                   {benefit}
                 </p>
               </motion.div>
@@ -81,22 +87,22 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6"
           >
             <Button
               size="lg"
               onClick={onOpenModal}
-              className="gradient-bg shadow-glow hover:shadow-elevated transition-smooth text-xl px-10 py-7 font-bold animate-pulse-glow"
+              className="bg-primary hover:bg-primary/90 text-black text-2xl px-14 py-8 font-black rounded-xl shadow-glow"
             >
-              <MessageCircle className="mr-2 h-6 w-6" />
+              <MessageCircle className="mr-2 h-7 w-7" />
               지금 신청하기
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-foreground backdrop-blur-sm text-xl px-10 py-7 font-bold"
+              className="border-2 border-white/30 text-white hover:bg-white/5 hover:border-primary text-2xl px-14 py-8 font-black rounded-xl"
             >
-              <Phone className="mr-2 h-6 w-6" />
+              <Phone className="mr-2 h-7 w-7" />
               상담 예약하기
             </Button>
           </motion.div>
@@ -107,12 +113,12 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-8 pt-8"
+            className="flex flex-wrap justify-center gap-10 pt-10"
           >
             {trustSignals.map((signal, index) => (
-              <div key={index} className="flex items-center gap-2 text-white/80">
-                <signal.icon className="w-5 h-5" />
-                <span className="text-sm font-medium">{signal.text}</span>
+              <div key={index} className="flex items-center gap-3 text-white/70">
+                <signal.icon className="w-6 h-6" />
+                <span className="text-base font-bold">{signal.text}</span>
               </div>
             ))}
           </motion.div>

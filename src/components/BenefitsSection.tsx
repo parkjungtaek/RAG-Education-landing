@@ -31,24 +31,24 @@ const benefits = [
 
 export const BenefitsSection = () => {
   return (
-    <section id="benefits" className="py-20 px-4">
+    <section id="benefits" className="py-24 px-4 bg-background">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">교육 혜택</span>
+          <h2 className="text-5xl font-black mb-4 text-foreground">
+            교육 혜택
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl text-muted-foreground font-medium">
             국비지원으로 부담 없이 시작하세요
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
@@ -57,16 +57,16 @@ export const BenefitsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="h-full text-center shadow-card hover:shadow-elevated transition-smooth hover:scale-105">
+              <Card className="h-full text-center bg-card border border-border hover:border-primary/50 transition-smooth hover:scale-105">
                 <CardHeader>
-                  <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mx-auto mb-4 shadow-glow">
-                    <benefit.icon className="w-8 h-8 text-white" />
+                  <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                    <benefit.icon className="w-10 h-10 text-primary" />
                   </div>
-                  <CardTitle className="text-xl">{benefit.title}</CardTitle>
+                  <CardTitle className="text-xl font-black">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold gradient-text mb-2">{benefit.highlight}</p>
-                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                  <p className="text-4xl font-black text-primary mb-3">{benefit.highlight}</p>
+                  <p className="text-base text-muted-foreground font-medium">{benefit.description}</p>
                 </CardContent>
               </Card>
             </motion.div>

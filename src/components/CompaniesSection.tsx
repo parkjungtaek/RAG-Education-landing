@@ -51,19 +51,19 @@ export const CompaniesSection = () => {
   };
 
   return (
-    <section id="companies" className="py-20 px-4 bg-muted/30">
+    <section id="companies" className="py-24 px-4 bg-secondary/30">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">참여기업</span>
+          <h2 className="text-5xl font-black mb-4 text-foreground">
+            참여기업
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl text-muted-foreground font-medium">
             13개 파트너사와 함께하는 취업 연계 프로그램
           </p>
         </motion.div>
@@ -74,28 +74,28 @@ export const CompaniesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-5xl mx-auto"
         >
-          <div className="text-center p-6 rounded-lg gradient-card-bg border border-primary/30">
-            <p className="text-3xl font-bold gradient-text">{stats.totalCompanies}</p>
-            <p className="text-sm text-muted-foreground mt-1">참여 기업</p>
+          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
+            <p className="text-5xl font-black text-primary mb-2">{stats.totalCompanies}</p>
+            <p className="text-sm text-muted-foreground font-bold">참여 기업</p>
           </div>
-          <div className="text-center p-6 rounded-lg gradient-card-bg border border-primary/30">
-            <p className="text-3xl font-bold gradient-text">{stats.employmentRate}</p>
-            <p className="text-sm text-muted-foreground mt-1">취업률</p>
+          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
+            <p className="text-5xl font-black text-primary mb-2">{stats.employmentRate}</p>
+            <p className="text-sm text-muted-foreground font-bold">취업률</p>
           </div>
-          <div className="text-center p-6 rounded-lg gradient-card-bg border border-primary/30">
-            <p className="text-3xl font-bold gradient-text">{stats.averageSalary}</p>
-            <p className="text-sm text-muted-foreground mt-1">평균 연봉</p>
+          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
+            <p className="text-5xl font-black text-primary mb-2">{stats.averageSalary}</p>
+            <p className="text-sm text-muted-foreground font-bold">평균 연봉</p>
           </div>
-          <div className="text-center p-6 rounded-lg gradient-card-bg border border-primary/30">
-            <p className="text-3xl font-bold gradient-text">{stats.regularConversionRate}</p>
-            <p className="text-sm text-muted-foreground mt-1">정규직 전환</p>
+          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
+            <p className="text-5xl font-black text-primary mb-2">{stats.regularConversionRate}</p>
+            <p className="text-sm text-muted-foreground font-bold">정규직 전환</p>
           </div>
         </motion.div>
 
         {/* Companies Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {companies.map((company, index) => (
             <motion.div
               key={index}
@@ -104,23 +104,23 @@ export const CompaniesSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full shadow-card hover:shadow-elevated transition-smooth hover:scale-105">
+              <Card className="h-full bg-card border border-border hover:border-primary/50 transition-smooth hover:scale-105">
                 <CardHeader>
-                  <div className="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-3">
-                    <Building className="w-6 h-6 text-white" />
+                  <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <Building className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="text-xl">{company.name}</CardTitle>
-                  <CardDescription>{company.description}</CardDescription>
+                  <CardTitle className="text-xl font-black">{company.name}</CardTitle>
+                  <CardDescription className="font-medium">{company.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <Badge variant="outline" className="gradient-card-bg">
+                <CardContent className="space-y-4">
+                  <Badge className="bg-primary/10 text-primary border-primary/30 font-bold">
                     {company.category}
                   </Badge>
                   <div>
-                    <p className="text-xs text-muted-foreground mb-2">채용 포지션</p>
-                    <div className="flex flex-wrap gap-1">
+                    <p className="text-xs text-muted-foreground mb-2 font-bold">채용 포지션</p>
+                    <div className="flex flex-wrap gap-2">
                       {company.hiringPositions.map((position, i) => (
-                        <Badge key={i} variant="secondary" className="text-xs">
+                        <Badge key={i} className="bg-secondary text-white border-border font-medium">
                           {position}
                         </Badge>
                       ))}

@@ -41,24 +41,24 @@ const cards = [
 
 export const OverviewSection = () => {
   return (
-    <section id="overview" className="py-20 px-4">
+    <section id="overview" className="py-24 px-4 bg-background">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">과정 개요</span>
+          <h2 className="text-5xl font-black mb-4 text-foreground">
+            과정 개요
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-xl text-muted-foreground font-medium">
             체계적인 커리큘럼으로 AI 전문가로 성장하세요
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {cards.map((card, index) => (
             <motion.div
               key={index}
@@ -67,26 +67,26 @@ export const OverviewSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="h-full shadow-card hover:shadow-elevated transition-smooth border-2 hover:border-primary/50">
+              <Card className="h-full bg-card border border-border hover:border-primary/50 transition-smooth">
                 <CardHeader>
-                  <div className="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center mb-4">
-                    <card.icon className="w-6 h-6 text-white" />
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <card.icon className="w-7 h-7 text-primary" />
                   </div>
-                  <CardTitle className="text-2xl">{card.title}</CardTitle>
-                  <CardDescription className="text-lg font-semibold text-foreground">
+                  <CardTitle className="text-2xl font-black">{card.title}</CardTitle>
+                  <CardDescription className="text-xl font-bold text-foreground mt-2">
                     {card.content}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2 mb-4">
+                  <ul className="space-y-3 mb-6">
                     {card.details.map((detail, i) => (
                       <li key={i} className="flex items-start">
-                        <span className="mr-2 text-primary">•</span>
-                        <span className="text-sm text-muted-foreground">{detail}</span>
+                        <span className="mr-3 text-primary font-bold">•</span>
+                        <span className="text-base text-muted-foreground">{detail}</span>
                       </li>
                     ))}
                   </ul>
-                  <Badge variant="secondary" className="gradient-card-bg border-primary/30">
+                  <Badge className="bg-primary/10 text-primary border-primary/30 font-bold">
                     {card.highlight}
                   </Badge>
                 </CardContent>

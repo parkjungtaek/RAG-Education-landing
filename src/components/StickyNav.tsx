@@ -57,26 +57,24 @@ export const StickyNav = () => {
 
   return (
     <motion.nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isSticky ? "bg-background/95 backdrop-blur-lg shadow-lg" : "bg-transparent"
-      }`}
+      className="sticky top-0 z-50 bg-black/95 backdrop-blur-md border-b border-white/10"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center space-x-2 py-4 overflow-x-auto">
+        <div className="flex items-center justify-center space-x-2 py-3 overflow-x-auto">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-smooth ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold whitespace-nowrap transition-smooth ${
                 activeSection === item.id
-                  ? "gradient-bg text-white shadow-glow"
-                  : "hover:bg-muted"
+                  ? "bg-primary text-black"
+                  : "text-white/70 hover:text-white hover:bg-white/5"
               }`}
             >
-              <item.icon className="w-4 h-4" />
+              <item.icon className="w-5 h-5" />
               <span className="hidden sm:inline">{item.label}</span>
             </button>
           ))}

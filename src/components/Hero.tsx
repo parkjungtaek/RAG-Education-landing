@@ -16,33 +16,22 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero-bg">
-      {/* Animated background particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-primary/30 rounded-full"
-            initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: Math.random() * window.innerHeight 
-            }}
-            animate={{
-              y: [null, Math.random() * window.innerHeight],
-              x: [null, Math.random() * window.innerWidth],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+      {/* Tech grid background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(hsl(184 91% 55% / 0.1) 1px, transparent 1px),
+                           linear-gradient(90deg, hsl(184 91% 55% / 0.1) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }} />
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
+      {/* Glow effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 blur-[120px] rounded-full" />
+
+      <div className="container mx-auto px-4 py-32 relative z-10">
         <motion.div 
-          className="max-w-4xl mx-auto text-center space-y-8"
+          className="max-w-5xl mx-auto text-center space-y-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -52,25 +41,25 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <Badge className="mb-4 px-6 py-2 text-base font-semibold shadow-glow bg-gradient-to-r from-primary to-accent border-0">
+            <Badge className="mb-6 px-8 py-3 text-base font-bold bg-primary text-black border-0">
               🔥 2025년 1기 모집중
             </Badge>
           </motion.div>
 
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold leading-tight"
+            className="text-6xl md:text-8xl font-black leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
             <span className="text-white">클라우드 기반</span>{" "}
-            <span className="gradient-text">AI 서비스</span>
+            <span className="text-primary">AI 서비스</span>
             <br />
             <span className="text-white">개발자 양성과정</span>
           </motion.h1>
 
           <motion.p 
-            className="text-xl md:text-2xl text-white/90 font-medium"
+            className="text-2xl md:text-3xl text-white/80 font-bold"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -79,7 +68,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
           </motion.p>
 
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -87,22 +76,22 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             {highlights.map((item, index) => (
               <motion.div
                 key={index}
-                className={`p-4 rounded-xl backdrop-blur-sm bg-white/10 border border-white/20 ${
-                  item.emphasis ? "shadow-glow" : ""
+                className={`p-6 rounded-lg bg-secondary/50 border-2 ${
+                  item.emphasis ? "border-primary" : "border-border"
                 }`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, borderColor: "hsl(184 91% 55%)" }}
               >
-                <item.icon className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm md:text-base font-semibold text-white">{item.text}</p>
+                <item.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
+                <p className="text-base md:text-lg font-bold text-white">{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
 
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
@@ -110,25 +99,22 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             <Button
               size="lg"
               onClick={onOpenModal}
-              className="gradient-bg shadow-glow hover:shadow-elevated transition-smooth text-lg px-8 py-6 font-bold"
+              className="bg-primary hover:bg-primary/90 text-black text-xl px-12 py-7 font-black rounded-lg shadow-glow"
             >
-              <MessageCircle className="mr-2 h-5 w-5" />
+              <MessageCircle className="mr-2 h-6 w-6" />
               무료 상담 신청하기
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white/50 text-white hover:bg-white/10 backdrop-blur-sm text-lg px-8 py-6 font-bold"
+              className="border-2 border-white/30 text-white hover:bg-white/5 hover:border-primary text-xl px-12 py-7 font-bold rounded-lg"
             >
-              <Download className="mr-2 h-5 w-5" />
+              <Download className="mr-2 h-6 w-6" />
               커리큘럼 다운로드
             </Button>
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
