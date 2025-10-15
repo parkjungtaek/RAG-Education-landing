@@ -187,13 +187,11 @@ export const CompaniesSection = () => {
                   </div>
 
                   {project.title === "AI Meeting Agent" && (
-                    <div className="w-full aspect-video rounded-lg overflow-hidden border border-primary/20">
-                      <iframe
-                        className="w-full h-full"
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                        title="AI Meeting Agent Demo"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
+                    <div className="w-full aspect-video rounded-lg overflow-hidden border border-primary/20 bg-muted">
+                      <img
+                        src="https://chatgpt.com/s/m_68ef846259e08191ac84e53a6a24c60e"
+                        alt="AI Meeting Agent Demo"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   )}
