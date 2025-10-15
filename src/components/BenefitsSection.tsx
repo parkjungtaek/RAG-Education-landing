@@ -24,7 +24,7 @@ const benefits = [
   {
     icon: Briefcase,
     title: "취업 연계",
-    description: "13개 참여기업 직접 연계",
+    description: "RAG 전문기업 직접 연계",
     highlight: "92% 취업률",
   },
 ];

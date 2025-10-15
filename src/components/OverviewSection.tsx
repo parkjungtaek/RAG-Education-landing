@@ -20,20 +20,20 @@ const cards = [
     title: "교육 대상",
     content: "개발 경험자 우대",
     details: [
-      "Python/Java 프로젝트 경험자",
-      "AI 분야 전직 희망 재직자",
-      "컴퓨터공학 전공자 우대",
+      "Python 프로젝트 경험자",
+      "생성형 AI 분야 전환 희망자",
+      "SW 개발 경험자 우대",
     ],
     highlight: "선발 테스트 실시",
   },
   {
     icon: Target,
     title: "교육 목표",
-    content: "AI 실무 전문가",
+    content: "RAG 전문가 양성",
     details: [
-      "클라우드 기반 AI 서비스 개발",
-      "MLOps 파이프라인 구축",
-      "실시간 데이터 처리",
+      "멀티모달 AI 서비스 개발",
+      "RAG 파이프라인 구축",
+      "음성·텍스트 데이터 처리",
     ],
     highlight: "현업 즉시 투입",
   },
@@ -54,7 +54,7 @@ export const OverviewSection = () => {
             과정 개요
           </h2>
           <p className="text-xl text-muted-foreground font-medium">
-            체계적인 커리큘럼으로 AI 전문가로 성장하세요
+            RAG 기술로 멀티모달 AI 전문가가 되세요
           </p>
         </motion.div>
 
