@@ -127,13 +127,6 @@ const projects = [
 ];
 
 export const CompaniesSection = () => {
-  const stats = {
-    totalCompanies: 13,
-    averageSalary: "4,200만원",
-    employmentRate: "92%",
-    regularConversionRate: "85%",
-  };
-
   return (
     <section id="companies" className="py-24 px-4 bg-secondary/30">
       <div className="container mx-auto">
@@ -150,32 +143,6 @@ export const CompaniesSection = () => {
           <p className="text-xl text-muted-foreground font-medium">
             13개 파트너사와 함께하는 취업 연계 프로그램
           </p>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-5xl mx-auto"
-        >
-          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
-            <p className="text-5xl font-black text-primary mb-2">{stats.totalCompanies}</p>
-            <p className="text-sm text-muted-foreground font-bold">참여 기업</p>
-          </div>
-          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
-            <p className="text-5xl font-black text-primary mb-2">{stats.employmentRate}</p>
-            <p className="text-sm text-muted-foreground font-bold">취업률</p>
-          </div>
-          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
-            <p className="text-5xl font-black text-primary mb-2">{stats.averageSalary}</p>
-            <p className="text-sm text-muted-foreground font-bold">평균 연봉</p>
-          </div>
-          <div className="text-center p-8 rounded-xl bg-primary/10 border-2 border-primary/30">
-            <p className="text-5xl font-black text-primary mb-2">{stats.regularConversionRate}</p>
-            <p className="text-sm text-muted-foreground font-bold">정규직 전환</p>
-          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
