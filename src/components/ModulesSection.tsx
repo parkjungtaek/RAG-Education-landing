@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, FileSearch, Cloud, Activity } from "lucide-react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const modules = [
   {
@@ -261,7 +261,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                       const shouldShow = index <= animatedModuleIndex || animationComplete;
 
                       return (
-                        <AnimatePresence key={moduleId}>
+                        <React.Fragment key={moduleId}>
                           {shouldShow && (
                             <motion.div
                               initial={{ opacity: 0, scale: 0.5, y: -10 }}
@@ -275,7 +275,6 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                   `0 0 10px ${colors?.rgba}`
                                 ]
                               }}
-                              exit={{ opacity: 0, scale: 0.5 }}
                               transition={{
                                 duration: 0.4,
                                 boxShadow: {
@@ -309,7 +308,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                               )}
                             </motion.div>
                           )}
-                        </AnimatePresence>
+                        </React.Fragment>
                       );
                     })}
                   </div>
@@ -326,7 +325,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                       const shouldShow = moduleIndex <= animatedModuleIndex || animationComplete;
 
                       return (
-                        <AnimatePresence key={moduleId}>
+                        <React.Fragment key={moduleId}>
                           {shouldShow && (
                             <motion.div
                               initial={{ opacity: 0, x: -30, scale: 0.9 }}
@@ -336,7 +335,6 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                 scale: 1,
                                 borderColor: colors?.border
                               }}
-                              exit={{ opacity: 0, x: -30, scale: 0.9 }}
                               transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
                               className={`p-3 rounded-lg border ${colors?.border} ${colors?.bg} backdrop-blur-sm`}
                             >
@@ -360,7 +358,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                               </motion.p>
                             </motion.div>
                           )}
-                        </AnimatePresence>
+                        </React.Fragment>
                       );
                     })}
                   </div>
@@ -375,12 +373,11 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                       const shouldShow = animationComplete || (isAnimating && animatedModuleIndex >= selectedProject.connectedModules.length - 1);
 
                       return (
-                        <AnimatePresence key={index}>
+                        <React.Fragment key={index}>
                           {shouldShow && (
                             <motion.li
                               initial={{ opacity: 0, x: -20, scale: 0.95 }}
                               animate={{ opacity: 1, x: 0, scale: 1 }}
-                              exit={{ opacity: 0, x: -20 }}
                               transition={{
                                 delay: animationComplete ? index * 0.1 : goalDelay,
                                 duration: 0.4,
@@ -410,7 +407,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                               </motion.span>
                             </motion.li>
                           )}
-                        </AnimatePresence>
+                        </React.Fragment>
                       );
                     })}
                   </ul>
