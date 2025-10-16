@@ -780,69 +780,78 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                         </span>
                       </div>
                       <motion.div
-                        className="relative flex-1 h-3 bg-secondary rounded-full overflow-hidden cursor-pointer"
+                        className="relative flex-1 h-3 bg-secondary rounded-full overflow-visible cursor-pointer group/progress"
                         whileHover={{ scale: 1.05, height: "14px" }}
                         transition={{ duration: 0.2 }}
                       >
-                        <motion.div
-                          className={`h-full bg-gradient-to-r ${colors.bg} border-r-2 ${colors.border} relative`}
-                          initial={{ width: 0 }}
-                          animate={{
-                            width: `${moduleProgress[module.id] || 0}%`,
-                            boxShadow: [
-                              `0 0 10px ${colors.rgba}`,
-                              `0 0 20px ${colors.rgbaHeavy}`,
-                              `0 0 10px ${colors.rgba}`
-                            ]
-                          }}
-                          whileHover={{
-                            boxShadow: `0 0 30px ${colors.rgbaHeavy}`,
-                            scale: 1.02
-                          }}
-                          transition={{
-                            duration: 0.5,
-                            ease: "easeOut",
-                            boxShadow: {
-                              duration: 2,
-                              repeat: Infinity
-                            }
-                          }}
-                        >
+                        <div className="absolute inset-0 rounded-full overflow-hidden">
                           <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                            initial={{ x: "-100%" }}
-                            animate={{ x: "200%" }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              ease: "linear"
+                            className={`h-full bg-gradient-to-r ${colors.bg} border-r-2 ${colors.border} relative`}
+                            initial={{ width: 0 }}
+                            animate={{
+                              width: `${moduleProgress[module.id] || 0}%`,
+                              boxShadow: [
+                                `0 0 10px ${colors.rgba}`,
+                                `0 0 20px ${colors.rgbaHeavy}`,
+                                `0 0 10px ${colors.rgba}`
+                              ]
                             }}
-                          />
-                        </motion.div>
-                        <motion.div
-                          className="absolute inset-0 pointer-events-none"
-                          initial={{ opacity: 0 }}
-                          whileHover={{ opacity: 1 }}
-                        >
-                          {[...Array(5)].map((_, i) => (
+                            transition={{
+                              width: { duration: 0.5, ease: "easeOut" },
+                              boxShadow: {
+                                duration: 2,
+                                repeat: Infinity
+                              }
+                            }}
+                          >
                             <motion.div
-                              key={i}
-                              className={`absolute w-1 h-full bg-gradient-to-b from-transparent via-white/40 to-transparent`}
-                              style={{
-                                left: `${(i + 1) * 20}%`
-                              }}
-                              animate={{
-                                opacity: [0, 0.8, 0],
-                                scaleY: [0.5, 1, 0.5]
-                              }}
+                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                              animate={{ x: ["-100%", "200%"] }}
                               transition={{
-                                duration: 1.5,
+                                duration: 2,
                                 repeat: Infinity,
-                                delay: i * 0.2
+                                ease: "linear"
                               }}
                             />
-                          ))}
-                        </motion.div>
+                            <motion.div
+                              className="absolute inset-0 opacity-0 group-hover/progress:opacity-100 transition-opacity duration-300"
+                            >
+                              {[...Array(8)].map((_, i) => (
+                                <motion.div
+                                  key={i}
+                                  className="absolute w-0.5 h-full bg-gradient-to-b from-transparent via-white/60 to-transparent"
+                                  style={{
+                                    left: `${(i + 1) * 12.5}%`
+                                  }}
+                                  animate={{
+                                    opacity: [0, 1, 0],
+                                    scaleY: [0.3, 1, 0.3]
+                                  }}
+                                  transition={{
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    delay: i * 0.15,
+                                    ease: "easeInOut"
+                                  }}
+                                />
+                              ))}
+                            </motion.div>
+                          </motion.div>
+                        </div>
+                        <motion.div
+                          className="absolute -inset-1 rounded-full opacity-0 group-hover/progress:opacity-100 pointer-events-none"
+                          style={{
+                            background: `radial-gradient(circle, ${colors.rgba} 0%, transparent 70%)`
+                          }}
+                          animate={{
+                            scale: [1, 1.2, 1],
+                            opacity: [0, 0.3, 0]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity
+                          }}
+                        />
                       </motion.div>
                       <div className="flex gap-2 justify-end">
                         <motion.button
