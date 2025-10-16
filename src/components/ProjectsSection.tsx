@@ -130,23 +130,6 @@ export const ProjectsSection = ({ selectedProjectId, onProjectSelect }: Projects
                     </ul>
                   </div>
 
-                  <div>
-                    <h4 className="font-bold text-lg mb-4 text-foreground">기술 스택</h4>
-                    <div className="space-y-3">
-                      {Object.entries(project.techStack).map(([category, techs]) => (
-                        <div key={category}>
-                          <p className="text-sm text-muted-foreground capitalize mb-2 font-bold">{category}</p>
-                          <div className="flex flex-wrap gap-2">
-                            {(techs as string[]).map((tech, i) => (
-                              <Badge key={i} className="bg-secondary text-white border-border font-medium">
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
             </motion.div>
