@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, FileSearch, Cloud, Activity } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const modules = [
   {
@@ -102,6 +103,47 @@ const getColorClasses = (color: string) => {
 };
 
 export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConnections, selectedProject }: ModulesSectionProps) => {
+  const [animatedModuleIndex, setAnimatedModuleIndex] = useState<number>(-1);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
+
+  useEffect(() => {
+    if (selectedProjectId && selectedProject) {
+      setIsAnimating(true);
+      setAnimationComplete(false);
+      setAnimatedModuleIndex(-1);
+
+      let currentIndex = 0;
+      const intervalId = setInterval(() => {
+        if (currentIndex < selectedProject.connectedModules.length) {
+          setAnimatedModuleIndex(currentIndex);
+          currentIndex++;
+        } else {
+          clearInterval(intervalId);
+          setIsAnimating(false);
+          setAnimationComplete(true);
+        }
+      }, 400);
+
+      return () => clearInterval(intervalId);
+    } else {
+      setAnimatedModuleIndex(-1);
+      setIsAnimating(false);
+      setAnimationComplete(false);
+    }
+  }, [selectedProjectId, selectedProject]);
+
+  const getModuleAnimationIndex = (moduleId: number): number => {
+    if (!selectedProject) return -1;
+    return selectedProject.connectedModules.indexOf(moduleId);
+  };
+
+  const isModuleVisible = (moduleId: number): boolean => {
+    if (!selectedProject || animationComplete) return true;
+    const moduleIndex = getModuleAnimationIndex(moduleId);
+    return moduleIndex <= animatedModuleIndex;
+  };
+
   return (
     <section id="modules" className="relative py-32 px-4 bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden">
       {/* Dense Network Background Grid */}
@@ -216,21 +258,58 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                     {selectedProject.connectedModules.map((moduleId, index) => {
                       const module = modules.find(m => m.id === moduleId);
                       const colors = module ? getColorClasses(module.color) : null;
+                      const shouldShow = index <= animatedModuleIndex || animationComplete;
+
                       return (
-                        <motion.div
-                          key={moduleId}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="flex items-center gap-2"
-                        >
-                          <span className={`px-3 py-1 rounded-full text-sm font-bold ${colors?.text} border-2 ${colors?.border} ${colors?.bg}`}>
-                            Module {moduleId}
-                          </span>
-                          {index < selectedProject.connectedModules.length - 1 && (
-                            <span className="text-primary text-xl">→</span>
+                        <AnimatePresence key={moduleId}>
+                          {shouldShow && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.5, y: -10 }}
+                              animate={{
+                                opacity: 1,
+                                scale: 1,
+                                y: 0,
+                                boxShadow: [
+                                  `0 0 0px ${colors?.rgba}`,
+                                  `0 0 20px ${colors?.rgbaHeavy}`,
+                                  `0 0 10px ${colors?.rgba}`
+                                ]
+                              }}
+                              exit={{ opacity: 0, scale: 0.5 }}
+                              transition={{
+                                duration: 0.4,
+                                boxShadow: {
+                                  duration: 1,
+                                  repeat: 2
+                                }
+                              }}
+                              className="flex items-center gap-2"
+                            >
+                              <motion.span
+                                className={`px-3 py-1 rounded-full text-sm font-bold ${colors?.text} border-2 ${colors?.border} ${colors?.bg}`}
+                                animate={{
+                                  borderColor: [
+                                    colors?.border.replace('border-', '').replace('/60', ''),
+                                    colors?.border.replace('border-', ''),
+                                  ]
+                                }}
+                                transition={{ duration: 0.5 }}
+                              >
+                                Module {moduleId}
+                              </motion.span>
+                              {index < selectedProject.connectedModules.length - 1 && (
+                                <motion.span
+                                  className="text-primary text-xl"
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.2 }}
+                                >
+                                  →
+                                </motion.span>
+                              )}
+                            </motion.div>
                           )}
-                        </motion.div>
+                        </AnimatePresence>
                       );
                     })}
                   </div>
@@ -243,21 +322,45 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                     {Object.entries(selectedProject.moduleUsage).map(([moduleId, usage]) => {
                       const module = modules.find(m => m.id === Number(moduleId));
                       const colors = module ? getColorClasses(module.color) : null;
+                      const moduleIndex = getModuleAnimationIndex(Number(moduleId));
+                      const shouldShow = moduleIndex <= animatedModuleIndex || animationComplete;
+
                       return (
-                        <motion.div
-                          key={moduleId}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: Number(moduleId) * 0.1 }}
-                          className={`p-3 rounded-lg border ${colors?.border} ${colors?.bg} backdrop-blur-sm`}
-                        >
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className={`text-xs font-bold ${colors?.text}`}>
-                              Module {moduleId}
-                            </span>
-                          </div>
-                          <p className="text-sm text-gray-300">{usage}</p>
-                        </motion.div>
+                        <AnimatePresence key={moduleId}>
+                          {shouldShow && (
+                            <motion.div
+                              initial={{ opacity: 0, x: -30, scale: 0.9 }}
+                              animate={{
+                                opacity: 1,
+                                x: 0,
+                                scale: 1,
+                                borderColor: colors?.border
+                              }}
+                              exit={{ opacity: 0, x: -30, scale: 0.9 }}
+                              transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
+                              className={`p-3 rounded-lg border ${colors?.border} ${colors?.bg} backdrop-blur-sm`}
+                            >
+                              <div className="flex items-center gap-2 mb-1">
+                                <motion.span
+                                  className={`text-xs font-bold ${colors?.text}`}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  transition={{ delay: 0.2 }}
+                                >
+                                  Module {moduleId}
+                                </motion.span>
+                              </div>
+                              <motion.p
+                                className="text-sm text-gray-300"
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                              >
+                                {usage}
+                              </motion.p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       );
                     })}
                   </div>
@@ -267,18 +370,49 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 <div>
                   <h4 className="text-sm font-bold text-primary mb-3">학습 목표</h4>
                   <ul className="space-y-2">
-                    {selectedProject.learningGoals.map((goal, index) => (
-                      <motion.li
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-start gap-2 text-sm text-gray-300"
-                      >
-                        <span className="text-primary mt-1">✓</span>
-                        <span>{goal}</span>
-                      </motion.li>
-                    ))}
+                    {selectedProject.learningGoals.map((goal, index) => {
+                      const goalDelay = (selectedProject.connectedModules.length * 0.4) + (index * 0.15);
+                      const shouldShow = animationComplete || (isAnimating && animatedModuleIndex >= selectedProject.connectedModules.length - 1);
+
+                      return (
+                        <AnimatePresence key={index}>
+                          {shouldShow && (
+                            <motion.li
+                              initial={{ opacity: 0, x: -20, scale: 0.95 }}
+                              animate={{ opacity: 1, x: 0, scale: 1 }}
+                              exit={{ opacity: 0, x: -20 }}
+                              transition={{
+                                delay: animationComplete ? index * 0.1 : goalDelay,
+                                duration: 0.4,
+                                type: "spring",
+                                stiffness: 200
+                              }}
+                              className="flex items-start gap-2 text-sm text-gray-300"
+                            >
+                              <motion.span
+                                className="text-primary mt-1"
+                                initial={{ scale: 0, rotate: -180 }}
+                                animate={{ scale: 1, rotate: 0 }}
+                                transition={{
+                                  delay: animationComplete ? index * 0.1 + 0.2 : goalDelay + 0.2,
+                                  type: "spring",
+                                  stiffness: 300
+                                }}
+                              >
+                                ✓
+                              </motion.span>
+                              <motion.span
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: animationComplete ? index * 0.1 + 0.3 : goalDelay + 0.3 }}
+                              >
+                                {goal}
+                              </motion.span>
+                            </motion.li>
+                          )}
+                        </AnimatePresence>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
@@ -313,7 +447,10 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
               const endX = `${target.position.left}`;
               const endY = `${target.position.top}`;
 
-              const isConnectionActive = selectedProjectId !== null;
+              const sourceIndex = getModuleAnimationIndex(sourceId);
+              const targetIndex = getModuleAnimationIndex(targetId);
+              const connectionShouldShow = sourceIndex <= animatedModuleIndex && targetIndex <= animatedModuleIndex;
+              const connectionDelay = Math.max(sourceIndex, targetIndex) * 0.4 + 0.2;
 
               return (
                 <g key={`connection-${sourceId}-${targetId}`}>
@@ -326,37 +463,39 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                     strokeWidth="5"
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{
-                      pathLength: 1,
-                      opacity: isConnectionActive ? 1 : 0.5,
-                      strokeWidth: isConnectionActive ? [5, 7, 5] : 5
+                      pathLength: connectionShouldShow || animationComplete ? 1 : 0,
+                      opacity: connectionShouldShow || animationComplete ? 1 : 0,
+                      strokeWidth: connectionShouldShow || animationComplete ? [5, 7, 5] : 5
                     }}
                     transition={{
-                      pathLength: { duration: 0.8, delay: index * 0.2 },
-                      opacity: { duration: 0.5 },
+                      pathLength: { duration: 0.5, delay: animationComplete ? 0 : connectionDelay },
+                      opacity: { duration: 0.3, delay: animationComplete ? 0 : connectionDelay },
                       strokeWidth: { duration: 1.5, repeat: Infinity }
                     }}
                   />
 
-                  <motion.circle
-                    r="5"
-                    fill={getColorClasses(source.color).rgbaHeavy}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: [0.8, 1, 0.8],
-                      r: [4, 6, 4]
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      delay: index * 0.3
-                    }}
-                  >
-                    <animateMotion
-                      dur="2s"
-                      repeatCount="indefinite"
-                      path={`M ${startX} ${startY} L ${endX} ${endY}`}
-                    />
-                  </motion.circle>
+                  {(connectionShouldShow || animationComplete) && (
+                    <motion.circle
+                      r="5"
+                      fill={getColorClasses(source.color).rgbaHeavy}
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: [0.8, 1, 0.8],
+                        r: [4, 6, 4]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: 0.5
+                      }}
+                    >
+                      <animateMotion
+                        dur="2s"
+                        repeatCount="indefinite"
+                        path={`M ${startX} ${startY} L ${endX} ${endY}`}
+                      />
+                    </motion.circle>
+                  )}
                 </g>
               );
             })}
@@ -367,6 +506,9 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
             const colors = getColorClasses(module.color);
             const isModuleActive = connectedModules.includes(module.id);
             const isModuleDimmed = selectedProjectId && !isModuleActive;
+            const moduleAnimIndex = getModuleAnimationIndex(module.id);
+            const shouldAnimate = moduleAnimIndex >= 0 && moduleAnimIndex <= animatedModuleIndex;
+            const moduleDelay = moduleAnimIndex >= 0 ? moduleAnimIndex * 0.4 : 0;
 
             return (
               <motion.div
@@ -378,7 +520,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                   transform: 'translate(-50%, -50%)'
                 }}
                 initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                whileInView={{ opacity: isModuleDimmed && !animationComplete ? 0.2 : 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{
                   duration: 0.6,
@@ -387,11 +529,12 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                   stiffness: 200
                 }}
                 animate={{
-                  opacity: isModuleDimmed ? 0.2 : 1,
-                  scale: isModuleDimmed ? 0.9 : 1,
-                  filter: isModuleDimmed ? "blur(3px)" : "blur(0px)",
+                  opacity: isModuleDimmed && !shouldAnimate && !animationComplete ? 0.2 : isModuleDimmed && animationComplete ? 0.2 : 1,
+                  scale: isModuleDimmed && !shouldAnimate && !animationComplete ? 0.9 : 1,
+                  filter: isModuleDimmed && !shouldAnimate && !animationComplete ? "blur(3px)" : "blur(0px)",
                   transition: {
-                    duration: 0.5,
+                    duration: shouldAnimate || animationComplete ? 0.4 : 0.5,
+                    delay: shouldAnimate && !animationComplete ? moduleDelay : 0,
                     type: "spring",
                     stiffness: 100,
                     damping: 20
