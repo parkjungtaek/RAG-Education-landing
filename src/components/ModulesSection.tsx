@@ -7,7 +7,7 @@ const modules = [
     title: "음성 데이터 처리 및 변환",
     icon: Mic,
     color: "cyan",
-    position: { x: 0, y: 0 },
+    position: { top: "15%", left: "15%" },
     connections: [2, 4]
   },
   {
@@ -15,7 +15,7 @@ const modules = [
     title: "RAG 기반 AI 문서 검색 및 질의응답 시스템 개발",
     icon: FileSearch,
     color: "purple",
-    position: { x: 1, y: 0 },
+    position: { top: "15%", left: "60%" },
     connections: [3]
   },
   {
@@ -23,7 +23,7 @@ const modules = [
     title: "클라우드 기반 AI 모델 배포 및 API 연동",
     icon: Cloud,
     color: "blue",
-    position: { x: 1, y: 1 },
+    position: { top: "60%", left: "60%" },
     connections: [4]
   },
   {
@@ -31,40 +31,56 @@ const modules = [
     title: "실시간 데이터 스트리밍 및 AI 분석 시스템 구축",
     icon: Activity,
     color: "emerald",
-    position: { x: 0, y: 1 },
+    position: { top: "60%", left: "15%" },
     connections: []
   }
 ];
 
 const getColorClasses = (color: string) => {
-  const colors: Record<string, { bg: string; border: string; glow: string; text: string; shadow: string }> = {
+  const colors: Record<string, {
+    bg: string;
+    border: string;
+    glow: string;
+    text: string;
+    shadow: string;
+    rgba: string;
+    rgbaHeavy: string;
+  }> = {
     cyan: {
       bg: "from-cyan-600/20 to-cyan-900/10",
-      border: "border-cyan-500/50",
-      glow: "shadow-[0_0_20px_rgba(6,182,212,0.3)]",
+      border: "border-cyan-500/60",
+      glow: "shadow-[0_0_30px_rgba(6,182,212,0.4)]",
       text: "text-cyan-400",
-      shadow: "drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]"
+      shadow: "drop-shadow-[0_0_12px_rgba(6,182,212,0.8)]",
+      rgba: "rgba(6,182,212,0.5)",
+      rgbaHeavy: "rgba(6,182,212,0.8)"
     },
     purple: {
       bg: "from-purple-600/20 to-purple-900/10",
-      border: "border-purple-500/50",
-      glow: "shadow-[0_0_20px_rgba(168,85,247,0.3)]",
+      border: "border-purple-500/60",
+      glow: "shadow-[0_0_30px_rgba(168,85,247,0.4)]",
       text: "text-purple-400",
-      shadow: "drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]"
+      shadow: "drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]",
+      rgba: "rgba(168,85,247,0.5)",
+      rgbaHeavy: "rgba(168,85,247,0.8)"
     },
     blue: {
       bg: "from-blue-600/20 to-blue-900/10",
-      border: "border-blue-500/50",
-      glow: "shadow-[0_0_20px_rgba(59,130,246,0.3)]",
+      border: "border-blue-500/60",
+      glow: "shadow-[0_0_30px_rgba(59,130,246,0.4)]",
       text: "text-blue-400",
-      shadow: "drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"
+      shadow: "drop-shadow-[0_0_12px_rgba(59,130,246,0.8)]",
+      rgba: "rgba(59,130,246,0.5)",
+      rgbaHeavy: "rgba(59,130,246,0.8)"
     },
     emerald: {
       bg: "from-emerald-600/20 to-emerald-900/10",
-      border: "border-emerald-500/50",
-      glow: "shadow-[0_0_20px_rgba(16,185,129,0.3)]",
+      border: "border-emerald-500/60",
+      glow: "shadow-[0_0_30px_rgba(16,185,129,0.4)]",
       text: "text-emerald-400",
-      shadow: "drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]"
+      shadow: "drop-shadow-[0_0_12px_rgba(16,185,129,0.8)]",
+      rgba: "rgba(16,185,129,0.5)",
+      rgbaHeavy: "rgba(16,185,129,0.8)"
     }
   };
   return colors[color];
@@ -73,22 +89,72 @@ const getColorClasses = (color: string) => {
 export const ModulesSection = () => {
   return (
     <section id="modules" className="relative py-32 px-4 bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden">
-      {/* Background Grid */}
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(100,100,100,0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(100,100,100,0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px'
-          }}
-        />
+      {/* Dense Network Background Grid */}
+      <div className="absolute inset-0 opacity-15">
+        <svg className="w-full h-full">
+          <defs>
+            <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+              <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgb(100,100,150)" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
       </div>
 
-      {/* Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-cyan-500/10 via-purple-500/5 to-transparent blur-3xl" />
+      {/* Animated Network Lines Background */}
+      <div className="absolute inset-0 opacity-20">
+        {[...Array(30)].map((_, i) => (
+          <motion.div
+            key={`line-${i}`}
+            className="absolute bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"
+            style={{
+              height: '1px',
+              width: `${Math.random() * 600 + 200}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              transform: `rotate(${Math.random() * 360}deg)`,
+            }}
+            animate={{
+              opacity: [0, 0.3, 0],
+              scale: [0.8, 1, 0.8]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 2
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0">
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute rounded-full"
+            style={{
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              background: `rgba(${Math.random() > 0.5 ? '6,182,212' : '168,85,247'},${Math.random() * 0.5 + 0.3})`
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.5, 1]
+            }}
+            transition={{
+              duration: 4 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
 
       <div className="container mx-auto relative z-10">
         <motion.div
@@ -106,138 +172,222 @@ export const ModulesSection = () => {
           </p>
         </motion.div>
 
-        {/* Obsidian-style Graph */}
-        <div className="relative max-w-5xl mx-auto">
+        {/* Dynamic Obsidian-style Graph */}
+        <div className="relative w-full h-[800px] max-w-7xl mx-auto">
           {/* Connection Lines SVG */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+            <defs>
+              {modules.map((module) => {
+                const colors = getColorClasses(module.color);
+                return (
+                  <linearGradient key={`gradient-${module.id}`} id={`lineGradient-${module.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor={colors.rgba} stopOpacity="0.2" />
+                    <stop offset="50%" stopColor={colors.rgbaHeavy} stopOpacity="0.8" />
+                    <stop offset="100%" stopColor={colors.rgba} stopOpacity="0.2" />
+                  </linearGradient>
+                );
+              })}
+            </defs>
+
             {modules.map((module) =>
               module.connections.map((targetId) => {
                 const target = modules.find(m => m.id === targetId);
                 if (!target) return null;
 
-                const startX = (module.position.x * 500 + 250) + 100;
-                const startY = (module.position.y * 280 + 140) + 100;
-                const endX = (target.position.x * 500 + 250) + 100;
-                const endY = (target.position.y * 280 + 140) + 100;
-
-                const colors: Record<string, string> = {
-                  cyan: "rgba(6,182,212,0.4)",
-                  purple: "rgba(168,85,247,0.4)",
-                  blue: "rgba(59,130,246,0.4)",
-                  emerald: "rgba(16,185,129,0.4)"
-                };
+                const startX = `${module.position.left}`;
+                const startY = `${module.position.top}`;
+                const endX = `${target.position.left}`;
+                const endY = `${target.position.top}`;
 
                 return (
-                  <motion.line
-                    key={`${module.id}-${targetId}`}
-                    x1={startX}
-                    y1={startY}
-                    x2={endX}
-                    y2={endY}
-                    stroke={colors[module.color]}
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    whileInView={{ pathLength: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                  />
+                  <g key={`connection-${module.id}-${targetId}`}>
+                    <motion.line
+                      x1={startX}
+                      y1={startY}
+                      x2={endX}
+                      y2={endY}
+                      stroke={`url(#lineGradient-${module.id})`}
+                      strokeWidth="3"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      whileInView={{ pathLength: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.5, delay: 0.5 }}
+                    />
+
+                    <motion.circle
+                      r="4"
+                      fill={getColorClasses(module.color).rgbaHeavy}
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: [0.5, 1, 0.5],
+                        r: [3, 5, 3]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: Math.random() * 2
+                      }}
+                    >
+                      <animateMotion
+                        dur="4s"
+                        repeatCount="indefinite"
+                        path={`M ${startX} ${startY} L ${endX} ${endY}`}
+                      />
+                    </motion.circle>
+                  </g>
                 );
               })
             )}
           </svg>
 
           {/* Module Nodes */}
-          <div className="relative grid grid-cols-2 gap-6 md:gap-12" style={{ zIndex: 2 }}>
-            {modules.map((module, index) => {
-              const colors = getColorClasses(module.color);
+          {modules.map((module, index) => {
+            const colors = getColorClasses(module.color);
 
-              return (
+            return (
+              <motion.div
+                key={module.id}
+                className="absolute"
+                style={{
+                  top: module.position.top,
+                  left: module.position.left,
+                  transform: 'translate(-50%, -50%)'
+                }}
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 200
+                }}
+              >
                 <motion.div
-                  key={module.id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="relative"
-                  style={{
-                    gridColumn: module.position.x + 1,
-                    gridRow: module.position.y + 1
+                  className={`relative w-[280px] md:w-[380px] p-6 md:p-8 rounded-3xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} cursor-pointer group`}
+                  whileHover={{
+                    scale: 1.08,
+                    rotate: [0, 1, -1, 0],
+                    boxShadow: `0 0 60px ${colors.rgbaHeavy}`
+                  }}
+                  animate={{
+                    y: [0, -10, 0],
+                  }}
+                  transition={{
+                    y: {
+                      duration: 4 + index * 0.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
                   }}
                 >
+                  {/* Orbiting Glow */}
                   <motion.div
-                    className={`relative p-6 md:p-8 rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-sm border-2 ${colors.border} ${colors.glow} transition-all duration-500 cursor-pointer group`}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: `0 0 40px ${module.color === 'cyan' ? 'rgba(6,182,212,0.5)' : module.color === 'purple' ? 'rgba(168,85,247,0.5)' : module.color === 'blue' ? 'rgba(59,130,246,0.5)' : 'rgba(16,185,129,0.5)'}`
+                    className={`absolute -inset-1 bg-gradient-to-r ${colors.bg} rounded-3xl blur-2xl`}
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3],
+                      scale: [1, 1.1, 1]
                     }}
-                  >
-                    {/* Pulsing Glow */}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: index * 0.5
+                    }}
+                  />
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    {/* Icon with Rotation */}
                     <motion.div
-                      className={`absolute -inset-1 bg-gradient-to-r ${colors.bg} rounded-2xl blur-xl opacity-0 group-hover:opacity-30`}
+                      className="mb-6 relative"
                       animate={{
-                        opacity: [0.2, 0.4, 0.2]
+                        rotate: [0, 360]
+                      }}
+                      transition={{
+                        duration: 20,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    >
+                      <div className={`absolute inset-0 bg-gradient-to-r ${colors.bg} rounded-2xl blur-xl opacity-60`} />
+                      <module.icon className={`relative w-12 h-12 md:w-16 md:h-16 ${colors.text} ${colors.shadow}`} />
+                    </motion.div>
+
+                    {/* Module Number Badge */}
+                    <motion.div
+                      className={`inline-block px-4 py-2 mb-4 rounded-full bg-gradient-to-r ${colors.bg} border-2 ${colors.border}`}
+                      animate={{
+                        boxShadow: [
+                          `0 0 10px ${colors.rgba}`,
+                          `0 0 20px ${colors.rgbaHeavy}`,
+                          `0 0 10px ${colors.rgba}`
+                        ]
                       }}
                       transition={{
                         duration: 2,
                         repeat: Infinity
                       }}
-                    />
+                    >
+                      <span className={`text-sm font-bold ${colors.text}`}>
+                        Module_{module.id}
+                      </span>
+                    </motion.div>
 
-                    {/* Content */}
-                    <div className="relative z-10">
-                      {/* Icon */}
-                      <motion.div
-                        className="mb-4"
-                        animate={{
-                          y: [0, -5, 0]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: index * 0.3
-                        }}
-                      >
-                        <module.icon className={`w-10 h-10 md:w-12 md:h-12 ${colors.text} ${colors.shadow}`} />
-                      </motion.div>
+                    {/* Title */}
+                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight">
+                      {module.title}
+                    </h3>
+                  </div>
 
-                      {/* Module Number */}
-                      <div className={`inline-block px-3 py-1 mb-3 rounded-full bg-gradient-to-r ${colors.bg} border ${colors.border}`}>
-                        <span className={`text-xs font-bold ${colors.text}`}>
-                          Module_{module.id}
-                        </span>
-                      </div>
+                  {/* Animated Corner Accents */}
+                  <motion.div
+                    className={`absolute top-2 right-2 w-3 h-3 rounded-full bg-${module.color}-400`}
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.5, 1, 0.5]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: 0.5
+                    }}
+                  />
+                  <motion.div
+                    className={`absolute bottom-2 left-2 w-3 h-3 rounded-full bg-${module.color}-400`}
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.5, 1, 0.5]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: 1
+                    }}
+                  />
 
-                      {/* Title */}
-                      <h3 className="text-base md:text-lg font-bold text-white leading-snug">
-                        {module.title}
-                      </h3>
-                    </div>
-
-                    {/* Connection Points */}
-                    {module.connections.length > 0 && (
-                      <motion.div
-                        className={`absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full ${colors.border} bg-black`}
-                        animate={{
-                          scale: [1, 1.3, 1],
-                          boxShadow: [
-                            `0 0 0 0 ${module.color === 'cyan' ? 'rgba(6,182,212,0.7)' : module.color === 'purple' ? 'rgba(168,85,247,0.7)' : module.color === 'blue' ? 'rgba(59,130,246,0.7)' : 'rgba(16,185,129,0.7)'}`,
-                            `0 0 0 4px ${module.color === 'cyan' ? 'rgba(6,182,212,0)' : module.color === 'purple' ? 'rgba(168,85,247,0)' : module.color === 'blue' ? 'rgba(59,130,246,0)' : 'rgba(16,185,129,0)'}`,
-                            `0 0 0 0 ${module.color === 'cyan' ? 'rgba(6,182,212,0)' : module.color === 'purple' ? 'rgba(168,85,247,0)' : module.color === 'blue' ? 'rgba(59,130,246,0)' : 'rgba(16,185,129,0)'}`
-                          ]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: index * 0.4
-                        }}
-                      />
-                    )}
-                  </motion.div>
+                  {/* Connection Node Indicator */}
+                  {module.connections.length > 0 && (
+                    <motion.div
+                      className={`absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full border-2 ${colors.border} bg-black flex items-center justify-center`}
+                      animate={{
+                        boxShadow: [
+                          `0 0 0 0 ${colors.rgbaHeavy}`,
+                          `0 0 0 8px ${colors.rgba}`,
+                          `0 0 0 0 ${colors.rgba}`
+                        ]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity
+                      }}
+                    >
+                      <div className={`w-2 h-2 rounded-full ${colors.text.replace('text-', 'bg-')}`} />
+                    </motion.div>
+                  )}
                 </motion.div>
-              );
-            })}
-          </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Legend */}
@@ -245,8 +395,8 @@ export const ModulesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="text-center mt-16"
+          transition={{ duration: 0.6, delay: 1.2 }}
+          className="text-center mt-20"
         >
           <p className="text-sm text-gray-500 font-medium">
             모듈 간 연결은 학습 흐름과 의존성을 나타냅니다
