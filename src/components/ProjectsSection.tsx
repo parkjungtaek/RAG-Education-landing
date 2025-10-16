@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Users as UsersIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Clock, Users as UsersIcon, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 
 const projects = [
@@ -128,6 +129,15 @@ export const ProjectsSection = ({ selectedProjectId, onProjectSelect }: Projects
                         </li>
                       ))}
                     </ul>
+                    <Button
+                      className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      프로젝트 상세 보기
+                    </Button>
                   </div>
 
                 </CardContent>
