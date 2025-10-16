@@ -284,21 +284,11 @@ export const ModulesSection = () => {
 
                   {/* Content */}
                   <div className="relative z-10">
-                    {/* Icon with Rotation */}
-                    <motion.div
-                      className="mb-6 relative"
-                      animate={{
-                        rotate: [0, 360]
-                      }}
-                      transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                    >
+                    {/* Icon */}
+                    <div className="mb-6 relative">
                       <div className={`absolute inset-0 bg-gradient-to-r ${colors.bg} rounded-2xl blur-xl opacity-60`} />
                       <module.icon className={`relative w-12 h-12 md:w-16 md:h-16 ${colors.text} ${colors.shadow}`} />
-                    </motion.div>
+                    </div>
 
                     {/* Module Number Badge */}
                     <motion.div
