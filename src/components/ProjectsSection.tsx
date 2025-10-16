@@ -157,6 +157,13 @@ export const ProjectsSection = ({ selectedProjectId, onProjectSelect }: Projects
                       className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
                       onClick={(e) => {
                         e.stopPropagation();
+                        onProjectSelect(project.id);
+                        setTimeout(() => {
+                          const modulesSection = document.getElementById('modules');
+                          if (modulesSection) {
+                            modulesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }, 100);
                       }}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
