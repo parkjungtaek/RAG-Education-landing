@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, CreditCard, Code, Users, Download, MessageCircle, Cpu, Layers, Network } from "lucide-react";
+import { Trophy, CreditCard, Code, Users, Download, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface HeroProps {
@@ -17,131 +17,10 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* AI Chip Background with Circuit Pattern */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/80 via-blue-950/60 to-purple-950/80" />
-
-        {/* Circuit Board Pattern Overlay */}
-        <motion.div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `
-              linear-gradient(90deg, cyan 1px, transparent 1px),
-              linear-gradient(0deg, cyan 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0,255,255,0.3) 1px, transparent 1px),
-              linear-gradient(0deg, rgba(0,255,255,0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: '100px 100px, 100px 100px, 20px 20px, 20px 20px'
-          }}
-          animate={{
-            backgroundPosition: ['0px 0px, 0px 0px, 0px 0px, 0px 0px', '100px 100px, 100px 100px, 20px 20px, 20px 20px']
-          }}
-          transition={{
-            duration: 40,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
       </div>
 
-      {/* Glowing AI Chip Effect */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]"
-        animate={{
-          scale: [1, 1.05, 1],
-          opacity: [0.3, 0.5, 0.3]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-radial from-cyan-500/40 via-blue-600/30 to-transparent blur-[100px]" />
-      </motion.div>
-
-      {/* Pulsing Data Lines */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-            style={{
-              top: `${15 + i * 10}%`,
-              width: '100%',
-              left: '-100%'
-            }}
-            animate={{
-              left: ['100%', '-100%'],
-              opacity: [0, 1, 0]
-            }}
-            transition={{
-              duration: 3 + i * 0.5,
-              repeat: Infinity,
-              ease: "linear",
-              delay: i * 0.4
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Floating Circuit Nodes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(0,255,255,0.8)]"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 1, 0.3],
-              boxShadow: [
-                '0 0 10px rgba(0,255,255,0.5)',
-                '0 0 20px rgba(0,255,255,1)',
-                '0 0 10px rgba(0,255,255,0.5)'
-              ]
-            }}
-            transition={{
-              duration: 2 + Math.random() * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 2
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Floating Tech Icons */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[Cpu, Layers, Network].map((Icon, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{
-              left: `${20 + i * 30}%`,
-              top: `${30 + i * 15}%`
-            }}
-            animate={{
-              y: [0, -30, 0],
-              rotate: [0, 10, -10, 0],
-              opacity: [0.1, 0.3, 0.1]
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 1.5
-            }}
-          >
-            <Icon className="w-24 h-24 text-cyan-400/30" />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Dark Vignette for Text Contrast */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
 
