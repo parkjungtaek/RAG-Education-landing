@@ -16,29 +16,71 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
-      {/* Professional AI Background Image */}
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/8439093/pexels-photo-8439093.jpeg?auto=compress&cs=tinysrgb&w=1920')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/95 via-blue-950/80 to-slate-950/95" />
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-950 via-purple-900 to-pink-900">
+      {/* Dynamic Gradient Orbs - Inspired by AI Agents Design */}
+      <motion.div
+        className="absolute top-0 left-0 w-[800px] h-[800px] bg-gradient-to-br from-blue-600 to-blue-800 rounded-full blur-[120px] opacity-70"
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, 100, 0],
+          y: [0, 50, 0]
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-purple-600 to-pink-600 rounded-full blur-[100px] opacity-60"
+        animate={{
+          scale: [1, 1.3, 1],
+          x: [0, -80, 0],
+          y: [0, 80, 0]
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 left-1/3 w-[700px] h-[700px] bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-[130px] opacity-50"
+        animate={{
+          scale: [1, 1.15, 1],
+          x: [0, 60, 0],
+          y: [0, -60, 0]
+        }}
+        transition={{
+          duration: 22,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 4
+        }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-0 w-[900px] h-[900px] bg-gradient-to-br from-pink-600 via-purple-700 to-blue-800 rounded-full blur-[140px] opacity-60"
+        animate={{
+          scale: [1, 1.25, 1],
+          x: [0, -100, 0],
+          y: [0, -80, 0]
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
 
-      {/* Neural Network Pattern */}
-      <div className="absolute inset-0 opacity-15">
+      {/* Geometric Overlay Pattern */}
+      <div className="absolute inset-0 opacity-10">
         <motion.div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              radial-gradient(circle at 20% 50%, hsl(184 91% 55% / 0.4) 1px, transparent 1px),
-              radial-gradient(circle at 80% 50%, hsl(217 91% 60% / 0.4) 1px, transparent 1px),
-              linear-gradient(hsl(184 91% 55% / 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(184 91% 55% / 0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '100px 100px, 100px 100px, 50px 50px, 50px 50px',
-            backgroundPosition: '0 0, 50px 50px, 0 0, 0 0'
-          }}
+          className="absolute top-0 left-0 w-[400px] h-[400px] bg-gradient-to-br from-blue-500 to-transparent rounded-full"
           animate={{
-            backgroundPosition: ['0 0, 50px 50px, 0 0, 0 0', '50px 50px, 100px 100px, 50px 50px, 50px 50px']
+            rotate: [0, 360],
+            scale: [1, 1.1, 1]
           }}
           transition={{
             duration: 30,
@@ -46,51 +88,22 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             ease: "linear"
           }}
         />
+        <motion.div
+          className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-purple-500 to-transparent rounded-full"
+          animate={{
+            rotate: [360, 0],
+            scale: [1, 1.15, 1]
+          }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
       </div>
 
-      {/* Sophisticated Glow Effects */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-blue-500/20 blur-[180px] rounded-full"
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.25, 0.45, 0.25],
-          x: [0, 50, 0],
-          y: [0, 30, 0]
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-l from-cyan-400/15 to-blue-600/15 blur-[150px] rounded-full"
-        animate={{
-          scale: [1, 1.25, 1],
-          opacity: [0.2, 0.4, 0.2],
-          x: [0, -40, 0],
-          y: [0, -20, 0]
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-blue-500/10 via-primary/10 to-transparent blur-[200px] rounded-full"
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.15, 0.3, 0.15],
-          rotate: [0, 180, 360]
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
+      {/* Subtle Dark Overlay for Text Contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
 
       {/* Floating AI Icons */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
