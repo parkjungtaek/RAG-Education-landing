@@ -779,17 +779,71 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                           {moduleProgress[module.id] || 0}%
                         </span>
                       </div>
-                      <div className="flex-1 h-3 bg-secondary rounded-full overflow-hidden">
+                      <motion.div
+                        className="relative flex-1 h-3 bg-secondary rounded-full overflow-hidden cursor-pointer"
+                        whileHover={{ scale: 1.05, height: "14px" }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <motion.div
-                          className={`h-full bg-gradient-to-r ${colors.bg} border-r-2 ${colors.border}`}
+                          className={`h-full bg-gradient-to-r ${colors.bg} border-r-2 ${colors.border} relative`}
                           initial={{ width: 0 }}
-                          animate={{ width: `${moduleProgress[module.id] || 0}%` }}
-                          transition={{ duration: 0.5, ease: "easeOut" }}
-                          style={{
-                            boxShadow: `0 0 10px ${colors.rgba}`
+                          animate={{
+                            width: `${moduleProgress[module.id] || 0}%`,
+                            boxShadow: [
+                              `0 0 10px ${colors.rgba}`,
+                              `0 0 20px ${colors.rgbaHeavy}`,
+                              `0 0 10px ${colors.rgba}`
+                            ]
                           }}
-                        />
-                      </div>
+                          whileHover={{
+                            boxShadow: `0 0 30px ${colors.rgbaHeavy}`,
+                            scale: 1.02
+                          }}
+                          transition={{
+                            duration: 0.5,
+                            ease: "easeOut",
+                            boxShadow: {
+                              duration: 2,
+                              repeat: Infinity
+                            }
+                          }}
+                        >
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                            initial={{ x: "-100%" }}
+                            animate={{ x: "200%" }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                          />
+                        </motion.div>
+                        <motion.div
+                          className="absolute inset-0 pointer-events-none"
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                        >
+                          {[...Array(5)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className={`absolute w-1 h-full bg-gradient-to-b from-transparent via-white/40 to-transparent`}
+                              style={{
+                                left: `${(i + 1) * 20}%`
+                              }}
+                              animate={{
+                                opacity: [0, 0.8, 0],
+                                scaleY: [0.5, 1, 0.5]
+                              }}
+                              transition={{
+                                duration: 1.5,
+                                repeat: Infinity,
+                                delay: i * 0.2
+                              }}
+                            />
+                          ))}
+                        </motion.div>
+                      </motion.div>
                       <div className="flex gap-2 justify-end">
                         <motion.button
                           onClick={(e) => {
@@ -797,7 +851,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                             updateModuleProgress(module.id, -10);
                           }}
                           className={`p-1.5 rounded-lg ${colors.bg} border ${colors.border} hover:scale-110 transition-transform`}
-                          whileHover={{ scale: 1.1 }}
+                          whileHover={{ scale: 1.1, rotate: -5 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           <Minus className={`w-4 h-4 ${colors.text}`} />
@@ -808,7 +862,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                             updateModuleProgress(module.id, 10);
                           }}
                           className={`p-1.5 rounded-lg ${colors.bg} border ${colors.border} hover:scale-110 transition-transform`}
-                          whileHover={{ scale: 1.1 }}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           <Plus className={`w-4 h-4 ${colors.text}`} />
