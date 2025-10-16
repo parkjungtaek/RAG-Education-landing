@@ -146,171 +146,137 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
 
       <div className="container mx-auto px-4 py-32 relative z-10">
-        <motion.div 
-          className="max-w-5xl mx-auto text-center space-y-10"
+        <motion.div
+          className="max-w-6xl mx-auto text-left space-y-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
+            className="inline-block"
           >
-            <motion.div
-              animate={{
-                scale: [1, 1.05, 1],
-                boxShadow: [
-                  "0 0 20px hsl(184 91% 55% / 0.3)",
-                  "0 0 40px hsl(184 91% 55% / 0.6)",
-                  "0 0 20px hsl(184 91% 55% / 0.3)"
-                ]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Badge className="mb-6 px-8 py-3 text-base font-bold bg-cyan-400 text-black border-2 border-cyan-300 shadow-[0_0_30px_rgba(0,255,255,0.5)]">
-                🔥 2025년 1기 모집중
-              </Badge>
-            </motion.div>
+            <Badge className="mb-8 px-6 py-2.5 text-sm font-bold bg-transparent text-cyan-400 border-2 border-cyan-400/50 shadow-[0_0_20px_rgba(0,255,255,0.3)] rounded-full">
+              AI &
+            </Badge>
           </motion.div>
 
-          <motion.h1
-            className="text-6xl md:text-8xl font-black leading-tight"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
+            className="space-y-4"
           >
-            <motion.span
-              className="text-white inline-block"
+            <motion.div
+              className="text-5xl md:text-7xl font-black leading-tight text-cyan-400"
               animate={{
                 textShadow: [
-                  "0 0 10px rgba(255,255,255,0.3)",
-                  "0 0 20px rgba(255,255,255,0.5)",
-                  "0 0 10px rgba(255,255,255,0.3)"
+                  "0 0 20px rgba(0,255,255,0.3)",
+                  "0 0 40px rgba(0,255,255,0.6)",
+                  "0 0 20px rgba(0,255,255,0.3)"
                 ]
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
               GEN-AI RAG
-            </motion.span>{" "}
-            <motion.span
-              className="text-cyan-400 inline-block"
-              animate={{
-                textShadow: [
-                  "0 0 20px rgba(0,255,255,0.5)",
-                  "0 0 40px rgba(0,255,255,0.9)",
-                  "0 0 20px rgba(0,255,255,0.5)"
-                ]
-              }}
-              transition={{ duration: 2.5, repeat: Infinity }}
-            >
-              문자·음성
-            </motion.span>
-            <br />
-            <motion.span
-              className="text-cyan-400 inline-block"
-              animate={{
-                textShadow: [
-                  "0 0 20px rgba(0,255,255,0.5)",
-                  "0 0 40px rgba(0,255,255,0.9)",
-                  "0 0 20px rgba(0,255,255,0.5)"
-                ]
-              }}
-              transition={{ duration: 2.5, repeat: Infinity, delay: 0.3 }}
-            >
-              데이터
-            </motion.span>{" "}
-            <span className="text-white">응용SW 개발자</span>
-          </motion.h1>
+            </motion.div>
+            <h1 className="text-5xl md:text-7xl font-black leading-tight text-white">
+              문자·음성<br />데이터 응용SW 개발자
+            </h1>
+          </motion.div>
 
           <motion.p
-            className="text-2xl md:text-3xl text-white/90 font-bold"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            className="text-xl md:text-2xl text-white/80 font-medium max-w-3xl"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
           >
-            <motion.span
-              className="inline-block"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              RAG 기반 멀티모달 AI 전문가 양성과정
-            </motion.span>
+            RAG 기반 멀티모달 AI 전문가 양성과정
           </motion.p>
 
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-8"
+          <motion.div
+            className="flex items-center gap-3 text-white/60 text-sm"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <span>2024-09-25</span>
+            <span>|</span>
+            <span>정동인 핵입교수</span>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl pt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.7 }}
           >
             {highlights.map((item, index) => (
               <motion.div
                 key={index}
-                className={`p-6 rounded-xl bg-gradient-to-br from-cyan-950/40 to-blue-950/20 backdrop-blur-md border-2 ${
-                  item.emphasis ? "border-cyan-400 shadow-[0_0_30px_rgba(0,255,255,0.4)]" : "border-cyan-600/30"
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
+                className={`relative p-5 rounded-lg bg-gradient-to-br from-teal-900/30 to-cyan-900/10 backdrop-blur-sm border ${
+                  item.emphasis ? "border-cyan-400/60" : "border-cyan-700/30"
+                } overflow-hidden group`}
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 + index * 0.1 }}
                 whileHover={{
-                  scale: 1.08,
+                  scale: 1.05,
                   borderColor: "rgb(0,255,255)",
-                  boxShadow: "0 0 40px rgba(0,255,255,0.6)",
-                  backgroundColor: "rgba(0,50,80,0.6)"
+                  backgroundColor: "rgba(0,80,100,0.3)"
                 }}
               >
-                <motion.div
-                  animate={{
-                    rotate: [0, 5, -5, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: index * 0.2
-                  }}
-                >
-                  <item.icon className="w-8 h-8 mx-auto mb-3 text-cyan-400 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
-                </motion.div>
-                <p className="text-base md:text-lg font-bold text-white">{item.text}</p>
+                {item.emphasis && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent"
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity
+                    }}
+                  />
+                )}
+                <div className="relative z-10 flex flex-col items-start gap-2">
+                  <item.icon className="w-7 h-7 text-cyan-400" />
+                  <p className="text-sm md:text-base font-bold text-white">{item.text}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
 
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 pt-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9 }}
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
               <Button
                 size="lg"
                 onClick={onOpenModal}
-                className="bg-cyan-400 hover:bg-cyan-300 text-black text-xl px-12 py-7 font-black rounded-xl shadow-[0_0_40px_rgba(0,255,255,0.6)] hover:shadow-[0_0_60px_rgba(0,255,255,0.9)] border-2 border-cyan-300 transition-all duration-500"
+                className="bg-cyan-400 hover:bg-cyan-300 text-black text-lg px-10 py-6 font-bold rounded-lg shadow-[0_0_30px_rgba(0,255,255,0.4)] hover:shadow-[0_0_40px_rgba(0,255,255,0.7)] transition-all duration-300"
               >
-                <MessageCircle className="mr-2 h-6 w-6" />
+                <MessageCircle className="mr-2 h-5 w-5" />
                 무료 상담 신청하기
               </Button>
             </motion.div>
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-cyan-400/50 text-white hover:bg-cyan-400/10 hover:border-cyan-400 text-xl px-12 py-7 font-bold rounded-xl backdrop-blur-sm shadow-[0_0_20px_rgba(0,255,255,0.3)] hover:shadow-[0_0_40px_rgba(0,255,255,0.6)] transition-all duration-300"
+                className="border-2 border-cyan-400/50 text-white hover:bg-cyan-400/10 hover:border-cyan-400 text-lg px-10 py-6 font-semibold rounded-lg backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,255,0.2)] hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-all duration-300"
               >
-                <Download className="mr-2 h-6 w-6" />
+                <Download className="mr-2 h-5 w-5" />
                 커리큘럼 다운로드
               </Button>
             </motion.div>
