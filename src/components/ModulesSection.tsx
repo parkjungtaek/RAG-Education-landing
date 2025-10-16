@@ -39,11 +39,15 @@ const modules = [
 interface ModulesSectionProps {
   selectedProjectId: string | null;
   connectedModules: number[];
+  moduleConnections: number[][] | null;
   selectedProject: {
     id: string;
     title: string;
     description: string;
+    detailedDescription: string;
     connectedModules: number[];
+    moduleUsage: Record<number, string>;
+    learningGoals: string[];
   } | null;
 }
 
@@ -97,7 +101,7 @@ const getColorClasses = (color: string) => {
   return colors[color];
 };
 
-export const ModulesSection = ({ selectedProjectId, connectedModules, selectedProject }: ModulesSectionProps) => {
+export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConnections, selectedProject }: ModulesSectionProps) => {
   return (
     <section id="modules" className="relative py-32 px-4 bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden">
       {/* Dense Network Background Grid */}
@@ -192,7 +196,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, selectedPr
               animate={{ opacity: 1, y: 0, height: "auto" }}
               exit={{ opacity: 0, y: -20, height: 0 }}
               transition={{ duration: 0.5 }}
-              className="max-w-4xl mx-auto mb-12 overflow-hidden"
+              className="max-w-5xl mx-auto mb-12 overflow-hidden"
             >
               <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border-2 border-primary/30 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
                 <div className="flex items-center gap-3 mb-4">
@@ -201,17 +205,81 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, selectedPr
                     {selectedProject.title}
                   </h3>
                 </div>
-                <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                  {selectedProject.description}
+                <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
+                  {selectedProject.detailedDescription}
                 </p>
-                <div className="mt-4 flex items-center gap-2 text-sm text-primary font-medium">
-                  <span>연결된 모듈:</span>
-                  {selectedProject.connectedModules.map((moduleId, index) => (
-                    <span key={moduleId}>
-                      Module_{moduleId}
-                      {index < selectedProject.connectedModules.length - 1 && ", "}
-                    </span>
-                  ))}
+
+                {/* Module Flow Visualization */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-bold text-primary mb-3">학습 흐름</h4>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {selectedProject.connectedModules.map((moduleId, index) => {
+                      const module = modules.find(m => m.id === moduleId);
+                      const colors = module ? getColorClasses(module.color) : null;
+                      return (
+                        <motion.div
+                          key={moduleId}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="flex items-center gap-2"
+                        >
+                          <span className={`px-3 py-1 rounded-full text-sm font-bold ${colors?.text} border-2 ${colors?.border} ${colors?.bg}`}>
+                            Module {moduleId}
+                          </span>
+                          {index < selectedProject.connectedModules.length - 1 && (
+                            <span className="text-primary text-xl">→</span>
+                          )}
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Module Usage Description */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-bold text-primary mb-3">모듈별 역할</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {Object.entries(selectedProject.moduleUsage).map(([moduleId, usage]) => {
+                      const module = modules.find(m => m.id === Number(moduleId));
+                      const colors = module ? getColorClasses(module.color) : null;
+                      return (
+                        <motion.div
+                          key={moduleId}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: Number(moduleId) * 0.1 }}
+                          className={`p-3 rounded-lg border ${colors?.border} ${colors?.bg} backdrop-blur-sm`}
+                        >
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className={`text-xs font-bold ${colors?.text}`}>
+                              Module {moduleId}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-300">{usage}</p>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Learning Goals */}
+                <div>
+                  <h4 className="text-sm font-bold text-primary mb-3">학습 목표</h4>
+                  <ul className="space-y-2">
+                    {selectedProject.learningGoals.map((goal, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="flex items-start gap-2 text-sm text-gray-300"
+                      >
+                        <span className="text-primary mt-1">✓</span>
+                        <span>{goal}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </motion.div>
@@ -235,64 +303,63 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, selectedPr
               })}
             </defs>
 
-            {modules.map((module) =>
-              module.connections.map((targetId) => {
-                const target = modules.find(m => m.id === targetId);
-                if (!target) return null;
+            {(moduleConnections || []).map(([sourceId, targetId], index) => {
+              const source = modules.find(m => m.id === sourceId);
+              const target = modules.find(m => m.id === targetId);
+              if (!source || !target) return null;
 
-                const startX = `${module.position.left}`;
-                const startY = `${module.position.top}`;
-                const endX = `${target.position.left}`;
-                const endY = `${target.position.top}`;
+              const startX = `${source.position.left}`;
+              const startY = `${source.position.top}`;
+              const endX = `${target.position.left}`;
+              const endY = `${target.position.top}`;
 
-                const isModuleConnected = connectedModules.includes(module.id);
-                const isTargetConnected = connectedModules.includes(targetId);
-                const isConnectionActive = selectedProjectId && isModuleConnected && isTargetConnected;
+              const isConnectionActive = selectedProjectId !== null;
 
-                return (
-                  <g key={`connection-${module.id}-${targetId}`}>
-                    <motion.line
-                      x1={startX}
-                      y1={startY}
-                      x2={endX}
-                      y2={endY}
-                      stroke={`url(#lineGradient-${module.id})`}
-                      strokeWidth={isConnectionActive ? "5" : "3"}
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      whileInView={{ pathLength: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.5, delay: 0.5 }}
-                      animate={{
-                        opacity: isConnectionActive ? 1 : selectedProjectId ? 0.2 : 1,
-                        strokeWidth: isConnectionActive ? [5, 7, 5] : [3, 3, 3]
-                      }}
+              return (
+                <g key={`connection-${sourceId}-${targetId}`}>
+                  <motion.line
+                    x1={startX}
+                    y1={startY}
+                    x2={endX}
+                    y2={endY}
+                    stroke={`url(#lineGradient-${sourceId})`}
+                    strokeWidth="5"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{
+                      pathLength: 1,
+                      opacity: isConnectionActive ? 1 : 0.5,
+                      strokeWidth: isConnectionActive ? [5, 7, 5] : 5
+                    }}
+                    transition={{
+                      pathLength: { duration: 0.8, delay: index * 0.2 },
+                      opacity: { duration: 0.5 },
+                      strokeWidth: { duration: 1.5, repeat: Infinity }
+                    }}
+                  />
+
+                  <motion.circle
+                    r="5"
+                    fill={getColorClasses(source.color).rgbaHeavy}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: [0.8, 1, 0.8],
+                      r: [4, 6, 4]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      delay: index * 0.3
+                    }}
+                  >
+                    <animateMotion
+                      dur="2s"
+                      repeatCount="indefinite"
+                      path={`M ${startX} ${startY} L ${endX} ${endY}`}
                     />
-
-                    <motion.circle
-                      r="4"
-                      fill={getColorClasses(module.color).rgbaHeavy}
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity: isConnectionActive ? [0.8, 1, 0.8] : [0.5, 1, 0.5],
-                        r: isConnectionActive ? [4, 6, 4] : [3, 5, 3],
-                        display: isConnectionActive || !selectedProjectId ? "block" : "none"
-                      }}
-                      transition={{
-                        duration: isConnectionActive ? 1.5 : 2,
-                        repeat: Infinity,
-                        delay: Math.random() * 2
-                      }}
-                    >
-                      <animateMotion
-                        dur={isConnectionActive ? "2s" : "4s"}
-                        repeatCount="indefinite"
-                        path={`M ${startX} ${startY} L ${endX} ${endY}`}
-                      />
-                    </motion.circle>
-                  </g>
-                );
-              })
-            )}
+                  </motion.circle>
+                </g>
+              );
+            })}
           </svg>
 
           {/* Module Nodes */}
@@ -320,14 +387,20 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, selectedPr
                   stiffness: 200
                 }}
                 animate={{
-                  opacity: isModuleDimmed ? 0.3 : 1,
-                  scale: isModuleDimmed ? 0.95 : 1,
-                  filter: isModuleDimmed ? "blur(2px)" : "blur(0px)"
+                  opacity: isModuleDimmed ? 0.2 : 1,
+                  scale: isModuleDimmed ? 0.9 : 1,
+                  filter: isModuleDimmed ? "blur(3px)" : "blur(0px)",
+                  transition: {
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 20
+                  }
                 }}
               >
                 <motion.div
                   className={`relative w-[280px] md:w-[380px] p-6 md:p-8 rounded-3xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} cursor-pointer group`}
-                  whileHover={{
+                  whileHover={isModuleDimmed ? {} : {
                     scale: 1.08,
                     rotate: [0, 1, -1, 0],
                     boxShadow: `0 0 60px ${colors.rgbaHeavy}`
@@ -377,9 +450,26 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, selectedPr
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight">
+                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight mb-3">
                       {module.title}
                     </h3>
+
+                    {/* Project Context Badge */}
+                    <AnimatePresence>
+                      {selectedProject && isModuleActive && selectedProject.moduleUsage[module.id] && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.3 }}
+                          className="mt-3 pt-3 border-t border-white/10"
+                        >
+                          <p className="text-xs text-gray-400 leading-relaxed">
+                            {selectedProject.moduleUsage[module.id]}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   {/* Animated Corner Accents */}

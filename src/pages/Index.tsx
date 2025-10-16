@@ -34,6 +34,7 @@ const Index = () => {
     : null;
 
   const connectedModules = selectedProject?.connectedModules || [];
+  const moduleConnections = selectedProject?.moduleConnections || null;
 
   return (
     <div className="min-h-screen">
@@ -50,6 +51,7 @@ const Index = () => {
       <ModulesSection
         selectedProjectId={selectedProjectId}
         connectedModules={connectedModules}
+        moduleConnections={moduleConnections}
         selectedProject={selectedProject}
       />
       <CTAFooter onOpenModal={() => setIsModalOpen(true)} />
