@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, FileSearch, Cloud, Activity } from "lucide-react";
+import { Mic, FileSearch, Cloud, Activity, Plus, Minus } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
+import { supabase, type ModuleProgress } from "../lib/supabase";
 
 const modules = [
   {
@@ -108,8 +109,73 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
   const [animationComplete, setAnimationComplete] = useState(false);
   const [modulePositions, setModulePositions] = useState<Record<number, { x: number; y: number }>>({});
   const [showConnections, setShowConnections] = useState(false);
+  const [moduleProgress, setModuleProgress] = useState<Record<number, number>>({});
   const flowContainerRef = useRef<HTMLDivElement>(null);
   const moduleRefs = useRef<Record<number, HTMLDivElement | null>>({});
+
+  useEffect(() => {
+    const fetchModuleProgress = async () => {
+      const { data, error } = await supabase
+        .from('module_progress')
+        .select('module_id, progress');
+
+      if (data && !error) {
+        const progressMap: Record<number, number> = {};
+        data.forEach((item: ModuleProgress) => {
+          progressMap[item.module_id] = item.progress;
+        });
+        setModuleProgress(progressMap);
+      }
+    };
+
+    fetchModuleProgress();
+
+    const channel = supabase
+      .channel('module_progress_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'module_progress'
+        },
+        (payload) => {
+          if (payload.new && 'module_id' in payload.new && 'progress' in payload.new) {
+            const newData = payload.new as ModuleProgress;
+            setModuleProgress(prev => ({
+              ...prev,
+              [newData.module_id]: newData.progress
+            }));
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const updateModuleProgress = async (moduleId: number, change: number) => {
+    const currentProgress = moduleProgress[moduleId] || 0;
+    const newProgress = Math.max(0, Math.min(100, currentProgress + change));
+
+    const { error } = await supabase
+      .from('module_progress')
+      .upsert({
+        module_id: moduleId,
+        progress: newProgress
+      }, {
+        onConflict: 'module_id'
+      });
+
+    if (!error) {
+      setModuleProgress(prev => ({
+        ...prev,
+        [moduleId]: newProgress
+      }));
+    }
+  };
 
   useEffect(() => {
     if (selectedProjectId && selectedProject) {
@@ -704,6 +770,51 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                     <h3 className="text-lg md:text-xl font-bold text-white leading-tight mb-3">
                       {module.title}
                     </h3>
+
+                    {/* Progress Bar */}
+                    <div className="space-y-3 mb-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-gray-400">학습 진행도</span>
+                        <span className={`text-xs font-bold ${colors.text}`}>
+                          {moduleProgress[module.id] || 0}%
+                        </span>
+                      </div>
+                      <div className="flex-1 h-3 bg-secondary rounded-full overflow-hidden">
+                        <motion.div
+                          className={`h-full bg-gradient-to-r ${colors.bg} border-r-2 ${colors.border}`}
+                          initial={{ width: 0 }}
+                          animate={{ width: `${moduleProgress[module.id] || 0}%` }}
+                          transition={{ duration: 0.5, ease: "easeOut" }}
+                          style={{
+                            boxShadow: `0 0 10px ${colors.rgba}`
+                          }}
+                        />
+                      </div>
+                      <div className="flex gap-2 justify-end">
+                        <motion.button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateModuleProgress(module.id, -10);
+                          }}
+                          className={`p-1.5 rounded-lg ${colors.bg} border ${colors.border} hover:scale-110 transition-transform`}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Minus className={`w-4 h-4 ${colors.text}`} />
+                        </motion.button>
+                        <motion.button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            updateModuleProgress(module.id, 10);
+                          }}
+                          className={`p-1.5 rounded-lg ${colors.bg} border ${colors.border} hover:scale-110 transition-transform`}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Plus className={`w-4 h-4 ${colors.text}`} />
+                        </motion.button>
+                      </div>
+                    </div>
 
                     {/* Project Context Badge */}
                     <AnimatePresence>
