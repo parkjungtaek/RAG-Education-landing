@@ -281,19 +281,6 @@ export const ModulesSection = () => {
                     }
                   }}
                 >
-                  {/* Orbiting Glow */}
-                  <motion.div
-                    className={`absolute -inset-1 bg-gradient-to-r ${colors.bg} rounded-3xl blur-2xl`}
-                    animate={{
-                      opacity: [0.3, 0.6, 0.3],
-                      scale: [1, 1.1, 1]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: index * 0.5
-                    }}
-                  />
 
                   {/* Content */}
                   <div className="relative z-10">
