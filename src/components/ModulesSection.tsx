@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mic, FileSearch, Cloud, Activity } from "lucide-react";
 
 const modules = [
@@ -35,6 +35,17 @@ const modules = [
     connections: []
   }
 ];
+
+interface ModulesSectionProps {
+  selectedProjectId: string | null;
+  connectedModules: number[];
+  selectedProject: {
+    id: string;
+    title: string;
+    description: string;
+    connectedModules: number[];
+  } | null;
+}
 
 const getColorClasses = (color: string) => {
   const colors: Record<string, {
@@ -86,7 +97,7 @@ const getColorClasses = (color: string) => {
   return colors[color];
 };
 
-export const ModulesSection = () => {
+export const ModulesSection = ({ selectedProjectId, connectedModules, selectedProject }: ModulesSectionProps) => {
   return (
     <section id="modules" className="relative py-32 px-4 bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden">
       {/* Dense Network Background Grid */}
@@ -172,6 +183,41 @@ export const ModulesSection = () => {
           </p>
         </motion.div>
 
+        {/* Project Description Panel */}
+        <AnimatePresence mode="wait">
+          {selectedProject && (
+            <motion.div
+              key={selectedProject.id}
+              initial={{ opacity: 0, y: -20, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -20, height: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-4xl mx-auto mb-12 overflow-hidden"
+            >
+              <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border-2 border-primary/30 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  <h3 className="text-2xl md:text-3xl font-black text-white">
+                    {selectedProject.title}
+                  </h3>
+                </div>
+                <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+                  {selectedProject.description}
+                </p>
+                <div className="mt-4 flex items-center gap-2 text-sm text-primary font-medium">
+                  <span>연결된 모듈:</span>
+                  {selectedProject.connectedModules.map((moduleId, index) => (
+                    <span key={moduleId}>
+                      Module_{moduleId}
+                      {index < selectedProject.connectedModules.length - 1 && ", "}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Dynamic Obsidian-style Graph */}
         <div className="relative w-full h-[800px] max-w-7xl mx-auto">
           {/* Connection Lines SVG */}
@@ -199,6 +245,10 @@ export const ModulesSection = () => {
                 const endX = `${target.position.left}`;
                 const endY = `${target.position.top}`;
 
+                const isModuleConnected = connectedModules.includes(module.id);
+                const isTargetConnected = connectedModules.includes(targetId);
+                const isConnectionActive = selectedProjectId && isModuleConnected && isTargetConnected;
+
                 return (
                   <g key={`connection-${module.id}-${targetId}`}>
                     <motion.line
@@ -207,11 +257,15 @@ export const ModulesSection = () => {
                       x2={endX}
                       y2={endY}
                       stroke={`url(#lineGradient-${module.id})`}
-                      strokeWidth="3"
+                      strokeWidth={isConnectionActive ? "5" : "3"}
                       initial={{ pathLength: 0, opacity: 0 }}
                       whileInView={{ pathLength: 1, opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 1.5, delay: 0.5 }}
+                      animate={{
+                        opacity: isConnectionActive ? 1 : selectedProjectId ? 0.2 : 1,
+                        strokeWidth: isConnectionActive ? [5, 7, 5] : [3, 3, 3]
+                      }}
                     />
 
                     <motion.circle
@@ -219,17 +273,18 @@ export const ModulesSection = () => {
                       fill={getColorClasses(module.color).rgbaHeavy}
                       initial={{ opacity: 0 }}
                       animate={{
-                        opacity: [0.5, 1, 0.5],
-                        r: [3, 5, 3]
+                        opacity: isConnectionActive ? [0.8, 1, 0.8] : [0.5, 1, 0.5],
+                        r: isConnectionActive ? [4, 6, 4] : [3, 5, 3],
+                        display: isConnectionActive || !selectedProjectId ? "block" : "none"
                       }}
                       transition={{
-                        duration: 2,
+                        duration: isConnectionActive ? 1.5 : 2,
                         repeat: Infinity,
                         delay: Math.random() * 2
                       }}
                     >
                       <animateMotion
-                        dur="4s"
+                        dur={isConnectionActive ? "2s" : "4s"}
                         repeatCount="indefinite"
                         path={`M ${startX} ${startY} L ${endX} ${endY}`}
                       />
@@ -243,6 +298,8 @@ export const ModulesSection = () => {
           {/* Module Nodes */}
           {modules.map((module, index) => {
             const colors = getColorClasses(module.color);
+            const isModuleActive = connectedModules.includes(module.id);
+            const isModuleDimmed = selectedProjectId && !isModuleActive;
 
             return (
               <motion.div
@@ -262,6 +319,11 @@ export const ModulesSection = () => {
                   type: "spring",
                   stiffness: 200
                 }}
+                animate={{
+                  opacity: isModuleDimmed ? 0.3 : 1,
+                  scale: isModuleDimmed ? 0.95 : 1,
+                  filter: isModuleDimmed ? "blur(2px)" : "blur(0px)"
+                }}
               >
                 <motion.div
                   className={`relative w-[280px] md:w-[380px] p-6 md:p-8 rounded-3xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} cursor-pointer group`}
@@ -272,12 +334,22 @@ export const ModulesSection = () => {
                   }}
                   animate={{
                     y: [0, -10, 0],
+                    boxShadow: isModuleActive ? [
+                      `0 0 30px ${colors.rgba}`,
+                      `0 0 50px ${colors.rgbaHeavy}`,
+                      `0 0 30px ${colors.rgba}`
+                    ] : undefined,
+                    borderWidth: isModuleActive ? "3px" : "2px"
                   }}
                   transition={{
                     y: {
                       duration: 4 + index * 0.5,
                       repeat: Infinity,
                       ease: "easeInOut"
+                    },
+                    boxShadow: {
+                      duration: 2,
+                      repeat: Infinity
                     }
                   }}
                 >
