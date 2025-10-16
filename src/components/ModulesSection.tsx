@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, FileSearch, Cloud, Activity } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const modules = [
   {
@@ -106,12 +106,30 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
   const [animatedModuleIndex, setAnimatedModuleIndex] = useState<number>(-1);
   const [isAnimating, setIsAnimating] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [modulePositions, setModulePositions] = useState<Record<number, { x: number; y: number }>>({});
+  const [showConnections, setShowConnections] = useState(false);
+  const flowContainerRef = useRef<HTMLDivElement>(null);
+  const moduleRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   useEffect(() => {
     if (selectedProjectId && selectedProject) {
       setIsAnimating(true);
       setAnimationComplete(false);
       setAnimatedModuleIndex(-1);
+      setShowConnections(false);
+
+      const positions: Record<number, { x: number; y: number }> = {};
+      selectedProject.connectedModules.forEach((moduleId) => {
+        const moduleEl = moduleRefs.current[moduleId];
+        if (moduleEl) {
+          const rect = moduleEl.getBoundingClientRect();
+          positions[moduleId] = {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+          };
+        }
+      });
+      setModulePositions(positions);
 
       let currentIndex = 0;
       const intervalId = setInterval(() => {
@@ -122,14 +140,19 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
           clearInterval(intervalId);
           setIsAnimating(false);
           setAnimationComplete(true);
+          setTimeout(() => {
+            setShowConnections(true);
+          }, 300);
         }
-      }, 400);
+      }, 600);
 
       return () => clearInterval(intervalId);
     } else {
       setAnimatedModuleIndex(-1);
       setIsAnimating(false);
       setAnimationComplete(false);
+      setShowConnections(false);
+      setModulePositions({});
     }
   }, [selectedProjectId, selectedProject]);
 
@@ -252,65 +275,152 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 </p>
 
                 {/* Module Flow Visualization */}
-                <div className="mb-6">
+                <div className="mb-6" ref={flowContainerRef}>
                   <h4 className="text-sm font-bold text-primary mb-3">학습 흐름</h4>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {selectedProject.connectedModules.map((moduleId, index) => {
-                      const module = modules.find(m => m.id === moduleId);
-                      const colors = module ? getColorClasses(module.color) : null;
-                      const shouldShow = index <= animatedModuleIndex || animationComplete;
+                  <div className="relative min-h-[220px] md:min-h-[250px] flex items-center justify-center py-8 px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20">
+                    <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center relative">
+                      {selectedProject.connectedModules.map((moduleId, index) => {
+                        const module = modules.find(m => m.id === moduleId);
+                        if (!module) return null;
+                        const colors = getColorClasses(module.color);
+                        const shouldShow = index <= animatedModuleIndex || animationComplete;
+                        const startPos = modulePositions[moduleId];
 
-                      return (
-                        <React.Fragment key={moduleId}>
-                          {shouldShow && (
-                            <motion.div
-                              initial={{ opacity: 0, scale: 0.5, y: -10 }}
-                              animate={{
-                                opacity: 1,
-                                scale: 1,
-                                y: 0,
-                                boxShadow: [
-                                  `0 0 0px ${colors?.rgba}`,
-                                  `0 0 20px ${colors?.rgbaHeavy}`,
-                                  `0 0 10px ${colors?.rgba}`
-                                ]
-                              }}
-                              transition={{
-                                duration: 0.4,
-                                boxShadow: {
-                                  duration: 1,
-                                  repeat: 2
-                                }
-                              }}
-                              className="flex items-center gap-2"
-                            >
-                              <motion.span
-                                className={`px-3 py-1 rounded-full text-sm font-bold ${colors?.text} border-2 ${colors?.border} ${colors?.bg}`}
-                                animate={{
-                                  borderColor: [
-                                    colors?.border.replace('border-', '').replace('/60', ''),
-                                    colors?.border.replace('border-', ''),
-                                  ]
-                                }}
-                                transition={{ duration: 0.5 }}
-                              >
-                                Module {moduleId}
-                              </motion.span>
-                              {index < selectedProject.connectedModules.length - 1 && (
-                                <motion.span
-                                  className="text-primary text-xl"
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: 0.2 }}
+                        return (
+                          <React.Fragment key={`flow-${moduleId}`}>
+                            <AnimatePresence>
+                              {shouldShow && (
+                                <motion.div
+                                  layoutId={`module-${moduleId}-clone`}
+                                  initial={startPos ? {
+                                    position: 'fixed',
+                                    left: startPos.x,
+                                    top: startPos.y,
+                                    x: '-50%',
+                                    y: '-50%',
+                                    opacity: 0,
+                                    scale: 1
+                                  } : {
+                                    opacity: 0,
+                                    scale: 0.3
+                                  }}
+                                  animate={{
+                                    position: 'relative',
+                                    left: 0,
+                                    top: 0,
+                                    x: 0,
+                                    y: 0,
+                                    opacity: 1,
+                                    scale: 0.5
+                                  }}
+                                  exit={{
+                                    opacity: 0,
+                                    scale: 0.3
+                                  }}
+                                  transition={{
+                                    duration: 0.8,
+                                    ease: [0.34, 1.56, 0.64, 1],
+                                    delay: 0
+                                  }}
+                                  className={`w-[140px] md:w-[190px] p-3 md:p-4 rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow}`}
+                                  style={{
+                                    boxShadow: `0 0 30px ${colors.rgba}`
+                                  }}
                                 >
-                                  →
-                                </motion.span>
+                                  <div className="relative z-10">
+                                    <motion.div
+                                      className={`inline-block px-2 py-1 mb-2 rounded-full bg-gradient-to-r ${colors.bg} border ${colors.border}`}
+                                    >
+                                      <span className={`text-xs font-bold ${colors.text}`}>
+                                        Module_{moduleId}
+                                      </span>
+                                    </motion.div>
+                                    <h3 className="text-xs md:text-sm font-bold text-white leading-tight">
+                                      {module.title}
+                                    </h3>
+                                  </div>
+                                  <motion.div
+                                    className={`absolute top-1 right-1 w-2 h-2 rounded-full bg-${module.color}-400`}
+                                    animate={{
+                                      scale: [1, 1.5, 1],
+                                      opacity: [0.5, 1, 0.5]
+                                    }}
+                                    transition={{
+                                      duration: 2,
+                                      repeat: Infinity
+                                    }}
+                                  />
+                                </motion.div>
                               )}
-                            </motion.div>
-                          )}
-                        </React.Fragment>
-                      );
-                    })}
+                            </AnimatePresence>
+                            {index < selectedProject.connectedModules.length - 1 && shouldShow && (
+                              <AnimatePresence>
+                                {showConnections && (
+                                  <motion.div
+                                    initial={{ opacity: 0, scaleX: 0 }}
+                                    animate={{ opacity: 1, scaleX: 1 }}
+                                    exit={{ opacity: 0, scaleX: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.2 }}
+                                    className="flex items-center"
+                                  >
+                                    <motion.svg
+                                      width="40"
+                                      height="24"
+                                      viewBox="0 0 40 24"
+                                      className="hidden md:block"
+                                    >
+                                      <motion.path
+                                        d="M 0 12 L 35 12"
+                                        stroke={colors.rgbaHeavy}
+                                        strokeWidth="2"
+                                        fill="none"
+                                        initial={{ pathLength: 0 }}
+                                        animate={{ pathLength: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                      />
+                                      <motion.path
+                                        d="M 30 8 L 38 12 L 30 16"
+                                        stroke={colors.rgbaHeavy}
+                                        strokeWidth="2"
+                                        fill="none"
+                                        initial={{ pathLength: 0 }}
+                                        animate={{ pathLength: 1 }}
+                                        transition={{ duration: 0.3, delay: 0.3 }}
+                                      />
+                                    </motion.svg>
+                                    <motion.svg
+                                      width="24"
+                                      height="24"
+                                      viewBox="0 0 24 24"
+                                      className="md:hidden"
+                                    >
+                                      <motion.path
+                                        d="M 12 0 L 12 19"
+                                        stroke={colors.rgbaHeavy}
+                                        strokeWidth="2"
+                                        fill="none"
+                                        initial={{ pathLength: 0 }}
+                                        animate={{ pathLength: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                      />
+                                      <motion.path
+                                        d="M 8 15 L 12 22 L 16 15"
+                                        stroke={colors.rgbaHeavy}
+                                        strokeWidth="2"
+                                        fill="none"
+                                        initial={{ pathLength: 0 }}
+                                        animate={{ pathLength: 1 }}
+                                        transition={{ duration: 0.3, delay: 0.3 }}
+                                      />
+                                    </motion.svg>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
 
@@ -510,6 +620,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
             return (
               <motion.div
                 key={module.id}
+                ref={(el) => { moduleRefs.current[module.id] = el; }}
                 className="absolute"
                 style={{
                   top: module.position.top,
