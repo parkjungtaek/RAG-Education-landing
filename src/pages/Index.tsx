@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Hero } from "@/components/Hero";
 import { StickyNav } from "@/components/StickyNav";
 import { OverviewSection } from "@/components/OverviewSection";
