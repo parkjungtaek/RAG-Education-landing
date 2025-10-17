@@ -329,8 +329,8 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 {/* Module Flow Visualization */}
                 <div className="mb-6">
                   <h4 className="text-sm font-bold text-primary mb-3">학습 흐름</h4>
-                  <div className="relative min-h-[220px] md:min-h-[250px] flex items-center justify-center py-8 px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20">
-                    <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center relative">
+                  <div className="relative min-h-[180px] flex items-center justify-center py-6 px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20 overflow-x-auto">
+                    <div className="flex items-center gap-3 md:gap-4 justify-start md:justify-center relative min-w-max">
                       {selectedProject.connectedModules.map((moduleId, index) => {
                         const module = modules.find(m => m.id === moduleId);
                         if (!module) return null;
@@ -362,7 +362,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     ease: "easeOut",
                                     delay: 0
                                   }}
-                                  className={`w-[140px] md:w-[190px] p-3 md:p-4 rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow}`}
+                                  className={`w-[140px] md:w-[180px] p-3 rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} flex-shrink-0`}
                                   style={{
                                     boxShadow: `0 0 30px ${colors.rgba}`
                                   }}
@@ -382,7 +382,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                       initial={{ opacity: 0, y: 5 }}
                                       animate={{ opacity: 1, y: 0 }}
                                       transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
-                                      className="text-xs md:text-sm font-bold text-white leading-tight"
+                                      className="text-xs font-bold text-white leading-tight"
                                     >
                                       {module.title}
                                     </motion.h3>
@@ -438,13 +438,13 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                       />
                                     </motion.svg>
                                     <motion.svg
-                                      width="24"
+                                      width="30"
                                       height="24"
-                                      viewBox="0 0 24 24"
+                                      viewBox="0 0 30 24"
                                       className="md:hidden"
                                     >
                                       <motion.path
-                                        d="M 12 0 L 12 19"
+                                        d="M 0 12 L 25 12"
                                         stroke={colors.rgbaHeavy}
                                         strokeWidth="2"
                                         fill="none"
@@ -453,7 +453,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                         transition={{ duration: 1, ease: "easeInOut" }}
                                       />
                                       <motion.path
-                                        d="M 8 15 L 12 22 L 16 15"
+                                        d="M 20 8 L 28 12 L 20 16"
                                         stroke={colors.rgbaHeavy}
                                         strokeWidth="2"
                                         fill="none"
