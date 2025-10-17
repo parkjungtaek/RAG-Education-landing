@@ -107,10 +107,8 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
   const [animatedModuleIndex, setAnimatedModuleIndex] = useState<number>(-1);
   const [isAnimating, setIsAnimating] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
-  const [modulePositions, setModulePositions] = useState<Record<number, { x: number; y: number }>>({});
   const [showConnections, setShowConnections] = useState(false);
   const [moduleProgress, setModuleProgress] = useState<Record<number, number>>({});
-  const flowContainerRef = useRef<HTMLDivElement>(null);
   const moduleRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   useEffect(() => {
@@ -184,19 +182,6 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
       setAnimatedModuleIndex(-1);
       setShowConnections(false);
 
-      const positions: Record<number, { x: number; y: number }> = {};
-      selectedProject.connectedModules.forEach((moduleId) => {
-        const moduleEl = moduleRefs.current[moduleId];
-        if (moduleEl) {
-          const rect = moduleEl.getBoundingClientRect();
-          positions[moduleId] = {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2
-          };
-        }
-      });
-      setModulePositions(positions);
-
       let currentIndex = 0;
       const intervalId = setInterval(() => {
         if (currentIndex < selectedProject.connectedModules.length) {
@@ -218,7 +203,6 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
       setIsAnimating(false);
       setAnimationComplete(false);
       setShowConnections(false);
-      setModulePositions({});
     }
   }, [selectedProjectId, selectedProject]);
 
@@ -341,7 +325,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 </p>
 
                 {/* Module Flow Visualization */}
-                <div className="mb-6" ref={flowContainerRef}>
+                <div className="mb-6">
                   <h4 className="text-sm font-bold text-primary mb-3">학습 흐름</h4>
                   <div className="relative min-h-[220px] md:min-h-[250px] flex items-center justify-center py-8 px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20">
                     <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center relative">
@@ -350,41 +334,29 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                         if (!module) return null;
                         const colors = getColorClasses(module.color);
                         const shouldShow = index <= animatedModuleIndex || animationComplete;
-                        const startPos = modulePositions[moduleId];
 
                         return (
                           <React.Fragment key={`flow-${moduleId}`}>
                             <AnimatePresence>
                               {shouldShow && (
                                 <motion.div
-                                  layoutId={`module-${moduleId}-clone`}
-                                  initial={startPos ? {
-                                    position: 'fixed',
-                                    left: startPos.x,
-                                    top: startPos.y,
-                                    x: '-50%',
-                                    y: '-50%',
+                                  initial={{
                                     opacity: 0,
-                                    scale: 1
-                                  } : {
-                                    opacity: 0,
-                                    scale: 0.3
+                                    scale: 0,
+                                    y: -20
                                   }}
                                   animate={{
-                                    position: 'relative',
-                                    left: 0,
-                                    top: 0,
-                                    x: 0,
-                                    y: 0,
                                     opacity: 1,
-                                    scale: 0.5
+                                    scale: 1,
+                                    y: 0
                                   }}
                                   exit={{
                                     opacity: 0,
-                                    scale: 0.3
+                                    scale: 0,
+                                    y: 20
                                   }}
                                   transition={{
-                                    duration: 0.8,
+                                    duration: 0.5,
                                     ease: [0.34, 1.56, 0.64, 1],
                                     delay: 0
                                   }}
@@ -395,25 +367,34 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                 >
                                   <div className="relative z-10">
                                     <motion.div
+                                      initial={{ opacity: 0, scale: 0.5 }}
+                                      animate={{ opacity: 1, scale: 1 }}
+                                      transition={{ delay: 0.2, duration: 0.3 }}
                                       className={`inline-block px-2 py-1 mb-2 rounded-full bg-gradient-to-r ${colors.bg} border ${colors.border}`}
                                     >
                                       <span className={`text-xs font-bold ${colors.text}`}>
                                         Module_{moduleId}
                                       </span>
                                     </motion.div>
-                                    <h3 className="text-xs md:text-sm font-bold text-white leading-tight">
+                                    <motion.h3
+                                      initial={{ opacity: 0, y: 5 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ delay: 0.3, duration: 0.3 }}
+                                      className="text-xs md:text-sm font-bold text-white leading-tight"
+                                    >
                                       {module.title}
-                                    </h3>
+                                    </motion.h3>
                                   </div>
                                   <motion.div
                                     className={`absolute top-1 right-1 w-2 h-2 rounded-full bg-${module.color}-400`}
+                                    initial={{ opacity: 0, scale: 0 }}
                                     animate={{
-                                      scale: [1, 1.5, 1],
-                                      opacity: [0.5, 1, 0.5]
+                                      opacity: [0, 0.5, 1, 0.5],
+                                      scale: [0, 1, 1.5, 1]
                                     }}
                                     transition={{
-                                      duration: 2,
-                                      repeat: Infinity
+                                      opacity: { duration: 2, repeat: Infinity },
+                                      scale: { duration: 2, repeat: Infinity }
                                     }}
                                   />
                                 </motion.div>
