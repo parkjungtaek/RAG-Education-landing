@@ -163,7 +163,7 @@ export const ProjectsSection = ({ selectedProjectId, onProjectSelect }: Projects
                           if (modulesSection) {
                             modulesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                           }
-                        }, 100);
+                        }, 300);
                       }}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />

@@ -189,13 +189,15 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
           currentIndex++;
         } else {
           clearInterval(intervalId);
-          setIsAnimating(false);
-          setAnimationComplete(true);
           setTimeout(() => {
-            setShowConnections(true);
-          }, 300);
+            setIsAnimating(false);
+            setAnimationComplete(true);
+            setTimeout(() => {
+              setShowConnections(true);
+            }, 500);
+          }, 200);
         }
-      }, 600);
+      }, 800);
 
       return () => clearInterval(intervalId);
     } else {
@@ -342,8 +344,8 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                 <motion.div
                                   initial={{
                                     opacity: 0,
-                                    scale: 0,
-                                    y: -20
+                                    scale: 0.5,
+                                    y: 15
                                   }}
                                   animate={{
                                     opacity: 1,
@@ -352,12 +354,12 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                   }}
                                   exit={{
                                     opacity: 0,
-                                    scale: 0,
-                                    y: 20
+                                    scale: 0.5,
+                                    y: 15
                                   }}
                                   transition={{
-                                    duration: 0.5,
-                                    ease: [0.34, 1.56, 0.64, 1],
+                                    duration: 0.7,
+                                    ease: "easeOut",
                                     delay: 0
                                   }}
                                   className={`w-[140px] md:w-[190px] p-3 md:p-4 rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow}`}
@@ -369,7 +371,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     <motion.div
                                       initial={{ opacity: 0, scale: 0.5 }}
                                       animate={{ opacity: 1, scale: 1 }}
-                                      transition={{ delay: 0.2, duration: 0.3 }}
+                                      transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
                                       className={`inline-block px-2 py-1 mb-2 rounded-full bg-gradient-to-r ${colors.bg} border ${colors.border}`}
                                     >
                                       <span className={`text-xs font-bold ${colors.text}`}>
@@ -379,7 +381,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     <motion.h3
                                       initial={{ opacity: 0, y: 5 }}
                                       animate={{ opacity: 1, y: 0 }}
-                                      transition={{ delay: 0.3, duration: 0.3 }}
+                                      transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
                                       className="text-xs md:text-sm font-bold text-white leading-tight"
                                     >
                                       {module.title}
@@ -407,7 +409,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     initial={{ opacity: 0, scaleX: 0 }}
                                     animate={{ opacity: 1, scaleX: 1 }}
                                     exit={{ opacity: 0, scaleX: 0 }}
-                                    transition={{ duration: 0.5, delay: index * 0.2 }}
+                                    transition={{ duration: 1, delay: index * 0.3, ease: "easeInOut" }}
                                     className="flex items-center"
                                   >
                                     <motion.svg
@@ -423,7 +425,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
-                                        transition={{ duration: 0.5 }}
+                                        transition={{ duration: 1, ease: "easeInOut" }}
                                       />
                                       <motion.path
                                         d="M 30 8 L 38 12 L 30 16"
@@ -432,7 +434,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
-                                        transition={{ duration: 0.3, delay: 0.3 }}
+                                        transition={{ duration: 0.4, delay: 0.6, ease: "easeInOut" }}
                                       />
                                     </motion.svg>
                                     <motion.svg
@@ -448,7 +450,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
-                                        transition={{ duration: 0.5 }}
+                                        transition={{ duration: 1, ease: "easeInOut" }}
                                       />
                                       <motion.path
                                         d="M 8 15 L 12 22 L 16 15"
@@ -457,7 +459,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
-                                        transition={{ duration: 0.3, delay: 0.3 }}
+                                        transition={{ duration: 0.4, delay: 0.6, ease: "easeInOut" }}
                                       />
                                     </motion.svg>
                                   </motion.div>
@@ -485,14 +487,14 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                         <React.Fragment key={moduleId}>
                           {shouldShow && (
                             <motion.div
-                              initial={{ opacity: 0, x: -30, scale: 0.9 }}
+                              initial={{ opacity: 0, x: -10, scale: 0.95 }}
                               animate={{
                                 opacity: 1,
                                 x: 0,
                                 scale: 1,
                                 borderColor: colors?.border
                               }}
-                              transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
+                              transition={{ duration: 0.6, ease: "easeOut" }}
                               className={`p-3 rounded-lg border ${colors?.border} ${colors?.bg} backdrop-blur-sm`}
                             >
                               <div className="flex items-center gap-2 mb-1">
@@ -533,24 +535,23 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                         <React.Fragment key={index}>
                           {shouldShow && (
                             <motion.li
-                              initial={{ opacity: 0, x: -20, scale: 0.95 }}
+                              initial={{ opacity: 0, x: -10, scale: 0.95 }}
                               animate={{ opacity: 1, x: 0, scale: 1 }}
                               transition={{
                                 delay: animationComplete ? index * 0.1 : goalDelay,
-                                duration: 0.4,
-                                type: "spring",
-                                stiffness: 200
+                                duration: 0.6,
+                                ease: "easeOut"
                               }}
                               className="flex items-start gap-2 text-sm text-gray-300"
                             >
                               <motion.span
                                 className="text-primary mt-1"
-                                initial={{ scale: 0, rotate: -180 }}
-                                animate={{ scale: 1, rotate: 0 }}
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
                                 transition={{
                                   delay: animationComplete ? index * 0.1 + 0.2 : goalDelay + 0.2,
-                                  type: "spring",
-                                  stiffness: 300
+                                  duration: 0.4,
+                                  ease: "easeOut"
                                 }}
                               >
                                 ✓
@@ -558,7 +559,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                               <motion.span
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: animationComplete ? index * 0.1 + 0.3 : goalDelay + 0.3 }}
+                                transition={{ delay: animationComplete ? index * 0.1 + 0.3 : goalDelay + 0.3, duration: 0.4, ease: "easeOut" }}
                               >
                                 {goal}
                               </motion.span>
@@ -688,11 +689,9 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                   scale: isModuleDimmed && !shouldAnimate && !animationComplete ? 0.9 : 1,
                   filter: isModuleDimmed && !shouldAnimate && !animationComplete ? "blur(3px)" : "blur(0px)",
                   transition: {
-                    duration: shouldAnimate || animationComplete ? 0.4 : 0.5,
+                    duration: shouldAnimate || animationComplete ? 0.6 : 0.7,
                     delay: shouldAnimate && !animationComplete ? moduleDelay : 0,
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 20
+                    ease: "easeOut"
                   }
                 }}
               >

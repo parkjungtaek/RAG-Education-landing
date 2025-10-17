@@ -25,7 +25,7 @@ const Index = () => {
         if (modulesSection) {
           modulesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100);
+      }, 300);
     }
   };
 
