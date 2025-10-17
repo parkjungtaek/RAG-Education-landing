@@ -1,40 +1,41 @@
-import { MessageCircle, Code, Briefcase } from "lucide-react";
+import { Clock, Users, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
 const cards = [
   {
-    icon: MessageCircle,
-    title: "RAG가 뭐예요?",
-    content: "근거를 찾아 말하는 AI",
+    icon: Clock,
+    title: "교육 기간",
+    content: "6개월 (960시간)",
     details: [
-      "사내 문서·회의록(음성→텍스트)을 검색·인용해",
-      "정확한 답변을 만드는 기술",
+      "월~금 09:00-18:00",
+      "일 8시간 집중 교육",
+      "정규과정 640H + 프로젝트 320H",
     ],
-    highlight: "검색 증강 생성",
+    highlight: "33% 프로젝트",
   },
   {
-    icon: Code,
-    title: "배우면 뭘 할 수 있나",
-    content: "실무형 RAG 개발 역량",
+    icon: Users,
+    title: "교육 대상",
+    content: "개발 경험자 우대",
     details: [
-      "문서·음성 기반 Q&A/챗봇 제작",
-      "벡터DB 의미검색·리랭킹 설계",
-      "회의록(STT) 요약·액션 아이템 추출 & API 배포",
+      "Python 프로젝트 경험자",
+      "생성형 AI 분야 전환 희망자",
+      "SW 개발 경험자 우대",
     ],
-    highlight: "프로덕션 레벨",
+    highlight: "선발 테스트 실시",
   },
   {
-    icon: Briefcase,
-    title: "취업/진출 분야",
-    content: "수요 높은 AI 실무 직군",
+    icon: Target,
+    title: "교육 목표",
+    content: "RAG 전문가 양성",
     details: [
-      "RAG 엔지니어 / AI 응용 SW",
-      "검색·데이터 엔지니어 / 챗봇 엔지니어",
-      "컨택센터·커머스·핀테크·제조·SI/컨설팅",
+      "멀티모달 AI 서비스 개발",
+      "RAG 파이프라인 구축",
+      "음성·텍스트 데이터 처리",
     ],
-    highlight: "취업 연계 100%",
+    highlight: "현업 즉시 투입",
   },
 ];
 
