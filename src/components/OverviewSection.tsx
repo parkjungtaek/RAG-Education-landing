@@ -198,7 +198,7 @@ export const OverviewSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {cards.map((card, index) => (
             <motion.div
               key={index}
@@ -227,7 +227,7 @@ export const OverviewSection = () => {
 
                 <Card className="relative h-full bg-gradient-to-br from-slate-900/90 via-blue-950/60 to-slate-900/90 backdrop-blur-md border-2 border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-500 overflow-hidden">
                   {/* Circuit Pattern Overlay */}
-                  <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+                  <div className="absolute top-0 right-0 w-24 h-24 opacity-10">
                     <motion.div
                       className="w-full h-full"
                       style={{
@@ -247,9 +247,9 @@ export const OverviewSection = () => {
                     />
                   </div>
 
-                  <CardHeader>
+                  <CardHeader className="pb-3">
                     <motion.div
-                      className="relative w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-6 border border-cyan-500/30"
+                      className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -264,15 +264,15 @@ export const OverviewSection = () => {
                           repeat: Infinity
                         }}
                       />
-                      <card.icon className="relative w-8 h-8 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
+                      <card.icon className="relative w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
                     </motion.div>
-                    <CardTitle className="text-2xl md:text-3xl font-black text-white mb-3">{card.title}</CardTitle>
-                    <CardDescription className="text-xl font-bold text-cyan-300 mt-2">
+                    <CardTitle className="text-xl font-black text-white mb-2">{card.title}</CardTitle>
+                    <CardDescription className="text-base font-bold text-cyan-300 mt-1">
                       {card.content}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-4 mb-6">
+                  <CardContent className="pt-0">
+                    <ul className="space-y-2 mb-4">
                       {card.details.map((detail, i) => (
                         <motion.li
                           key={i}
@@ -282,12 +282,12 @@ export const OverviewSection = () => {
                           viewport={{ once: true }}
                           transition={{ delay: index * 0.1 + i * 0.1 }}
                         >
-                          <span className="mr-3 text-cyan-400 font-bold text-lg">•</span>
-                          <span className="text-base text-gray-300">{detail}</span>
+                          <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                          <span className="text-sm text-gray-300 leading-snug">{detail}</span>
                         </motion.li>
                       ))}
                     </ul>
-                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-4 py-1.5 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
                       {card.highlight}
                     </Badge>
                   </CardContent>
