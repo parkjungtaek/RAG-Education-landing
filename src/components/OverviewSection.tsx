@@ -56,6 +56,12 @@ const TechStackDiagram = () => {
       color: "from-blue-500 to-cyan-500"
     },
     {
+      icon: ArrowUpDown,
+      label: "리랭킹",
+      description: "순위/정렬",
+      color: "from-green-500 to-emerald-500"
+    },
+    {
       icon: Bot,
       label: "Q&A/챗봇",
       description: "채팅/질문 처리",
@@ -66,12 +72,18 @@ const TechStackDiagram = () => {
       label: "API 배포",
       description: "클라우드 배포",
       color: "from-indigo-500 to-purple-500"
+    },
+    {
+      icon: LayoutDashboard,
+      label: "프로덕션 대시보드",
+      description: "대시보드/차트",
+      color: "from-cyan-500 to-blue-500"
     }
   ];
 
   return (
     <div className="w-full h-full flex items-center justify-center p-6">
-      <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-md">
         {techStack.map((tech, index) => {
           const isActive = activeIndex === index;
           const IconComponent = tech.icon;
@@ -710,9 +722,9 @@ export const OverviewSection = () => {
                     </div>
                   ) : index === 1 ? (
                     // Special layout for second card with new tech stack diagram
-                    <div className="flex flex-col lg:flex-row h-full p-4 lg:gap-8">
+                    <div className="flex flex-col lg:flex-row h-full p-4">
                       {/* Left side - Text content */}
-                      <div className="lg:w-[40%] flex flex-col justify-center space-y-3">
+                      <div className="flex-1 flex flex-col justify-center space-y-3 lg:pr-4">
                         <motion.div
                           className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border border-cyan-500/30"
                           whileHover={{ scale: 1.1, rotate: 5 }}
@@ -759,7 +771,7 @@ export const OverviewSection = () => {
                       </div>
 
                       {/* Right side - Tech Stack Diagram */}
-                      <div className="lg:w-[60%] flex items-center justify-center mt-6 lg:mt-0">
+                      <div className="flex-1 flex items-center justify-center mt-6 lg:mt-0">
                         <TechStackDiagram />
                       </div>
                     </div>
