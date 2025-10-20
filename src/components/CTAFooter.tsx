@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Award, Users, MessageCircle, Phone } from "lucide-react";
+import { Shield, Award, Users, MessageCircle, Phone, MapPin, Clock, Train, Bus } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface CTAFooterProps {
@@ -121,6 +121,62 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
                 <span className="text-base font-bold">{signal.text}</span>
               </div>
             ))}
+          </motion.div>
+
+          {/* Location Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-20 p-8 rounded-2xl bg-gradient-to-br from-cyan-900/20 to-blue-900/10 border border-cyan-700/30 backdrop-blur-sm"
+          >
+            <h3 className="text-3xl font-black text-cyan-400 mb-8">에듀윌 국비교육원 구로</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+              {/* Address & Directions */}
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-white/90 font-bold mb-2">주소</p>
+                    <p className="text-white/70">서울 구로구 디지털로32길 79, 5층<br />에듀윌 국비교육원 구로센터</p>
+                    <p className="text-cyan-400 font-semibold mt-2">오시는길: 구로디지털단지역(2호선) 2번 출구에서 도보 5분</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Clock className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-white/90 font-bold mb-2">이용시간</p>
+                    <p className="text-white/70">평일 09:00 ~ 22:00</p>
+                    <p className="text-white/70">주말 10:00 ~ 17:00</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Transportation */}
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <Train className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-white/90 font-bold mb-2">지하철</p>
+                    <p className="text-white/70">구로디지털단지역(2호선)</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Bus className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-white/90 font-bold mb-2">버스</p>
+                    <div className="space-y-1">
+                      <p className="text-white/70"><span className="text-cyan-400 font-semibold">지선버스:</span> 5536, 5616</p>
+                      <p className="text-white/70"><span className="text-cyan-400 font-semibold">일반/마을:</span> 구로09 · 영등포01 · 금천07</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
