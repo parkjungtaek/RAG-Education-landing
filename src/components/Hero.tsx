@@ -9,10 +9,10 @@ interface HeroProps {
 
 export const Hero = ({ onOpenModal }: HeroProps) => {
   const highlights = [
-    { icon: Trophy, text: "프로그래밍, AI 실무 활용 SW 교육", emphasis: true },
-    { icon: CreditCard, text: "전액 국비지원, 올해 마지막 기회" },
+    { icon: Trophy, text: "프로그래밍, ,<br /> AI 실무 활용 SW 교육", emphasis: true },
+    { icon: CreditCard, text: "전액 국비지원, ,<br /> 올해 마지막 기회" },
     { icon: Code, text: "프로젝트 320시간" },
-    { icon: Users, text: "Sysone, Maymust 등 13개 기업 참여" },
+    { icon: Users, text: "Sysone, Maymust 등 ,<br /> 13개 기업 참여" },
   ];
 
   return (
