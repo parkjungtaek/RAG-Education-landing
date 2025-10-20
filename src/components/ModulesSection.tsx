@@ -329,8 +329,10 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 {/* Module Flow Visualization */}
                 <div className="mb-6">
                   <h4 className="text-sm font-bold text-primary mb-3">학습 흐름</h4>
-                  <div className="relative min-h-[180px] flex items-center justify-center py-6 px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20 overflow-x-auto">
-                    <div className="flex items-center gap-3 md:gap-4 justify-start md:justify-center relative min-w-max">
+                  <div className="relative min-h-[120px] md:min-h-[180px] flex items-center justify-center py-3 px-2 md:py-6 md:px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20 overflow-x-auto scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
+                    <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-primary/10 to-transparent pointer-events-none z-10 md:hidden" />
+                    <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-primary/10 to-transparent pointer-events-none z-10 md:hidden" />
+                    <div className="flex items-center gap-2 md:gap-4 justify-start md:justify-center relative min-w-max px-1">
                       {selectedProject.connectedModules.map((moduleId, index) => {
                         const module = modules.find(m => m.id === moduleId);
                         if (!module) return null;
@@ -362,7 +364,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     ease: "easeOut",
                                     delay: 0
                                   }}
-                                  className={`w-[140px] md:w-[180px] p-3 rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} flex-shrink-0`}
+                                  className={`w-[110px] md:w-[180px] p-2 md:p-3 rounded-xl md:rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} flex-shrink-0`}
                                   style={{
                                     boxShadow: `0 0 30px ${colors.rgba}`
                                   }}
@@ -372,23 +374,24 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                       initial={{ opacity: 0, scale: 0.5 }}
                                       animate={{ opacity: 1, scale: 1 }}
                                       transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
-                                      className={`inline-block px-2 py-1 mb-2 rounded-full bg-gradient-to-r ${colors.bg} border ${colors.border}`}
+                                      className={`inline-block px-1.5 py-0.5 md:px-2 md:py-1 mb-1.5 md:mb-2 rounded-full bg-gradient-to-r ${colors.bg} border ${colors.border}`}
                                     >
-                                      <span className={`text-xs font-bold ${colors.text}`}>
-                                        Module_{moduleId}
+                                      <span className={`text-[10px] md:text-xs font-bold ${colors.text}`}>
+                                        M_{moduleId}
                                       </span>
                                     </motion.div>
                                     <motion.h3
                                       initial={{ opacity: 0, y: 5 }}
                                       animate={{ opacity: 1, y: 0 }}
                                       transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
-                                      className="text-xs font-bold text-white leading-tight"
+                                      className="text-[10px] md:text-xs font-bold text-white leading-tight line-clamp-3"
+                                      style={{ wordBreak: 'keep-all' }}
                                     >
                                       {module.title}
                                     </motion.h3>
                                   </div>
                                   <motion.div
-                                    className={`absolute top-1 right-1 w-2 h-2 rounded-full bg-${module.color}-400`}
+                                    className={`absolute top-1 right-1 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-${module.color}-400`}
                                     initial={{ opacity: 0, scale: 0 }}
                                     animate={{
                                       opacity: [0, 0.5, 1, 0.5],
@@ -410,7 +413,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     animate={{ opacity: 1, scaleX: 1 }}
                                     exit={{ opacity: 0, scaleX: 0 }}
                                     transition={{ duration: 1, delay: index * 0.3, ease: "easeInOut" }}
-                                    className="flex items-center"
+                                    className="flex items-center flex-shrink-0"
                                   >
                                     <motion.svg
                                       width="40"
@@ -438,24 +441,24 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                       />
                                     </motion.svg>
                                     <motion.svg
-                                      width="30"
-                                      height="24"
-                                      viewBox="0 0 30 24"
+                                      width="20"
+                                      height="16"
+                                      viewBox="0 0 20 16"
                                       className="md:hidden"
                                     >
                                       <motion.path
-                                        d="M 0 12 L 25 12"
+                                        d="M 0 8 L 15 8"
                                         stroke={colors.rgbaHeavy}
-                                        strokeWidth="2"
+                                        strokeWidth="1.5"
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
                                         transition={{ duration: 1, ease: "easeInOut" }}
                                       />
                                       <motion.path
-                                        d="M 20 8 L 28 12 L 20 16"
+                                        d="M 12 5 L 18 8 L 12 11"
                                         stroke={colors.rgbaHeavy}
-                                        strokeWidth="2"
+                                        strokeWidth="1.5"
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
