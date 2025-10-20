@@ -9,10 +9,10 @@ interface HeroProps {
 
 export const Hero = ({ onOpenModal }: HeroProps) => {
   const highlights = [
-    { icon: Trophy, text: "프로그래밍, ,<br /> AI 실무 활용 SW 교육", emphasis: true },
-    { icon: CreditCard, text: "전액 국비지원, ,<br /> 올해 마지막 기회" },
-    { icon: Code, text: "프로젝트 320시간" },
-    { icon: Users, text: "Sysone, Maymust 등 ,<br /> 13개 기업 참여" },
+    { icon: Trophy,     text: "프로그래밍,\nAI 실무 활용 SW 교육", emphasis: true },
+    { icon: CreditCard, text: "전액 국비지원,\n올해 마지막 기회" },
+    { icon: Code,       text: "프로젝트 320시간" },
+    { icon: Users,      text: "Sysone, Maymust 등\n13개 기업 참여" },
   ];
 
   return (
@@ -92,7 +92,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
-          >           
+          >
           </motion.div>
 
           <motion.div
@@ -119,18 +119,16 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
                 {item.emphasis && (
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent"
-                    animate={{
-                      opacity: [0.3, 0.6, 0.3]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity
-                    }}
+                    animate={{ opacity: [0.3, 0.6, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity }}
                   />
                 )}
                 <div className="relative z-10 flex flex-col items-start gap-2">
                   <item.icon className="w-7 h-7 text-cyan-400" />
-                  <p className="text-sm md:text-base font-bold text-white">{item.text}</p>
+                  {/* 핵심: 줄바꿈 표시 */}
+                  <p className="text-sm md:text-base font-bold text-white whitespace-pre-line break-keep leading-relaxed">
+                    {item.text}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -142,10 +140,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.9 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
               <Button
                 size="lg"
                 onClick={onOpenModal}
