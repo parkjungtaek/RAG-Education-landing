@@ -298,10 +298,10 @@ export const OverviewSection = () => {
                       </div>
 
                       {/* Right side - Visual diagram */}
-                      <div className="flex-1 flex items-center justify-center p-2 relative">
-                        <div className="relative w-full max-w-sm scale-90">
+                      <div className="flex-1 flex items-center justify-center p-1 relative">
+                        <div className="relative w-full max-w-xs scale-75">
                           {/* Top Row - Data Sources */}
-                          <div className="flex justify-around items-start mb-4">
+                          <div className="flex justify-around items-start mb-2">
                             {/* Documents Stack */}
                             <motion.div
                               className="flex flex-col items-center gap-2"
@@ -381,7 +381,7 @@ export const OverviewSection = () => {
                           </div>
 
                           {/* Second Row - Meeting Records and Vector DB */}
-                          <div className="flex items-center justify-start mb-4 gap-4">
+                          <div className="flex items-center justify-start mb-2 gap-4">
                             {/* Meeting Records */}
                             <motion.div
                               className="flex flex-col items-center gap-2 ml-8"
@@ -469,7 +469,7 @@ export const OverviewSection = () => {
                           </div>
 
                           {/* Center Row - AI Agent */}
-                          <div className="flex justify-center items-center mb-4">
+                          <div className="flex justify-center items-center mb-2">
                             <motion.div
                               className="relative"
                               initial={{ opacity: 0, scale: 0 }}
