@@ -43,6 +43,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
                 alt="에듀윌"
                 className="h-8 object-contain"
               />
+              <span className="text-gray-800 font-bold text-lg">에듀윌 국비교육원 구로센터</span>
             </div>
           </motion.div>
 
