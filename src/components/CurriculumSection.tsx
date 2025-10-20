@@ -169,7 +169,6 @@ export const CurriculumSection = () => {
                       <div key={i} className="border-l-4 border-primary pl-6">
                         <div className="flex justify-between items-start mb-3">
                           <h4 className="font-bold text-lg text-foreground">{module.name}</h4>
-                          <Badge className="bg-primary/10 text-primary border-primary/30 font-bold">{module.hours}시간</Badge>
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {module.topics.map((topic, j) => (
