@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Info, Cpu, Gift, Calendar, Folder, Building } from "lucide-react";
+import { Info, Cpu, Gift, Calendar, Folder } from "lucide-react";
 import { motion } from "framer-motion";
 
 const navItems = [
@@ -8,7 +8,6 @@ const navItems = [
   { id: "benefits", label: "교육 혜택", icon: Gift },
   { id: "curriculum", label: "커리큘럼", icon: Calendar },
   { id: "projects", label: "프로젝트", icon: Folder },
-  { id: "companies", label: "참여기업", icon: Building },
 ];
 
 export const StickyNav = () => {
