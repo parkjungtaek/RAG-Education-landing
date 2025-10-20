@@ -13,7 +13,7 @@ const benefits = [
     icon: TrendingUp,
     title: "훈련 장려금",
     description: "출석률에 따라 월 최대 지급",
-    highlight: "최대 80만원",
+    highlight: "수당 지급",
   },
   {
     icon: Award,
