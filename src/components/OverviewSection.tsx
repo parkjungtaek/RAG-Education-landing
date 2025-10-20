@@ -1,7 +1,7 @@
-import { MessageCircle, Code, Briefcase, Mic, FileText, Database, ArrowUpDown, Bot, Cloud, LayoutDashboard } from "lucide-react";
+import { MessageCircle, Code, Briefcase, Mic, FileText, Database, ArrowUpDown, Bot, Cloud, LayoutDashboard, ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 const cards = [
@@ -166,6 +166,8 @@ const TechStackDiagram = () => {
 };
 
 export const OverviewSection = () => {
+  const [showDiagram, setShowDiagram] = useState(false);
+
   return (
     <section id="overview" className="relative py-32 px-4 bg-gradient-to-b from-black via-blue-950/20 to-black overflow-hidden">
       {/* AI Chip Circuit Background */}
@@ -376,9 +378,9 @@ export const OverviewSection = () => {
 
                   {index === 0 ? (
                     // Special layout for first card
-                    <div className="flex flex-col md:flex-row h-full p-4">
+                    <div className="flex flex-col md:flex-row h-full p-4 md:p-6">
                       {/* Left side - Text content */}
-                      <div className="flex-1 flex flex-col justify-center space-y-2">
+                      <div className="flex-1 flex flex-col justify-center space-y-3 md:space-y-2">
                         <motion.div
                           className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border border-cyan-500/30"
                           whileHover={{ scale: 1.1, rotate: 5 }}
@@ -399,11 +401,11 @@ export const OverviewSection = () => {
                         </motion.div>
 
                         <div>
-                          <h3 className="text-2xl font-black text-white mb-1">{card.title}</h3>
-                          <p className="text-lg font-bold text-cyan-300 mb-2">{card.content}</p>
+                          <h3 className="text-2xl md:text-3xl font-black text-white mb-2">{card.title}</h3>
+                          <p className="text-lg md:text-xl font-bold text-cyan-300 mb-3">{card.content}</p>
                         </div>
 
-                        <ul className="space-y-1">
+                        <ul className="space-y-2.5 md:space-y-1">
                           {card.details.map((detail, i) => (
                             <motion.li
                               key={i}
@@ -413,8 +415,8 @@ export const OverviewSection = () => {
                               viewport={{ once: true }}
                               transition={{ delay: index * 0.1 + i * 0.1 }}
                             >
-                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
-                              <span className="text-sm text-gray-300 leading-snug">{detail}</span>
+                              <span className="mr-2 text-cyan-400 font-bold text-base md:text-sm">•</span>
+                              <span className="text-base md:text-sm text-gray-300 leading-relaxed md:leading-snug">{detail}</span>
                             </motion.li>
                           ))}
                         </ul>
@@ -423,9 +425,12 @@ export const OverviewSection = () => {
                           {card.highlight}
                         </Badge>
 
-                        <div className="mt-4 space-y-2">
-                          <h4 className="text-lg font-bold text-white">왜 좋은가요?</h4>
-                          <ul className="space-y-1.5">
+                        {/* Mobile: Key Values Cards */}
+                        <div className="mt-4 space-y-3">
+                          <h4 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-2">왜 좋은가요?</h4>
+
+                          {/* Desktop: Simple list */}
+                          <ul className="hidden md:flex md:flex-col space-y-1.5">
                             <li className="flex items-start">
                               <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
                               <span className="text-sm text-gray-300 leading-snug"><strong className="text-cyan-300">최신성:</strong> 모델을 다시 학습하지 않아도 새 자료 즉시 반영</span>
@@ -439,11 +444,201 @@ export const OverviewSection = () => {
                               <span className="text-sm text-gray-300 leading-snug"><strong className="text-cyan-300">정확성:</strong> "근거 표시"로 검증 가능한 답변</span>
                             </li>
                           </ul>
+
+                          {/* Mobile: Enhanced Cards */}
+                          <div className="md:hidden grid grid-cols-1 gap-3">
+                            <motion.div
+                              className="p-4 rounded-xl bg-gradient-to-br from-blue-600/20 to-blue-700/10 border-2 border-blue-400/40"
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.1 }}
+                            >
+                              <div className="flex items-start gap-3">
+                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-500/30 border border-blue-400/50 flex items-center justify-center">
+                                  <svg className="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg>
+                                </div>
+                                <div className="flex-1">
+                                  <h5 className="text-base font-bold text-blue-300 mb-1.5">최신성</h5>
+                                  <p className="text-sm text-gray-300 leading-relaxed">모델을 다시 학습하지 않아도 새 자료 즉시 반영</p>
+                                </div>
+                              </div>
+                            </motion.div>
+
+                            <motion.div
+                              className="p-4 rounded-xl bg-gradient-to-br from-green-600/20 to-green-700/10 border-2 border-green-400/40"
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.2 }}
+                            >
+                              <div className="flex items-start gap-3">
+                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-green-500/30 border border-green-400/50 flex items-center justify-center">
+                                  <svg className="w-6 h-6 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                  </svg>
+                                </div>
+                                <div className="flex-1">
+                                  <h5 className="text-base font-bold text-green-300 mb-1.5">보안성</h5>
+                                  <p className="text-sm text-gray-300 leading-relaxed">사내 지식만으로 동작하여 내부 정보 안전 활용</p>
+                                </div>
+                              </div>
+                            </motion.div>
+
+                            <motion.div
+                              className="p-4 rounded-xl bg-gradient-to-br from-cyan-600/20 to-cyan-700/10 border-2 border-cyan-400/40"
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.3 }}
+                            >
+                              <div className="flex items-start gap-3">
+                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-500/30 border border-cyan-400/50 flex items-center justify-center">
+                                  <svg className="w-6 h-6 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg>
+                                </div>
+                                <div className="flex-1">
+                                  <h5 className="text-base font-bold text-cyan-300 mb-1.5">정확성</h5>
+                                  <p className="text-sm text-gray-300 leading-relaxed">근거 표시로 검증 가능한 답변 제공</p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          </div>
+
+                          {/* Mobile: Toggle button for diagram */}
+                          <motion.button
+                            onClick={() => setShowDiagram(!showDiagram)}
+                            className="md:hidden mt-4 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border-2 border-cyan-400/40 flex items-center justify-center gap-2 text-cyan-300 font-bold hover:from-cyan-600/30 hover:to-blue-600/30 transition-all"
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            {showDiagram ? (
+                              <>
+                                <ChevronUp className="w-5 h-5" />
+                                <span>도식 숨기기</span>
+                              </>
+                            ) : (
+                              <>
+                                <ChevronDown className="w-5 h-5" />
+                                <span>상세 도식 보기</span>
+                              </>
+                            )}
+                          </motion.button>
                         </div>
                       </div>
 
-                      {/* Right side - Visual diagram */}
-                      <div className="flex-1 flex items-center justify-center p-1 relative">
+                      {/* Mobile: Collapsible diagram */}
+                      <AnimatePresence>
+                        {showDiagram && (
+                          <motion.div
+                            className="md:hidden mt-4"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <div className="flex items-center justify-center p-4 bg-slate-900/50 rounded-xl border border-cyan-500/20">
+                              <div className="relative w-full max-w-sm scale-90">
+                                {/* Simplified mobile diagram */}
+                                <div className="flex flex-col items-center gap-4">
+                                  {/* Documents */}
+                                  <motion.div
+                                    className="flex items-center gap-3"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 }}
+                                  >
+                                    <div className="w-14 h-14 bg-gray-700/40 rounded-lg border border-gray-500/40 flex items-center justify-center">
+                                      <svg className="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                      </svg>
+                                    </div>
+                                    <span className="text-sm text-gray-300 font-medium">사내문서·회의록</span>
+                                  </motion.div>
+
+                                  {/* Arrow down */}
+                                  <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.2 }}
+                                  >
+                                    <svg className="w-6 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                  </motion.div>
+
+                                  {/* Knowledge Base */}
+                                  <motion.div
+                                    className="flex items-center gap-3"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 }}
+                                  >
+                                    <div className="w-16 h-14 bg-gray-700/40 rounded-lg border border-gray-500/40 flex items-center justify-center relative">
+                                      <div className="absolute inset-x-2 top-2 h-1 bg-gray-600/50 rounded" />
+                                      <div className="absolute inset-x-2 top-1/2 -translate-y-1/2 h-1 bg-gray-600/50 rounded" />
+                                      <div className="absolute inset-x-2 bottom-2 h-1 bg-gray-600/50 rounded" />
+                                    </div>
+                                    <span className="text-sm text-gray-300 font-medium">지식베이스</span>
+                                  </motion.div>
+
+                                  {/* Arrow down */}
+                                  <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.4 }}
+                                  >
+                                    <svg className="w-6 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                  </motion.div>
+
+                                  {/* AI */}
+                                  <motion.div
+                                    className="relative"
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 0.5 }}
+                                  >
+                                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/30 to-blue-600/30 border-2 border-cyan-400/60 flex items-center justify-center">
+                                      <span className="text-2xl font-black text-cyan-300">AI</span>
+                                    </div>
+                                  </motion.div>
+
+                                  {/* Arrow down */}
+                                  <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.6 }}
+                                  >
+                                    <svg className="w-6 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                    </svg>
+                                  </motion.div>
+
+                                  {/* Result */}
+                                  <motion.div
+                                    className="p-4 bg-gradient-to-br from-blue-600/20 to-blue-700/20 rounded-xl border-2 border-blue-400/50 max-w-xs text-center"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.7 }}
+                                  >
+                                    <h5 className="text-sm font-bold text-blue-300 mb-1">정확한 답변</h5>
+                                    <p className="text-xs text-gray-300 leading-relaxed">
+                                      최신 데이터를 바탕으로 정확한 정보 제공
+                                    </p>
+                                  </motion.div>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Right side - Visual diagram (hidden on mobile) */}
+                      <div className="hidden md:flex flex-1 items-center justify-center p-1 relative">
                         <div className="relative w-full max-w-xs scale-75">
                           {/* Top Row - Data Sources */}
                           <div className="flex justify-around items-start mb-2">
