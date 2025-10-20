@@ -13,19 +13,19 @@ const benefits = [
     icon: TrendingUp,
     title: "훈련 장려금",
     description: "출석률에 따라 월 최대 지급",
-    highlight: "31.6만원",
+    highlight: "개인 차등 지급",
   },
   {
     icon: Award,
-    title: "수료 후 지원금",
-    description: "취업 성공 시 추가 지원금 지급",
-    highlight: "최대 100만원",
+    title: "AI 실무 기술",
+    description: "생성형 AI 실무 활용 기술",
+    highlight: "AI 전문기업 13개기어 참여",
   },
   {
     icon: Briefcase,
     title: "취업 연계",
-    description: "RAG 전문기업 직접 연계",
-    highlight: "92% 취업률",
+    description: "AI 전문기업 직접 연계",
+    highlight: "실무자 멘토 참여",
   },
 ];
 
