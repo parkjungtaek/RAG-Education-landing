@@ -13,7 +13,7 @@ const cards = [
       "정확한 답변을 만드는 기술",
     ],
     highlight: "검색 증강 생성",
-    image: "/images/rag-concept.png",
+    image: "/images/image.png",
   },
   {
     icon: Code,
@@ -25,7 +25,7 @@ const cards = [
       "회의록(STT) 요약·액션 아이템 추출 & API 배포",
     ],
     highlight: "프로덕션 레벨",
-    image: "/images/rag-development.png",
+    image: "/images/image.png",
   },
   {
     icon: Briefcase,
@@ -37,7 +37,7 @@ const cards = [
       "컨택센터·커머스·핀테크·제조·SI/컨설팅",
     ],
     highlight: "취업 연계 100%",
-    image: "/images/rag-career.png",
+    image: "/images/image.png",
   },
 ];
 
