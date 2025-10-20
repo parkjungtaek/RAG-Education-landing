@@ -247,7 +247,168 @@ export const OverviewSection = () => {
                     />
                   </div>
 
-                  <CardHeader className="pb-3">
+                  {index === 0 ? (
+                    // Special layout for first card
+                    <div className="flex flex-col md:flex-row h-full p-6">
+                      {/* Left side - Text content */}
+                      <div className="flex-1 flex flex-col justify-center space-y-4">
+                        <motion.div
+                          className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border border-cyan-500/30"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <motion.div
+                            className="absolute inset-0 bg-cyan-500/20 rounded-xl"
+                            animate={{
+                              scale: [1, 1.2, 1],
+                              opacity: [0.5, 0, 0.5]
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity
+                            }}
+                          />
+                          <card.icon className="relative w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
+                        </motion.div>
+
+                        <div>
+                          <h3 className="text-2xl font-black text-white mb-2">{card.title}</h3>
+                          <p className="text-lg font-bold text-cyan-300 mb-4">{card.content}</p>
+                        </div>
+
+                        <ul className="space-y-2">
+                          {card.details.map((detail, i) => (
+                            <motion.li
+                              key={i}
+                              className="flex items-start"
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: index * 0.1 + i * 0.1 }}
+                            >
+                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                              <span className="text-sm text-gray-300 leading-snug">{detail}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+
+                        <Badge className="w-fit bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
+                          {card.highlight}
+                        </Badge>
+                      </div>
+
+                      {/* Right side - Visual diagram */}
+                      <div className="flex-1 flex items-center justify-center p-4 relative">
+                        {/* RAG Flow Diagram */}
+                        <div className="relative w-full max-w-xs">
+                          {/* Top section - Data sources */}
+                          <div className="flex justify-around mb-6">
+                            <motion.div
+                              className="flex flex-col items-center gap-2"
+                              animate={{ y: [0, -5, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                            >
+                              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-600/30 rounded-lg border border-cyan-400/50 flex items-center justify-center">
+                                <svg className="w-6 h-6 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                              </div>
+                              <span className="text-[10px] text-cyan-300">문서</span>
+                            </motion.div>
+
+                            <motion.div
+                              className="flex flex-col items-center gap-2"
+                              animate={{ y: [0, -5, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                            >
+                              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/30 to-blue-600/30 rounded-lg border border-cyan-400/50 flex items-center justify-center">
+                                <svg className="w-6 h-6 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                                </svg>
+                              </div>
+                              <span className="text-[10px] text-cyan-300">음성</span>
+                            </motion.div>
+                          </div>
+
+                          {/* Arrow down */}
+                          <div className="flex justify-center mb-4">
+                            <motion.div
+                              animate={{ y: [0, 5, 0] }}
+                              transition={{ duration: 1.5, repeat: Infinity }}
+                            >
+                              <svg className="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 4v12m0 0l-4-4m4 4l4-4" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                              </svg>
+                            </motion.div>
+                          </div>
+
+                          {/* Middle - Vector DB */}
+                          <motion.div
+                            className="flex justify-center mb-4"
+                            animate={{ scale: [1, 1.05, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
+                            <div className="px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-lg border border-cyan-400/50">
+                              <span className="text-xs text-cyan-300 font-bold">벡터 DB</span>
+                            </div>
+                          </motion.div>
+
+                          {/* Arrow right to AI */}
+                          <div className="flex justify-center items-center mb-4 gap-2">
+                            <motion.div
+                              animate={{ x: [0, 5, 0] }}
+                              transition={{ duration: 1.5, repeat: Infinity }}
+                            >
+                              <svg className="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M4 12h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                              </svg>
+                            </motion.div>
+                            <motion.div
+                              className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/30 to-blue-600/30 border-2 border-cyan-400/60 flex items-center justify-center relative"
+                              animate={{
+                                boxShadow: [
+                                  '0 0 20px rgba(0,255,255,0.3)',
+                                  '0 0 40px rgba(0,255,255,0.6)',
+                                  '0 0 20px rgba(0,255,255,0.3)'
+                                ]
+                              }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              <span className="text-xl font-black text-cyan-300">AI</span>
+                              <div className="absolute -right-1 -top-1 w-6 h-6 bg-blue-500/40 rounded-full border border-blue-400/60 flex items-center justify-center">
+                                <svg className="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                              </div>
+                            </motion.div>
+                          </div>
+
+                          {/* Bottom - Output indicators */}
+                          <div className="flex justify-around mt-4">
+                            {['정확성', '실시간', '보안'].map((label, i) => (
+                              <motion.div
+                                key={label}
+                                className="flex flex-col items-center gap-1"
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.5 + i * 0.2, duration: 0.5 }}
+                              >
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500/30 to-emerald-600/30 border border-green-400/50 flex items-center justify-center">
+                                  <svg className="w-4 h-4 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                                <span className="text-[9px] text-green-300">{label}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    // Original layout for other cards
+                    <>
+                      <CardHeader className="pb-3">
                         <motion.div
                           className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30"
                           whileHover={{ scale: 1.1, rotate: 5 }}
@@ -270,8 +431,8 @@ export const OverviewSection = () => {
                         <CardDescription className="text-base font-bold text-cyan-300 mt-1">
                           {card.content}
                         </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
+                      </CardHeader>
+                      <CardContent className="pt-0">
                         <ul className="space-y-2 mb-4">
                           {card.details.map((detail, i) => (
                             <motion.li
@@ -290,7 +451,9 @@ export const OverviewSection = () => {
                         <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
                           {card.highlight}
                         </Badge>
-                  </CardContent>
+                      </CardContent>
+                    </>
+                  )}
                 </Card>
               </motion.div>
             </motion.div>
