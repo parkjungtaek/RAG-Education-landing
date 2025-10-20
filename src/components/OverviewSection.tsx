@@ -295,6 +295,24 @@ export const OverviewSection = () => {
                         <Badge className="w-fit bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
                           {card.highlight}
                         </Badge>
+
+                        <div className="mt-4 space-y-2">
+                          <h4 className="text-lg font-bold text-white">왜 좋은가요?</h4>
+                          <ul className="space-y-1.5">
+                            <li className="flex items-start">
+                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                              <span className="text-sm text-gray-300 leading-snug"><strong className="text-cyan-300">최신성:</strong> 모델을 다시 학습하지 않아도 새 자료 즉시 반영</span>
+                            </li>
+                            <li className="flex items-start">
+                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                              <span className="text-sm text-gray-300 leading-snug"><strong className="text-cyan-300">보안성:</strong> 사내 지식만으로 동작 → 내부 정보 안전 활용</span>
+                            </li>
+                            <li className="flex items-start">
+                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                              <span className="text-sm text-gray-300 leading-snug"><strong className="text-cyan-300">정확성:</strong> "근거 표시"로 검증 가능한 답변</span>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
 
                       {/* Right side - Visual diagram */}
