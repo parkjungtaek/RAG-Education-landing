@@ -9,7 +9,7 @@ interface HeroProps {
 
 export const Hero = ({ onOpenModal }: HeroProps) => {
   const highlights = [
-    { icon: Trophy, text: "AI 실무 활용 SW 교육", emphasis: true },
+    { icon: Trophy, text: "프로그래밍, AI 실무 활용 SW 교육", emphasis: true },
     { icon: CreditCard, text: "전액 국비지원" },
     { icon: Code, text: "프로젝트 320시간" },
     { icon: Users, text: "Sysone, Maymust 등 13개 기업 참여" },
