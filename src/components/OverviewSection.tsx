@@ -198,145 +198,103 @@ export const OverviewSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-          <div className="space-y-6">
-            {cards.map((card, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-              >
-                <motion.div
-                  className="relative h-full"
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.div
-                    className="absolute -inset-0.5 bg-gradient-to-br from-cyan-500/30 via-blue-600/20 to-transparent rounded-2xl blur-lg"
-                    animate={{
-                      opacity: [0.3, 0.6, 0.3]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: index * 0.5
-                    }}
-                  />
-
-                  <Card className="relative h-full bg-gradient-to-br from-slate-900/90 via-blue-950/60 to-slate-900/90 backdrop-blur-md border-2 border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-500 overflow-hidden">
-                    <div className="absolute top-0 right-0 w-24 h-24 opacity-10">
-                      <motion.div
-                        className="w-full h-full"
-                        style={{
-                          backgroundImage: `
-                            linear-gradient(90deg, cyan 1px, transparent 1px),
-                            linear-gradient(0deg, cyan 1px, transparent 1px)
-                          `,
-                          backgroundSize: '10px 10px'
-                        }}
-                        animate={{
-                          opacity: [0.1, 0.3, 0.1]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity
-                        }}
-                      />
-                    </div>
-
-                    <CardHeader className="pb-3">
-                      <motion.div
-                        className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30"
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <motion.div
-                          className="absolute inset-0 bg-cyan-500/20 rounded-xl"
-                          animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [0.5, 0, 0.5]
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity
-                          }}
-                        />
-                        <card.icon className="relative w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
-                      </motion.div>
-                      <CardTitle className="text-xl font-black text-white mb-2">{card.title}</CardTitle>
-                      <CardDescription className="text-base font-bold text-cyan-300 mt-1">
-                        {card.content}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <ul className="space-y-2 mb-4">
-                        {card.details.map((detail, i) => (
-                          <motion.li
-                            key={i}
-                            className="flex items-start"
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 + i * 0.1 }}
-                          >
-                            <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
-                            <span className="text-sm text-gray-300 leading-snug">{detail}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                      <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
-                        {card.highlight}
-                      </Badge>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center justify-center"
-          >
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {cards.map((card, index) => (
             <motion.div
-              className="relative w-full max-w-2xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
             >
               <motion.div
-                className="absolute -inset-1 bg-gradient-to-br from-cyan-500/30 via-blue-600/20 to-transparent rounded-3xl blur-xl"
-                animate={{
-                  opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity
-                }}
-              />
-              <div className="relative bg-gradient-to-br from-slate-900/90 via-blue-950/60 to-slate-900/90 backdrop-blur-md border-2 border-cyan-500/30 rounded-2xl p-8 overflow-hidden">
+                className="relative h-full"
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Card Glow Effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent"
+                  className="absolute -inset-0.5 bg-gradient-to-br from-cyan-500/30 via-blue-600/20 to-transparent rounded-2xl blur-lg"
                   animate={{
-                    opacity: [0.2, 0.4, 0.2]
+                    opacity: [0.3, 0.6, 0.3]
                   }}
                   transition={{
-                    duration: 2,
-                    repeat: Infinity
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: index * 0.5
                   }}
                 />
-                <img
-                  src="/images/rag 기술 소개.png"
-                  alt="RAG 기술 소개"
-                  className="relative w-full h-auto rounded-xl"
-                />
-              </div>
+
+                <Card className="relative h-full bg-gradient-to-br from-slate-900/90 via-blue-950/60 to-slate-900/90 backdrop-blur-md border-2 border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-500 overflow-hidden">
+                  {/* Circuit Pattern Overlay */}
+                  <div className="absolute top-0 right-0 w-24 h-24 opacity-10">
+                    <motion.div
+                      className="w-full h-full"
+                      style={{
+                        backgroundImage: `
+                          linear-gradient(90deg, cyan 1px, transparent 1px),
+                          linear-gradient(0deg, cyan 1px, transparent 1px)
+                        `,
+                        backgroundSize: '10px 10px'
+                      }}
+                      animate={{
+                        opacity: [0.1, 0.3, 0.1]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity
+                      }}
+                    />
+                  </div>
+
+                  <CardHeader className="pb-3">
+                        <motion.div
+                          className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <motion.div
+                            className="absolute inset-0 bg-cyan-500/20 rounded-xl"
+                            animate={{
+                              scale: [1, 1.2, 1],
+                              opacity: [0.5, 0, 0.5]
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity
+                            }}
+                          />
+                          <card.icon className="relative w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
+                        </motion.div>
+                        <CardTitle className="text-xl font-black text-white mb-2">{card.title}</CardTitle>
+                        <CardDescription className="text-base font-bold text-cyan-300 mt-1">
+                          {card.content}
+                        </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                        <ul className="space-y-2 mb-4">
+                          {card.details.map((detail, i) => (
+                            <motion.li
+                              key={i}
+                              className="flex items-start"
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: index * 0.1 + i * 0.1 }}
+                            >
+                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                              <span className="text-sm text-gray-300 leading-snug">{detail}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                        <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
+                          {card.highlight}
+                        </Badge>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          ))}
         </div>
       </div>
     </section>
