@@ -77,7 +77,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            RAG 기반 멀티모달 AI 전문가 양성과정
+            26년도 자기부담금 확정, 전액지원 마지막 기회(25년)
           </motion.p>
 
           <motion.div
