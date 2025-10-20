@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 const categories = [
   {
-    name: "RAG Core",
+    name: "프로그래밍",
     color: "bg-blue-500",
     skills: [
-      { name: "LangChain", level: "Advanced", hours: 120 },
-      { name: "Vector DB", level: "Advanced", hours: 80, details: ["Pinecone", "Chroma", "FAISS"] },
-      { name: "임베딩 모델", level: "Advanced", hours: 60 },
+      { name: "Python", level: "Advanced" },
+      { name: "데이터베이스", level: "Advanced", details: ["Pinecone", "Chroma", "FAISS"] },
+      { name: "API 개발", level: "Advanced" },
     ],
   },
   {
