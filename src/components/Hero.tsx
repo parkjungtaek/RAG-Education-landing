@@ -37,9 +37,10 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             transition={{ delay: 0.2 }}
             className="inline-block"
           >
-            <Badge className="mb-8 px-6 py-2.5 text-sm font-bold bg-transparent text-cyan-400 border-2 border-cyan-400/50 shadow-[0_0_20px_rgba(0,255,255,0.3)] rounded-full">
-              에듀윌 국비교육원 구로센터
-            </Badge>
+            <div className="mb-8 px-6 py-2.5 bg-black border-2 border-cyan-400 rounded-md inline-flex items-center gap-3">
+              <img src="https://www.eduwill.net/images/common/logo.png" alt="에듀윌" className="h-6" />
+              <span className="text-cyan-400 font-bold text-sm">국비교육원 구로센터</span>
+            </div>
           </motion.div>
 
           <motion.div
