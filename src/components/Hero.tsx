@@ -38,7 +38,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             className="inline-block"
           >
             <Badge className="mb-8 px-6 py-2.5 text-sm font-bold bg-transparent text-cyan-400 border-2 border-cyan-400/50 shadow-[0_0_20px_rgba(0,255,255,0.3)] rounded-full">
-              AI &
+              에듀윌 국비교육원 구로센터
             </Badge>
           </motion.div>
 
