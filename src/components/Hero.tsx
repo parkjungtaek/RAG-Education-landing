@@ -80,10 +80,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
-          >
-            <span>2024-09-25</span>
-            <span>|</span>
-            <span>정동인 핵입교수</span>
+          >           
           </motion.div>
 
           <motion.div
