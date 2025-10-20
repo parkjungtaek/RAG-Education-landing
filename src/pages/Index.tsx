@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Hero } from "@/components/Hero";
 import { StickyNav } from "@/components/StickyNav";
 import { OverviewSection } from "@/components/OverviewSection";
+import { RAGComponentsSection } from "@/components/RAGComponentsSection";
 import { TechStackSection } from "@/components/TechStackSection";
 import { BenefitsSection } from "@/components/BenefitsSection";
 import { CurriculumSection } from "@/components/CurriculumSection";
@@ -41,6 +42,7 @@ const Index = () => {
       <Hero onOpenModal={() => setIsModalOpen(true)} />
       <StickyNav />
       <OverviewSection />
+      <RAGComponentsSection />
       <TechStackSection />
       <BenefitsSection />
       <CurriculumSection />
