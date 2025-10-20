@@ -71,15 +71,21 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             </h1>
           </motion.div>
 
-          <motion.p
-            className="text-xl md:text-2xl text-yellow-400 font-medium max-w-3xl"
+          <motion.div
+            className="max-w-3xl"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            26년도 자기부담금 확정, 전액지원 마지막 기회(25년)<br />
-                         25년 12월 8일 ~ 26년 6월 4일
-          </motion.p>
+            <div className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 border-l-4 border-yellow-400 rounded-lg p-6 backdrop-blur-sm">
+              <p className="text-xl md:text-2xl text-yellow-400 font-bold">
+                26년도 자기부담금 확정, 전액지원 마지막 기회(25년)
+              </p>
+              <p className="text-lg md:text-xl text-yellow-300 font-medium mt-2">
+                25년 12월 8일 ~ 26년 6월 4일
+              </p>
+            </div>
+          </motion.div>
 
           <motion.div
             className="flex items-center gap-3 text-white/60 text-sm"
