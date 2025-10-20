@@ -58,7 +58,7 @@ export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
             className="inline-block"
           >
             <div className="px-8 py-4 rounded-full bg-primary text-black font-black text-xl shadow-glow">
-              ⚡ 조기 마감 임박 - 선착순 30명
+              ⚡ 조기 마감 임박 - 선착순 20명
             </div>
           </motion.div>
 
