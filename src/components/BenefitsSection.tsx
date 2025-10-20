@@ -19,7 +19,7 @@ const benefits = [
     icon: Award,
     title: "AI 실무 기술",
     description: "생성형 AI 활용",
-    highlight: "AI 전문기업 참여",
+    highlight: "AI 기업",
   },
   {
     icon: Briefcase,
