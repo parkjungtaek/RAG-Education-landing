@@ -86,12 +86,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
                   25년 12월 8일 ~ 26년 6월 4일
                 </p>
               </div>
-
-              <div className="grid grid-cols-1 gap-3 text-white/90">
-                <div className="flex items-start gap-3">
-                  <div className="text-yellow-400 font-bold min-w-[100px]">교육 기간</div>
-                  <div>25년 12월 8일 ~ 26년 6월 4일 (960시간)</div>
-                </div>
+             
                 <div className="flex items-start gap-3">
                   <div className="text-yellow-400 font-bold min-w-[100px]">수업시간</div>
                   <div>09:30 ~ 18:30 (월 ~ 금)</div>
