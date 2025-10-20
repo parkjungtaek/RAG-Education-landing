@@ -299,14 +299,280 @@ export const OverviewSection = () => {
 
                       {/* Right side - Visual diagram */}
                       <div className="flex-1 flex items-center justify-center p-4 relative">
-                        <motion.img
-                          src="/images/rag 기술 소개.png"
-                          alt="RAG 기술 소개"
-                          className="w-full max-w-md h-auto object-contain"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.6 }}
-                        />
+                        <div className="relative w-full max-w-md">
+                          {/* Top Row - Data Sources */}
+                          <div className="flex justify-around items-start mb-8">
+                            {/* Documents Stack */}
+                            <motion.div
+                              className="flex flex-col items-center gap-2"
+                              initial={{ opacity: 0, y: -20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: 0.2 }}
+                            >
+                              <div className="relative">
+                                <motion.div
+                                  className="w-16 h-16 bg-gray-700/40 rounded-lg border border-gray-500/40 flex items-center justify-center relative"
+                                  whileHover={{ scale: 1.05 }}
+                                >
+                                  {/* Stack layers */}
+                                  <div className="absolute -left-1 -top-1 w-16 h-16 bg-gray-700/30 rounded-lg border border-gray-500/30" />
+                                  <div className="absolute -left-2 -top-2 w-16 h-16 bg-gray-700/20 rounded-lg border border-gray-500/20" />
+                                  {/* Top layer with icon */}
+                                  <svg className="w-8 h-8 text-gray-400 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                  </svg>
+                                </motion.div>
+                              </div>
+                              <span className="text-xs text-gray-400 font-medium">사내문서</span>
+                            </motion.div>
+
+                            {/* Arrow pointing to My Data */}
+                            <motion.div
+                              className="flex items-center mt-6"
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.4, delay: 0.4 }}
+                            >
+                              <svg className="w-12 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                              </svg>
+                            </motion.div>
+
+                            {/* My Data Box with Search */}
+                            <motion.div
+                              className="flex flex-col items-center"
+                              initial={{ opacity: 0, y: -20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: 0.3 }}
+                            >
+                              <div className="relative">
+                                <div className="px-4 py-3 bg-gradient-to-br from-gray-700/50 to-gray-800/50 rounded-lg border border-gray-500/50 flex flex-col items-center gap-1">
+                                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                  </svg>
+                                  <span className="text-[10px] text-gray-400 font-medium">PDF</span>
+                                </div>
+                                <motion.div
+                                  className="absolute -right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-blue-500/30 rounded-full border-2 border-blue-400/60 flex items-center justify-center"
+                                  animate={{ scale: [1, 1.1, 1] }}
+                                  transition={{ duration: 2, repeat: Infinity }}
+                                >
+                                  <svg className="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                  </svg>
+                                </motion.div>
+                              </div>
+                              <span className="text-xs text-gray-400 font-medium mt-2">My Data</span>
+                            </motion.div>
+
+                            {/* Security Shield */}
+                            <motion.div
+                              className="flex flex-col items-center"
+                              initial={{ opacity: 0, y: -20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: 0.5 }}
+                            >
+                              <div className="w-12 h-12 bg-blue-500/20 rounded-full border-2 border-blue-400/50 flex items-center justify-center">
+                                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                              </div>
+                            </motion.div>
+                          </div>
+
+                          {/* Second Row - Meeting Records and Vector DB */}
+                          <div className="flex items-center justify-start mb-8 gap-4">
+                            {/* Meeting Records */}
+                            <motion.div
+                              className="flex flex-col items-center gap-2 ml-8"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.6, delay: 0.4 }}
+                            >
+                              <div className="relative w-16 h-16 bg-gray-700/40 rounded-lg border border-gray-500/40 flex items-center justify-center">
+                                <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <motion.div
+                                  className="absolute -bottom-1 -left-1 w-6 h-6 bg-blue-500/30 rounded-full border-2 border-blue-400/60 flex items-center justify-center"
+                                  animate={{ scale: [1, 1.1, 1] }}
+                                  transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                                >
+                                  <svg className="w-3 h-3 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                  </svg>
+                                </motion.div>
+                              </div>
+                              <span className="text-xs text-gray-400 font-medium">회의록</span>
+                            </motion.div>
+
+                            {/* Arrow */}
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.4, delay: 0.6 }}
+                            >
+                              <svg className="w-12 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                              </svg>
+                            </motion.div>
+
+                            {/* Vector Database Stack */}
+                            <motion.div
+                              className="flex flex-col items-center"
+                              initial={{ opacity: 0, y: -20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: 0.5 }}
+                            >
+                              <div className="relative">
+                                <motion.div
+                                  className="w-20 h-16 bg-gray-700/40 rounded-lg border border-gray-500/40 relative"
+                                  animate={{ boxShadow: ['0 0 0 rgba(59,130,246,0)', '0 0 20px rgba(59,130,246,0.3)', '0 0 0 rgba(59,130,246,0)'] }}
+                                  transition={{ duration: 3, repeat: Infinity }}
+                                >
+                                  {/* Stack layers */}
+                                  <div className="absolute inset-x-2 top-2 h-1 bg-gray-600/50 rounded" />
+                                  <div className="absolute inset-x-2 top-1/2 -translate-y-1/2 h-1 bg-gray-600/50 rounded" />
+                                  <div className="absolute inset-x-2 bottom-2 h-1 bg-gray-600/50 rounded" />
+                                </motion.div>
+                              </div>
+                              <span className="text-xs text-gray-400 font-medium mt-2">지식베이스</span>
+                            </motion.div>
+
+                            {/* Curved Arrow */}
+                            <motion.div
+                              className="relative"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.6, delay: 0.7 }}
+                            >
+                              <svg className="w-16 h-12" viewBox="0 0 60 40" fill="none">
+                                <motion.path
+                                  d="M5 35 Q 30 5, 50 20"
+                                  stroke="#3b82f6"
+                                  strokeWidth="2"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  initial={{ pathLength: 0 }}
+                                  animate={{ pathLength: 1 }}
+                                  transition={{ duration: 1, delay: 0.8 }}
+                                />
+                                <motion.path
+                                  d="M50 20 L45 18 L47 23 Z"
+                                  fill="#3b82f6"
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  transition={{ duration: 0.3, delay: 1.3 }}
+                                />
+                              </svg>
+                            </motion.div>
+                          </div>
+
+                          {/* Center Row - AI Agent */}
+                          <div className="flex justify-center items-center mb-8">
+                            <motion.div
+                              className="relative"
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.6, delay: 0.8 }}
+                            >
+                              {/* Outer rings */}
+                              <motion.div
+                                className="absolute inset-0 -m-4 rounded-full border-2 border-cyan-500/30"
+                                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
+                                transition={{ duration: 3, repeat: Infinity }}
+                              />
+                              <motion.div
+                                className="absolute inset-0 -m-2 rounded-full border-2 border-cyan-500/40"
+                                animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0, 0.6] }}
+                                transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                              />
+
+                              {/* AI Circle */}
+                              <motion.div
+                                className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-500/30 to-blue-600/30 border-3 border-cyan-400/60 flex items-center justify-center relative"
+                                animate={{
+                                  boxShadow: [
+                                    '0 0 20px rgba(0,255,255,0.3)',
+                                    '0 0 40px rgba(0,255,255,0.6)',
+                                    '0 0 20px rgba(0,255,255,0.3)'
+                                  ]
+                                }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                              >
+                                <div className="text-center">
+                                  <span className="text-3xl font-black text-cyan-300">AI</span>
+                                </div>
+
+                                {/* Security badge */}
+                                <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500/40 rounded-full border-2 border-blue-400/60 flex items-center justify-center">
+                                  <svg className="w-5 h-5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                  </svg>
+                                </div>
+                              </motion.div>
+
+                              {/* Arrow to info box */}
+                              <motion.div
+                                className="absolute left-full ml-4 top-1/2 -translate-y-1/2"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6, delay: 1 }}
+                              >
+                                <svg className="w-8 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                              </motion.div>
+                            </motion.div>
+
+                            {/* Info Box */}
+                            <motion.div
+                              className="ml-16 px-6 py-4 bg-gradient-to-br from-blue-600/20 to-blue-700/20 rounded-xl border-2 border-blue-400/50 max-w-xs"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.6, delay: 1.1 }}
+                            >
+                              <h4 className="text-sm font-bold text-blue-300 mb-2">정확한 답변</h4>
+                              <p className="text-xs text-gray-300 leading-relaxed mb-2">
+                                최신 데이터를 바탕으로<br/>
+                                정확한 정보 제공
+                              </p>
+                              <p className="text-xs text-gray-400 leading-relaxed">
+                                내부 데이터와 최신 정보를<br/>
+                                통합하여 정확성 확보
+                              </p>
+                            </motion.div>
+                          </div>
+
+                          {/* Bottom Row - Benefits */}
+                          <div className="flex justify-center gap-8">
+                            {[
+                              { icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', label: '신뢰도', color: 'green' },
+                              { icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z', label: '최신 자료 적용', color: 'blue' },
+                              { icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z', label: '내부 지식\n신규 적용', color: 'purple' }
+                            ].map((item, i) => (
+                              <motion.div
+                                key={item.label}
+                                className="flex flex-col items-center gap-2"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 1.2 + i * 0.15 }}
+                              >
+                                <motion.div
+                                  className={`w-12 h-12 rounded-full bg-${item.color}-500/20 border-2 border-${item.color}-400/50 flex items-center justify-center`}
+                                  whileHover={{ scale: 1.1 }}
+                                  animate={{ y: [0, -5, 0] }}
+                                  transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                                >
+                                  <svg className={`w-6 h-6 text-${item.color}-400`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                                  </svg>
+                                </motion.div>
+                                <span className="text-[10px] text-gray-400 font-medium text-center whitespace-pre-line">{item.label}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ) : (
