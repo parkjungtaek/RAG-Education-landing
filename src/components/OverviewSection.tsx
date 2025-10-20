@@ -710,9 +710,9 @@ export const OverviewSection = () => {
                     </div>
                   ) : index === 1 ? (
                     // Special layout for second card with new tech stack diagram
-                    <div className="flex flex-col lg:flex-row h-full p-4">
+                    <div className="flex flex-col lg:flex-row h-full p-4 gap-6">
                       {/* Left side - Text content */}
-                      <div className="flex-1 flex flex-col justify-center space-y-3 lg:pr-4">
+                      <div className="flex-1 flex flex-col justify-center space-y-3 lg:max-w-[45%]">
                         <motion.div
                           className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border border-cyan-500/30"
                           whileHover={{ scale: 1.1, rotate: 5 }}
@@ -759,7 +759,7 @@ export const OverviewSection = () => {
                       </div>
 
                       {/* Right side - Tech Stack Diagram */}
-                      <div className="flex-1 flex items-center justify-center mt-6 lg:mt-0">
+                      <div className="flex-1 flex items-center justify-center lg:justify-end lg:max-w-[55%]">
                         <TechStackDiagram />
                       </div>
                     </div>
