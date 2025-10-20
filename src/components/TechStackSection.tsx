@@ -13,27 +13,26 @@ const categories = [
     ],
   },
   {
-    name: "LLM & API",
+    name: "AI 활용",
     color: "bg-green-500",
     skills: [
       {
-        name: "OpenAI API",
+        name: "LLM API",
         level: "Advanced",
-        hours: 100,
         details: ["GPT-4", "GPT-4o", "Embeddings"],
       },
-      { name: "Claude", level: "Advanced", hours: 60 },
-      { name: "프롬프트 최적화", level: "Advanced", hours: 80 },
+      { name: "LangChain", level: "Advanced" },
+      { name: "프롬프트 최적화", level: "Advanced" },
     ],
   },
   {
-    name: "멀티모달 처리",
+    name: "클라우드",
     color: "bg-orange-500",
     skills: [
-      { name: "Whisper STT", level: "Advanced", hours: 80 },
-      { name: "TTS API", level: "Intermediate", hours: 60 },
-      { name: "음성 신호 처리", level: "Intermediate", hours: 60 },
-      { name: "텍스트 NLP", level: "Advanced", hours: 80 },
+      { name: "컨테이너 & 오케스트레이션", level: "Advanced" },
+      { name: "Vector DB on Cloud", level: "Intermediate" },
+      { name: "서버리스", level: "Intermediate" },
+      { name: "API 게이트웨이", level: "Advanced" },
     ],
   },
 ];
