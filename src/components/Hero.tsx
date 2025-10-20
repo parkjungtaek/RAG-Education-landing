@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, CreditCard, Code, Users, Download, MessageCircle } from "lucide-react";
+import { Trophy, CreditCard, Code, Users, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface HeroProps {
@@ -130,7 +130,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
           </motion.div>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 pt-8"
+            className="pt-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.9 }}
@@ -146,19 +146,6 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 무료 상담 신청하기
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-cyan-400/50 text-white hover:bg-cyan-400/10 hover:border-cyan-400 text-lg px-10 py-6 font-semibold rounded-lg backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,255,0.2)] hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-all duration-300"
-              >
-                <Download className="mr-2 h-5 w-5" />
-                커리큘럼 다운로드
               </Button>
             </motion.div>
           </motion.div>
