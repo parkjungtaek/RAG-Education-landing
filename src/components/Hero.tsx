@@ -72,7 +72,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
           </motion.div>
 
           <motion.p
-            className="text-xl md:text-2xl text-white/80 font-medium max-w-3xl"
+            className="text-xl md:text-2xl text-yellow-400 font-medium max-w-3xl"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
