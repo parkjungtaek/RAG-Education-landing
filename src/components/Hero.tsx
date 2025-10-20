@@ -84,7 +84,40 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
                 </p>
                 <p className="text-lg md:text-xl text-yellow-300 font-medium">
                   25년 12월 8일 ~ 26년 6월 4일
-                </p>             
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 text-white/90">
+                <div className="flex items-start gap-3">
+                  <div className="text-yellow-400 font-bold min-w-[100px]">교육 기간</div>
+                  <div>25년 12월 8일 ~ 26년 6월 4일 (960시간)</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="text-yellow-400 font-bold min-w-[100px]">수업시간</div>
+                  <div>09:30 ~ 18:30 (월 ~ 금)</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="text-yellow-400 font-bold min-w-[100px]">인원</div>
+                  <div>20명</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="text-yellow-400 font-bold min-w-[100px]">장소</div>
+                  <div>에듀윌 국비교육원 구로센터 (구로디지털단지역)</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="text-yellow-400 font-bold min-w-[100px]">대상</div>
+                  <div>미취업자 및 AI 기업 취업 희망자</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="text-yellow-400 font-bold min-w-[100px]">혜택</div>
+                  <div>교육 및 교재 전액지원, 훈련비 지급</div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="text-red-400 font-bold min-w-[100px]">지원 마감일</div>
+                  <div className="text-red-400 font-bold">11월 20일</div>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
