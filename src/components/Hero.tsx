@@ -38,7 +38,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             className="inline-block"
           >
             <div className="mb-8 px-8 py-3 bg-black border-2 border-cyan-400 rounded-lg inline-flex items-center gap-4">
-              <img src="https://www.eduwill.net/images/common/logo.png" alt="에듀윌" className="h-7" />
+              <span className="text-cyan-400 font-bold text-2xl">에듀윌</span>
               <span className="text-cyan-400 font-bold text-base">국비교육원 구로센터</span>
             </div>
           </motion.div>
