@@ -152,16 +152,95 @@ export const ProcessSection = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="mt-20"
         >
-          <div className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500/10 via-cyan-600/10 to-blue-500/10 rounded-2xl border border-blue-400/30">
-            <p className="text-lg text-blue-300 font-medium">
-              <span className="text-blue-400 font-bold">320시간</span>의 실전 프로젝트를 통해 전 과정을 마스터합니다
-            </p>
+          <div className="bg-gradient-to-br from-slate-900/90 via-blue-950/70 to-slate-900/90 rounded-3xl p-8 md:p-12 border-2 border-cyan-500/30 shadow-2xl">
+            <h3 className="text-3xl md:text-4xl font-black text-white mb-8 text-center">
+              배우면 뭘 할 수 있나요?
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-10">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 1.0 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-cyan-500/20 hover:border-cyan-400/40 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-bold text-cyan-300 mb-3">실무형 RAG 개발 역량</h4>
+                    <ul className="space-y-2 text-blue-100">
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400 mt-1">•</span>
+                        <span>문서·음성 기반 Q&A/챗봇 제작</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400 mt-1">•</span>
+                        <span>벡터DB 의미검색·리랭킹 설계</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400 mt-1">•</span>
+                        <span>회의록(STT) 요약·액션 아이템 추출 & API 배포</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 1.1 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-cyan-500/20 hover:border-cyan-400/40 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-bold text-cyan-300 mb-3">프로덕션 레벨</h4>
+                    <p className="text-blue-200 font-semibold mb-3">어디에 쓰나요? (문자·음성 예시)</p>
+                    <ul className="space-y-2 text-blue-100">
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400 mt-1">•</span>
+                        <span><strong className="text-cyan-300">문자:</strong> 매뉴얼/FAQ/정책 문서 Q&A, 사내 검색 고도화</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-cyan-400 mt-1">•</span>
+                        <span><strong className="text-cyan-300">음성:</strong> 회의·콜로그 요약 → 핵심 추출 → 근거 기반 답변</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+              className="text-center"
+            >
+              <div className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-cyan-500/20 rounded-2xl border border-cyan-400/40">
+                <p className="text-lg text-blue-200 font-medium">
+                  <span className="text-cyan-300 font-bold">320시간</span>의 실전 프로젝트를 통해 전 과정을 마스터합니다
+                </p>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
