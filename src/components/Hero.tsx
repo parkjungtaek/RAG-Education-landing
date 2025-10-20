@@ -77,7 +77,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            26년도 자기부담금 확정, 전액지원 마지막 기회(25년)
+            26년도 자기부담금 확정, 전액지원 마지막 기회(25년)<br />
             25년 12월 8일 ~ 26년 6월 4일, 960시간/ 09:30 ~ 18:30/월~금
           </motion.p>
 
