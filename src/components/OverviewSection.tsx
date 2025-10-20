@@ -776,11 +776,11 @@ export const OverviewSection = () => {
                       </div>
                     </div>
                   ) : (
-                    // Original layout for other cards
-                    <>
-                      <CardHeader className="pb-3">
+                    // Third card - Course details
+                    <div className="flex flex-col h-full p-6">
+                      <div className="flex items-center gap-4 mb-6">
                         <motion.div
-                          className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30"
+                          className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border border-cyan-500/30"
                           whileHover={{ scale: 1.1, rotate: 5 }}
                           transition={{ duration: 0.3 }}
                         >
@@ -797,32 +797,114 @@ export const OverviewSection = () => {
                           />
                           <card.icon className="relative w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
                         </motion.div>
-                        <CardTitle className="text-xl font-black text-white mb-2">{card.title}</CardTitle>
-                        <CardDescription className="text-base font-bold text-cyan-300 mt-1">
-                          {card.content}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <ul className="space-y-2 mb-4">
-                          {card.details.map((detail, i) => (
-                            <motion.li
-                              key={i}
-                              className="flex items-start"
-                              initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ delay: index * 0.1 + i * 0.1 }}
-                            >
-                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
-                              <span className="text-sm text-gray-300 leading-snug">{detail}</span>
-                            </motion.li>
-                          ))}
-                        </ul>
-                        <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
-                          {card.highlight}
-                        </Badge>
-                      </CardContent>
-                    </>
+
+                        <div>
+                          <h3 className="text-2xl font-black text-white">{card.title}</h3>
+                          <p className="text-lg font-bold text-cyan-300 mt-1">{card.content}</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 mb-6">
+                        {card.details.map((detail, i) => (
+                          <motion.div
+                            key={i}
+                            className="flex items-start"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 + i * 0.1 }}
+                          >
+                            <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                            <span className="text-sm text-gray-300 leading-snug">{detail}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      <Badge className="w-fit bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all mb-6">
+                        {card.highlight}
+                      </Badge>
+
+                      <div className="mt-auto pt-6 border-t border-cyan-500/20">
+                        <div className="grid grid-cols-1 gap-3 text-sm">
+                          <motion.div
+                            className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/40 border border-cyan-500/20"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            <div className="text-cyan-400 font-bold min-w-[90px]">교육 기간</div>
+                            <div className="text-gray-300">25년 12월 8일 ~ 26년 6월 4일 (960시간)</div>
+                          </motion.div>
+
+                          <motion.div
+                            className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/40 border border-cyan-500/20"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                          >
+                            <div className="text-cyan-400 font-bold min-w-[90px]">수업시간</div>
+                            <div className="text-gray-300">09:30 ~ 18:30 (월 ~ 금)</div>
+                          </motion.div>
+
+                          <motion.div
+                            className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/40 border border-cyan-500/20"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 }}
+                          >
+                            <div className="text-cyan-400 font-bold min-w-[90px]">인원</div>
+                            <div className="text-gray-300">20명</div>
+                          </motion.div>
+
+                          <motion.div
+                            className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/40 border border-cyan-500/20"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.5 }}
+                          >
+                            <div className="text-cyan-400 font-bold min-w-[90px]">장소</div>
+                            <div className="text-gray-300">에듀윌 국비교육원 구로센터 (구로디지털단지역)</div>
+                          </motion.div>
+
+                          <motion.div
+                            className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/40 border border-cyan-500/20"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.6 }}
+                          >
+                            <div className="text-cyan-400 font-bold min-w-[90px]">대상</div>
+                            <div className="text-gray-300">미취업자 및 AI 기업 취업 희망자</div>
+                          </motion.div>
+
+                          <motion.div
+                            className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/40 border border-cyan-500/20"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.7 }}
+                          >
+                            <div className="text-cyan-400 font-bold min-w-[90px]">혜택</div>
+                            <div className="text-gray-300">교육 및 교재 전액지원, 훈련비 지급</div>
+                          </motion.div>
+
+                          <motion.div
+                            className="flex items-start gap-3 p-3 rounded-lg bg-gradient-to-r from-red-900/30 to-red-800/20 border-2 border-red-500/40"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.8 }}
+                          >
+                            <div className="text-red-400 font-bold min-w-[90px]">지원 마감일</div>
+                            <div className="text-red-400 font-bold">11월 20일</div>
+                          </motion.div>
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </Card>
               </motion.div>
