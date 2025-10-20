@@ -1,7 +1,8 @@
-import { MessageCircle, Code, Briefcase } from "lucide-react";
+import { MessageCircle, Code, Briefcase, Mic, FileText, Database, ArrowUpDown, Bot, Cloud, LayoutDashboard } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const cards = [
   {
@@ -37,6 +38,132 @@ const cards = [
     highlight: "취업 연계 100%",
   },
 ];
+
+const TechStackDiagram = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const techStack = [
+    {
+      icon: Mic,
+      label: "문서·음성(STT)",
+      description: "마이크/문서 처리",
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: Database,
+      label: "임베딩/벡터DB",
+      description: "데이터 벡터화",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: ArrowUpDown,
+      label: "리랭킹",
+      description: "순위/정렬",
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: Bot,
+      label: "Q&A/챗봇",
+      description: "채팅/질문 처리",
+      color: "from-orange-500 to-red-500"
+    },
+    {
+      icon: Cloud,
+      label: "API 배포",
+      description: "클라우드 배포",
+      color: "from-indigo-500 to-purple-500"
+    },
+    {
+      icon: LayoutDashboard,
+      label: "프로덕션 대시보드",
+      description: "대시보드/차트",
+      color: "from-cyan-500 to-blue-500"
+    }
+  ];
+
+  return (
+    <div className="w-full h-full flex items-center justify-center p-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-md">
+        {techStack.map((tech, index) => {
+          const isActive = activeIndex === index;
+          const IconComponent = tech.icon;
+
+          return (
+            <motion.div
+              key={index}
+              className="relative"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              onHoverStart={() => setActiveIndex(index)}
+              onHoverEnd={() => setActiveIndex(null)}
+              onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+            >
+              <motion.div
+                className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all duration-300 ${
+                  isActive
+                    ? 'border-cyan-400 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 shadow-[0_0_30px_rgba(0,255,255,0.4)]'
+                    : 'border-gray-600/50 bg-gray-800/40 hover:border-cyan-500/50'
+                }`}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                animate={isActive ? {
+                  boxShadow: [
+                    '0 0 20px rgba(0,255,255,0.3)',
+                    '0 0 40px rgba(0,255,255,0.6)',
+                    '0 0 20px rgba(0,255,255,0.3)'
+                  ]
+                } : {}}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <motion.div
+                  className={`w-12 h-12 rounded-lg bg-gradient-to-br ${tech.color} flex items-center justify-center mb-3 mx-auto`}
+                  animate={isActive ? {
+                    rotate: [0, 5, -5, 0],
+                    scale: [1, 1.1, 1]
+                  } : {}}
+                  transition={{ duration: 0.5 }}
+                >
+                  <IconComponent
+                    className={`w-6 h-6 transition-colors duration-300 ${
+                      isActive ? 'text-white' : 'text-white/80'
+                    }`}
+                  />
+                </motion.div>
+
+                <div className="text-center">
+                  <h4 className={`text-xs font-bold mb-1 transition-colors duration-300 ${
+                    isActive ? 'text-cyan-300' : 'text-gray-300'
+                  }`}>
+                    {tech.label}
+                  </h4>
+
+                  <motion.p
+                    className="text-[10px] text-gray-400 overflow-hidden"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={isActive ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {tech.description}
+                  </motion.p>
+                </div>
+
+                {isActive && (
+                  <motion.div
+                    className="absolute -inset-1 rounded-xl bg-gradient-to-r from-cyan-500/30 to-blue-600/30 -z-10 blur-lg"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  />
+                )}
+              </motion.div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 export const OverviewSection = () => {
   return (
@@ -591,6 +718,61 @@ export const OverviewSection = () => {
                             ))}
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  ) : index === 1 ? (
+                    // Special layout for second card with new tech stack diagram
+                    <div className="flex flex-col lg:flex-row h-full p-4">
+                      {/* Left side - Text content */}
+                      <div className="flex-1 flex flex-col justify-center space-y-3 lg:pr-4">
+                        <motion.div
+                          className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border border-cyan-500/30"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <motion.div
+                            className="absolute inset-0 bg-cyan-500/20 rounded-xl"
+                            animate={{
+                              scale: [1, 1.2, 1],
+                              opacity: [0.5, 0, 0.5]
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity
+                            }}
+                          />
+                          <card.icon className="relative w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]" />
+                        </motion.div>
+
+                        <div>
+                          <h3 className="text-2xl font-black text-white mb-1">{card.title}</h3>
+                          <p className="text-lg font-bold text-cyan-300 mb-2">{card.content}</p>
+                        </div>
+
+                        <ul className="space-y-1.5">
+                          {card.details.map((detail, i) => (
+                            <motion.li
+                              key={i}
+                              className="flex items-start"
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: index * 0.1 + i * 0.1 }}
+                            >
+                              <span className="mr-2 text-cyan-400 font-bold text-sm">•</span>
+                              <span className="text-sm text-gray-300 leading-snug">{detail}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+
+                        <Badge className="w-fit bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
+                          {card.highlight}
+                        </Badge>
+                      </div>
+
+                      {/* Right side - Tech Stack Diagram */}
+                      <div className="flex-1 flex items-center justify-center mt-6 lg:mt-0">
+                        <TechStackDiagram />
                       </div>
                     </div>
                   ) : (
