@@ -156,7 +156,6 @@ export const CurriculumSection = () => {
                   <div className="flex-1 text-left">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-2xl font-black text-foreground">{month.title}</h3>
-                      <Badge className="bg-primary text-black font-black text-base px-4 py-1">{month.duration}</Badge>
                     </div>
                     <div className="flex items-center gap-4">
                       <Progress value={month.progress} className="flex-1 h-3" />
