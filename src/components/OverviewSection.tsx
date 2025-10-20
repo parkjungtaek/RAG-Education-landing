@@ -249,9 +249,9 @@ export const OverviewSection = () => {
 
                   {index === 0 ? (
                     // Special layout for first card
-                    <div className="flex flex-col md:flex-row h-full p-6">
+                    <div className="flex flex-col md:flex-row h-full p-4">
                       {/* Left side - Text content */}
-                      <div className="flex-1 flex flex-col justify-center space-y-4">
+                      <div className="flex-1 flex flex-col justify-center space-y-2">
                         <motion.div
                           className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border border-cyan-500/30"
                           whileHover={{ scale: 1.1, rotate: 5 }}
@@ -272,11 +272,11 @@ export const OverviewSection = () => {
                         </motion.div>
 
                         <div>
-                          <h3 className="text-2xl font-black text-white mb-2">{card.title}</h3>
-                          <p className="text-lg font-bold text-cyan-300 mb-4">{card.content}</p>
+                          <h3 className="text-2xl font-black text-white mb-1">{card.title}</h3>
+                          <p className="text-lg font-bold text-cyan-300 mb-2">{card.content}</p>
                         </div>
 
-                        <ul className="space-y-2">
+                        <ul className="space-y-1">
                           {card.details.map((detail, i) => (
                             <motion.li
                               key={i}
