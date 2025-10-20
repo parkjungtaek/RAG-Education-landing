@@ -39,7 +39,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
           >
             <div className="mb-8 px-8 py-3 bg-black border-2 border-cyan-400 rounded-lg inline-flex items-center gap-4">
               <img
-                src="/images/에듀윌 로고 copy.png"
+                src="/images/eduwill-logo.png"
                 alt="에듀윌"
                 className="h-8 object-contain"
               />
