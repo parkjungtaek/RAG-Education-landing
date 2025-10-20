@@ -56,12 +56,6 @@ const TechStackDiagram = () => {
       color: "from-blue-500 to-cyan-500"
     },
     {
-      icon: ArrowUpDown,
-      label: "리랭킹",
-      description: "순위/정렬",
-      color: "from-green-500 to-emerald-500"
-    },
-    {
       icon: Bot,
       label: "Q&A/챗봇",
       description: "채팅/질문 처리",
@@ -72,18 +66,12 @@ const TechStackDiagram = () => {
       label: "API 배포",
       description: "클라우드 배포",
       color: "from-indigo-500 to-purple-500"
-    },
-    {
-      icon: LayoutDashboard,
-      label: "프로덕션 대시보드",
-      description: "대시보드/차트",
-      color: "from-cyan-500 to-blue-500"
     }
   ];
 
   return (
     <div className="w-full h-full flex items-center justify-center p-6">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-md">
+      <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
         {techStack.map((tech, index) => {
           const isActive = activeIndex === index;
           const IconComponent = tech.icon;
