@@ -25,7 +25,7 @@ const benefits = [
     icon: Briefcase,
     title: "취업 연계",
     description: "AI 전문기업 직접 연계",
-    highlight: "실무자 참여",
+    highlight: "실무자참여",
   },
 ];
 
