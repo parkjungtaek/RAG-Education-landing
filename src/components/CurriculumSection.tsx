@@ -145,7 +145,7 @@ export const CurriculumSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Accordion type="single" collapsible className="space-y-6">
+          <Accordion type="single" collapsible className="space-y-6" defaultValue="month1">
             {curriculum.map((month, index) => (
               <AccordionItem
                 key={month.id}
