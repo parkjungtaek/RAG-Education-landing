@@ -9,8 +9,8 @@ interface CTAFooterProps {
 export const CTAFooter = ({ onOpenModal }: CTAFooterProps) => {
   const benefits = [
     "수강료 100% 지원",
-    "훈련 장려금 월 최대 31.6만원",
-    "취업 성공 시 추가 지원금",
+    "훈련 장려금 지원(개인차등 지금)",
+    "AI 전문기업 취업지원",
   ];
 
   const trustSignals = [
