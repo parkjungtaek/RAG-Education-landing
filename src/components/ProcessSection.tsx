@@ -2,34 +2,34 @@ import { motion } from "framer-motion";
 
 const processSteps = [
   {
-    title: "데이터 수집 및 \n모니터링",
+    title: "데이터 수집 및 모니터링",
     subtitle: "텍스트 및 음성 데이터 수집",
-    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+    image: "/images/image.png"
   },
   {
-    title: "도메인 특화 \n레시피",
+    title: "도메인 특화 레시피",
     subtitle: "맞춤형 데이터 처리",
-    icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+    image: "/images/image.png"
   },
   {
-    title: "데이터 \n전처리 및 시맨틱 \n청킹",
+    title: "데이터 전처리 및 시맨틱 청킹",
     subtitle: "Semantic Chunking",
-    icon: "M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+    image: "/images/image.png"
   },
   {
     title: "임베딩 모델",
     subtitle: "Embedding/Reranking",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z"
+    image: "/images/image.png"
   },
   {
-    title: "검색 증강 \nOAI/파인튜닝 \nLLM",
+    title: "검색 증강 OAI/파인튜닝 LLM",
     subtitle: "RAG + Fine-tuning",
-    icon: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+    image: "/images/image.png"
   },
   {
-    title: "모든것이 \n지식화된 \n서비스",
+    title: "모든것이 지식화된 서비스",
     subtitle: "Knowledge Service",
-    icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+    image: "/images/image.png"
   }
 ];
 
@@ -67,8 +67,8 @@ export const ProcessSection = () => {
           </p>
         </motion.div>
 
-        <div className="relative bg-white rounded-3xl p-12 shadow-2xl">
-          <div className="flex items-center justify-between gap-4 flex-wrap lg:flex-nowrap">
+        <div className="relative bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {processSteps.map((step, index) => (
               <motion.div
                 key={index}
@@ -76,42 +76,44 @@ export const ProcessSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-center gap-6"
+                className="relative"
               >
                 <motion.div
-                  className="flex flex-col items-center"
-                  whileHover={{ y: -5 }}
+                  className="flex flex-col items-center text-center"
+                  whileHover={{ y: -8, scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div
-                    className="relative mb-4"
+                    className="relative mb-4 w-full"
                     animate={{
-                      scale: [1, 1.05, 1]
+                      y: [0, -5, 0]
                     }}
                     transition={{
                       duration: 3,
                       repeat: Infinity,
-                      delay: index * 0.5
+                      delay: index * 0.4
                     }}
                   >
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl flex items-center justify-center border-2 border-blue-200 shadow-lg">
-                      <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={step.icon} />
-                      </svg>
+                    <div className="w-full aspect-square max-w-[200px] mx-auto bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-200 shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow duration-300">
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                   </motion.div>
 
-                  <h3 className="text-sm font-bold text-[#0d1b2a] mb-1 text-center whitespace-pre-line leading-tight max-w-[140px]">
+                  <h3 className="text-base md:text-lg font-bold text-[#0d1b2a] mb-2 leading-tight">
                     {step.title}
                   </h3>
-                  <p className="text-xs text-gray-600 text-center max-w-[140px] leading-tight">
+                  <p className="text-sm text-gray-600 leading-relaxed">
                     {step.subtitle}
                   </p>
                 </motion.div>
 
-                {index < processSteps.length - 1 && (
+                {(index % 3 !== 2) && (index < processSteps.length - 1) && (
                   <motion.div
-                    className="hidden lg:block"
+                    className="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-10"
                     animate={{
                       x: [0, 5, 0]
                     }}
@@ -121,8 +123,26 @@ export const ProcessSection = () => {
                       delay: index * 0.3
                     }}
                   >
-                    <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </motion.div>
+                )}
+
+                {index === 2 && (
+                  <motion.div
+                    className="hidden md:block absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-10"
+                    animate={{
+                      y: [0, 5, 0]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: 0.5
+                    }}
+                  >
+                    <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
                   </motion.div>
                 )}
