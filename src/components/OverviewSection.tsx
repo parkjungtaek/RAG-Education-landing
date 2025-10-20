@@ -641,6 +641,21 @@ export const OverviewSection = () => {
                         <Badge className="w-fit bg-cyan-500/20 text-cyan-300 border-cyan-400/40 font-bold px-3 py-1 text-xs shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] transition-all">
                           {card.highlight}
                         </Badge>
+
+                        {/* Additional Info Section */}
+                        <div className="mt-4 pt-4 border-t border-cyan-500/20">
+                          <h4 className="text-lg font-bold text-cyan-300 mb-2">어디에 쓰나요? (문자·음성 예시)</h4>
+                          <ul className="space-y-1 text-sm text-gray-300">
+                            <li className="flex items-start">
+                              <span className="mr-2 text-cyan-400 font-bold">•</span>
+                              <span><strong className="text-cyan-400">문자:</strong> 매뉴얼/FAQ/정책 문서 Q&A, 사내 검색 고도화</span>
+                            </li>
+                            <li className="flex items-start">
+                              <span className="mr-2 text-cyan-400 font-bold">•</span>
+                              <span><strong className="text-cyan-400">음성:</strong> 회의·콜로그 요약 → 핵심 추출 → 근거 기반 답변</span>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
 
                       {/* Right side - RAG workflow diagram */}
