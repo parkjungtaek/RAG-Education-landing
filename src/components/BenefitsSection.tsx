@@ -13,19 +13,19 @@ const benefits = [
     icon: TrendingUp,
     title: "훈련 장려금",
     description: "출석률에 따라 월 최대 지급",
-    highlight: "개인 차등 지급",
+    highlight: "최대 80만원",
   },
   {
     icon: Award,
     title: "AI 실무 기술",
-    description: "생성형 AI 실무 활용 기술",
+    description: "생성형 AI 활용",
     highlight: "AI 전문기업 참여",
   },
   {
     icon: Briefcase,
     title: "취업 연계",
     description: "AI 전문기업 직접 연계",
-    highlight: "실무자 멘토 참여",
+    highlight: "실무자 참여",
   },
 ];
 
