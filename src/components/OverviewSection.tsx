@@ -325,7 +325,7 @@ export const OverviewSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 gap-8 max-w-6xl mx-auto">
           {cards.map((card, index) => (
             <motion.div
               key={index}
