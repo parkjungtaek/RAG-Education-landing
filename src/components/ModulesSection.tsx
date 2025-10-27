@@ -234,11 +234,11 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
       </div>
 
       {/* Animated Network Lines Background */}
-      <div className="absolute inset-0 opacity-10 md:opacity-20">
+      <div className="absolute inset-0 opacity-5 md:opacity-20">
         {[...Array(30)].map((_, i) => (
           <motion.div
             key={`line-${i}`}
-            className="absolute bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"
+            className="absolute bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent hidden md:block"
             style={{
               height: '1px',
               width: `${Math.random() * 600 + 200}px`,
@@ -257,9 +257,31 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
             }}
           />
         ))}
+        {/* Simplified lines for mobile */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`line-mobile-${i}`}
+            className="absolute bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent md:hidden"
+            style={{
+              height: '1px',
+              width: `${Math.random() * 300 + 150}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              transform: `rotate(${Math.random() * 360}deg)`,
+            }}
+            animate={{
+              opacity: [0, 0.2, 0]
+            }}
+            transition={{
+              duration: 5 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 2
+            }}
+          />
+        ))}
       </div>
 
-      {/* Floating Particles - Reduced on mobile */}
+      {/* Floating Particles - Optimized for mobile */}
       <div className="absolute inset-0 opacity-60 md:opacity-100">
         {[...Array(50)].map((_, i) => (
           <motion.div
@@ -270,7 +292,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
               height: `${Math.random() * 4 + 2}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              background: `rgba(${Math.random() > 0.5 ? '6,182,212' : '168,85,247'},${Math.random() * 0.5 + 0.3})`
+              background: `rgba(${Math.random() > 0.5 ? '6,182,212' : '34,211,238'},${Math.random() * 0.5 + 0.3})`
             }}
             animate={{
               y: [0, -30, 0],
@@ -286,26 +308,24 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
             }}
           />
         ))}
-        {/* Show fewer particles on mobile */}
-        {[...Array(15)].map((_, i) => (
+        {/* Show fewer, simpler particles on mobile */}
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={`particle-mobile-${i}`}
             className="absolute rounded-full md:hidden"
             style={{
-              width: `${Math.random() * 3 + 1.5}px`,
-              height: `${Math.random() * 3 + 1.5}px`,
+              width: `${Math.random() * 2.5 + 1.5}px`,
+              height: `${Math.random() * 2.5 + 1.5}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              background: `rgba(${Math.random() > 0.5 ? '6,182,212' : '168,85,247'},${Math.random() * 0.3 + 0.2})`
+              background: `rgba(${Math.random() > 0.5 ? '6,182,212' : '34,211,238'},${Math.random() * 0.25 + 0.15})`
             }}
             animate={{
-              y: [0, -20, 0],
-              x: [0, Math.random() * 15 - 7.5, 0],
-              opacity: [0.15, 0.5, 0.15],
-              scale: [1, 1.3, 1]
+              y: [0, -15, 0],
+              opacity: [0.1, 0.4, 0.1]
             }}
             transition={{
-              duration: 6 + Math.random() * 4,
+              duration: 7 + Math.random() * 3,
               repeat: Infinity,
               delay: Math.random() * 2,
               ease: "easeInOut"
@@ -322,10 +342,10 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-black mb-6 text-white">
+          <h2 className="text-3xl md:text-6xl font-black mb-6 text-white">
             학습 모듈
           </h2>
-          <p className="text-xl md:text-2xl text-gray-400 font-medium">
+          <p className="text-lg md:text-2xl text-gray-400 font-medium">
             연결된 지식의 네트워크
           </p>
         </motion.div>
@@ -609,8 +629,8 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
           )}
         </AnimatePresence>
 
-        {/* Dynamic Obsidian-style Graph */}
-        <div className="relative w-full h-[800px] max-w-7xl mx-auto">
+        {/* Dynamic Obsidian-style Graph - Desktop */}
+        <div className="hidden md:block relative w-full h-[800px] max-w-7xl mx-auto">
           {/* Connection Lines SVG */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
             <defs>
@@ -730,7 +750,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 }}
               >
                 <motion.div
-                  className={`relative w-[280px] md:w-[380px] p-4 md:p-8 rounded-3xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} cursor-pointer group`}
+                  className={`relative w-[380px] p-8 rounded-3xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} cursor-pointer group`}
                   style={{
                     boxShadow: `0 0 ${isModuleActive ? '20px' : '15px'} ${colors.rgba}`
                   }}
@@ -761,7 +781,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                   }}
                 >
                   {/* Dark backdrop overlay for mobile readability */}
-                  {isModuleActive && <div className="absolute inset-0 bg-black/30 md:bg-black/10 rounded-3xl" />}
+                  {isModuleActive && <div className="absolute inset-0 bg-black/10 rounded-3xl" />}
 
                   {/* Content */}
                   <div className="relative z-10">
@@ -786,7 +806,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="text-xl md:text-xl font-bold text-white leading-tight mb-3" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}>
+                    <h3 className="text-xl font-bold text-white leading-tight mb-3" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}>
                       {module.title}
                     </h3>
 
@@ -963,6 +983,233 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                   )}
                 </motion.div>
               </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Vertical Stacked Layout - Mobile */}
+        <div className="md:hidden flex flex-col gap-6 max-w-md mx-auto px-4">
+          {modules.map((module, index) => {
+            const colors = getColorClasses(module.color);
+            const isModuleActive = connectedModules.includes(module.id);
+            const isModuleDimmed = selectedProjectId && !isModuleActive;
+            const moduleAnimIndex = getModuleAnimationIndex(module.id);
+            const shouldAnimate = moduleAnimIndex >= 0 && moduleAnimIndex <= animatedModuleIndex;
+            const moduleDelay = moduleAnimIndex >= 0 ? moduleAnimIndex * 0.4 : 0;
+
+            return (
+              <React.Fragment key={module.id}>
+                <motion.div
+                  ref={(el) => { moduleRefs.current[module.id] = el; }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: isModuleDimmed && !animationComplete ? 0.3 : 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1
+                  }}
+                  animate={{
+                    opacity: isModuleDimmed && !shouldAnimate && !animationComplete ? 0.3 : isModuleDimmed && animationComplete ? 0.3 : 1,
+                    filter: isModuleDimmed && !shouldAnimate && !animationComplete ? "blur(2px)" : "blur(0px)",
+                    transition: {
+                      duration: shouldAnimate || animationComplete ? 0.6 : 0.7,
+                      delay: shouldAnimate && !animationComplete ? moduleDelay : 0,
+                      ease: "easeOut"
+                    }
+                  }}
+                >
+                  <motion.div
+                    className={`relative w-full p-5 rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border}`}
+                    style={{
+                      boxShadow: `0 0 ${isModuleActive ? '15px' : '10px'} ${colors.rgba}`
+                    }}
+                    animate={{
+                      boxShadow: isModuleActive ? [
+                        `0 0 15px ${colors.rgba}`,
+                        `0 0 25px ${colors.rgbaHeavy}`,
+                        `0 0 15px ${colors.rgba}`
+                      ] : undefined,
+                      borderWidth: isModuleActive ? "3px" : "2px"
+                    }}
+                    transition={{
+                      boxShadow: {
+                        duration: 2,
+                        repeat: Infinity
+                      }
+                    }}
+                  >
+                    {/* Dark backdrop overlay for mobile readability */}
+                    {isModuleActive && <div className="absolute inset-0 bg-black/40 rounded-2xl" />}
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      {/* Module Number Badge */}
+                      <motion.div
+                        className={`inline-block px-3 py-1.5 mb-3 rounded-full bg-gradient-to-r ${colors.bg} border-2 ${colors.border}`}
+                        animate={{
+                          boxShadow: [
+                            `0 0 6px ${colors.rgba}`,
+                            `0 0 12px ${colors.rgbaHeavy}`,
+                            `0 0 6px ${colors.rgba}`
+                          ]
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity
+                        }}
+                      >
+                        <span className={`text-xs font-bold ${colors.text}`} style={{ textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
+                          Module_{module.id}
+                        </span>
+                      </motion.div>
+
+                      {/* Title */}
+                      <h3 className="text-base font-bold text-white leading-tight mb-3" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9)', wordBreak: 'keep-all' }}>
+                        {module.title}
+                      </h3>
+
+                      {/* Progress Bar */}
+                      <div className="space-y-2.5 mb-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-gray-300" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>학습 진행도</span>
+                          <span className={`text-xs font-bold ${colors.text}`} style={{ textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
+                            {moduleProgress[module.id] || 0}%
+                          </span>
+                        </div>
+                        <motion.div
+                          className="relative flex-1 h-2.5 bg-secondary rounded-full overflow-visible"
+                        >
+                          <div className="absolute inset-0 rounded-full overflow-hidden">
+                            <motion.div
+                              className={`h-full bg-gradient-to-r ${colors.bg} border-r-2 ${colors.border} relative`}
+                              initial={{ width: 0 }}
+                              animate={{
+                                width: `${moduleProgress[module.id] || 0}%`,
+                                boxShadow: [
+                                  `0 0 6px ${colors.rgba}`,
+                                  `0 0 12px ${colors.rgbaHeavy}`,
+                                  `0 0 6px ${colors.rgba}`
+                                ]
+                              }}
+                              transition={{
+                                width: { duration: 0.5, ease: "easeOut" },
+                                boxShadow: {
+                                  duration: 2,
+                                  repeat: Infinity
+                                }
+                              }}
+                            >
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                                animate={{ x: ["-100%", "200%"] }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  ease: "linear"
+                                }}
+                              />
+                            </motion.div>
+                          </div>
+                        </motion.div>
+                        <div className="flex gap-2 justify-end">
+                          <motion.button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              updateModuleProgress(module.id, -10);
+                            }}
+                            className={`p-2 rounded-lg ${colors.bg} border ${colors.border} active:scale-95 transition-transform min-w-[44px] min-h-[44px] flex items-center justify-center`}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <Minus className={`w-4 h-4 ${colors.text}`} />
+                          </motion.button>
+                          <motion.button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              updateModuleProgress(module.id, 10);
+                            }}
+                            className={`p-2 rounded-lg ${colors.bg} border ${colors.border} active:scale-95 transition-transform min-w-[44px] min-h-[44px] flex items-center justify-center`}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <Plus className={`w-4 h-4 ${colors.text}`} />
+                          </motion.button>
+                        </div>
+                      </div>
+
+                      {/* Project Context Badge */}
+                      <AnimatePresence>
+                        {selectedProject && isModuleActive && selectedProject.moduleUsage[module.id] && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3 }}
+                            className="mt-3 pt-3 border-t border-white/10"
+                          >
+                            <p className="text-xs text-gray-300 leading-relaxed" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+                              {selectedProject.moduleUsage[module.id]}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* Animated Corner Accents */}
+                    <motion.div
+                      className={`absolute top-2 right-2 w-2 h-2 rounded-full bg-${module.color}-400`}
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: 0.5
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+
+                {/* Connection Arrow between modules */}
+                {index < modules.length - 1 && moduleConnections && (
+                  <AnimatePresence>
+                    {showConnections && (
+                      <motion.div
+                        initial={{ opacity: 0, scaleY: 0 }}
+                        animate={{ opacity: 1, scaleY: 1 }}
+                        exit={{ opacity: 0, scaleY: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.2 }}
+                        className="flex justify-center"
+                      >
+                        <motion.svg
+                          width="24"
+                          height="32"
+                          viewBox="0 0 24 32"
+                          className="opacity-60"
+                        >
+                          <motion.path
+                            d="M 12 0 L 12 27"
+                            stroke={getColorClasses(module.color).rgbaHeavy}
+                            strokeWidth="2"
+                            fill="none"
+                            initial={{ pathLength: 0 }}
+                            animate={{ pathLength: 1 }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
+                          />
+                          <motion.path
+                            d="M 8 23 L 12 30 L 16 23"
+                            stroke={getColorClasses(module.color).rgbaHeavy}
+                            strokeWidth="2"
+                            fill="none"
+                            initial={{ pathLength: 0 }}
+                            animate={{ pathLength: 1 }}
+                            transition={{ duration: 0.3, delay: 0.5, ease: "easeInOut" }}
+                          />
+                        </motion.svg>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </React.Fragment>
             );
           })}
         </div>
