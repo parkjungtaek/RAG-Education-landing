@@ -222,7 +222,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
   return (
     <section id="modules" className="relative py-32 px-4 bg-gradient-to-b from-black via-slate-950 to-black overflow-hidden">
       {/* Dense Network Background Grid */}
-      <div className="absolute inset-0 opacity-15">
+      <div className="absolute inset-0 opacity-10 md:opacity-15">
         <svg className="w-full h-full">
           <defs>
             <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
@@ -234,7 +234,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
       </div>
 
       {/* Animated Network Lines Background */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-10 md:opacity-20">
         {[...Array(30)].map((_, i) => (
           <motion.div
             key={`line-${i}`}
@@ -251,7 +251,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
               scale: [0.8, 1, 0.8]
             }}
             transition={{
-              duration: 3 + Math.random() * 3,
+              duration: 4 + Math.random() * 4,
               repeat: Infinity,
               delay: Math.random() * 2
             }}
@@ -259,12 +259,12 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
         ))}
       </div>
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0">
+      {/* Floating Particles - Reduced on mobile */}
+      <div className="absolute inset-0 opacity-60 md:opacity-100">
         {[...Array(50)].map((_, i) => (
           <motion.div
             key={`particle-${i}`}
-            className="absolute rounded-full"
+            className="absolute rounded-full hidden md:block"
             style={{
               width: `${Math.random() * 4 + 2}px`,
               height: `${Math.random() * 4 + 2}px`,
@@ -279,7 +279,33 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
               scale: [1, 1.5, 1]
             }}
             transition={{
-              duration: 4 + Math.random() * 4,
+              duration: 5 + Math.random() * 5,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+        {/* Show fewer particles on mobile */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`particle-mobile-${i}`}
+            className="absolute rounded-full md:hidden"
+            style={{
+              width: `${Math.random() * 3 + 1.5}px`,
+              height: `${Math.random() * 3 + 1.5}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              background: `rgba(${Math.random() > 0.5 ? '6,182,212' : '168,85,247'},${Math.random() * 0.3 + 0.2})`
+            }}
+            animate={{
+              y: [0, -20, 0],
+              x: [0, Math.random() * 15 - 7.5, 0],
+              opacity: [0.15, 0.5, 0.15],
+              scale: [1, 1.3, 1]
+            }}
+            transition={{
+              duration: 6 + Math.random() * 4,
               repeat: Infinity,
               delay: Math.random() * 2,
               ease: "easeInOut"
@@ -363,11 +389,15 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     ease: "easeOut",
                                     delay: 0
                                   }}
-                                  className={`w-full md:w-[180px] max-w-[280px] md:max-w-none p-3 md:p-3 rounded-xl md:rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} flex-shrink-0`}
+                                  className={`w-full md:w-[180px] max-w-[280px] md:max-w-none p-4 md:p-3 rounded-xl md:rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} flex-shrink-0 relative`}
                                   style={{
-                                    boxShadow: `0 0 30px ${colors.rgba}`
+                                    boxShadow: `0 0 15px ${colors.rgba}`,
+                                    textShadow: '0 2px 8px rgba(0,0,0,0.8)'
                                   }}
                                 >
+                                  {/* Dark backdrop overlay for mobile readability */}
+                                  <div className="absolute inset-0 bg-black/40 md:bg-black/20 rounded-xl md:rounded-2xl" />
+
                                   <div className="relative z-10">
                                     <motion.div
                                       initial={{ opacity: 0, scale: 0.5 }}
@@ -375,7 +405,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                       transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
                                       className={`inline-block px-1.5 py-0.5 md:px-2 md:py-1 mb-1.5 md:mb-2 rounded-full bg-gradient-to-r ${colors.bg} border ${colors.border}`}
                                     >
-                                      <span className={`text-[10px] md:text-xs font-bold ${colors.text}`}>
+                                      <span className={`text-[10px] md:text-xs font-bold ${colors.text}`} style={{ textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
                                         M_{moduleId}
                                       </span>
                                     </motion.div>
@@ -383,8 +413,8 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                       initial={{ opacity: 0, y: 5 }}
                                       animate={{ opacity: 1, y: 0 }}
                                       transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
-                                      className="text-xs md:text-xs font-bold text-white leading-tight line-clamp-3"
-                                      style={{ wordBreak: 'keep-all' }}
+                                      className="text-sm md:text-xs font-bold text-white leading-tight line-clamp-3"
+                                      style={{ wordBreak: 'keep-all', textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}
                                     >
                                       {module.title}
                                     </motion.h3>
@@ -700,18 +730,21 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 }}
               >
                 <motion.div
-                  className={`relative w-[280px] md:w-[380px] p-6 md:p-8 rounded-3xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} cursor-pointer group`}
+                  className={`relative w-[280px] md:w-[380px] p-4 md:p-8 rounded-3xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} cursor-pointer group`}
+                  style={{
+                    boxShadow: `0 0 ${isModuleActive ? '20px' : '15px'} ${colors.rgba}`
+                  }}
                   whileHover={isModuleDimmed ? {} : {
                     scale: 1.08,
                     rotate: [0, 1, -1, 0],
-                    boxShadow: `0 0 60px ${colors.rgbaHeavy}`
+                    boxShadow: `0 0 40px ${colors.rgbaHeavy}`
                   }}
                   animate={{
                     y: [0, -10, 0],
                     boxShadow: isModuleActive ? [
-                      `0 0 30px ${colors.rgba}`,
-                      `0 0 50px ${colors.rgbaHeavy}`,
-                      `0 0 30px ${colors.rgba}`
+                      `0 0 20px ${colors.rgba}`,
+                      `0 0 30px ${colors.rgbaHeavy}`,
+                      `0 0 20px ${colors.rgba}`
                     ] : undefined,
                     borderWidth: isModuleActive ? "3px" : "2px"
                   }}
@@ -727,6 +760,8 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                     }
                   }}
                 >
+                  {/* Dark backdrop overlay for mobile readability */}
+                  {isModuleActive && <div className="absolute inset-0 bg-black/30 md:bg-black/10 rounded-3xl" />}
 
                   {/* Content */}
                   <div className="relative z-10">
@@ -735,9 +770,9 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                       className={`inline-block px-4 py-2 mb-4 rounded-full bg-gradient-to-r ${colors.bg} border-2 ${colors.border}`}
                       animate={{
                         boxShadow: [
-                          `0 0 10px ${colors.rgba}`,
-                          `0 0 20px ${colors.rgbaHeavy}`,
-                          `0 0 10px ${colors.rgba}`
+                          `0 0 8px ${colors.rgba}`,
+                          `0 0 15px ${colors.rgbaHeavy}`,
+                          `0 0 8px ${colors.rgba}`
                         ]
                       }}
                       transition={{
@@ -745,21 +780,21 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                         repeat: Infinity
                       }}
                     >
-                      <span className={`text-sm font-bold ${colors.text}`}>
+                      <span className={`text-sm font-bold ${colors.text}`} style={{ textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
                         Module_{module.id}
                       </span>
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight mb-3">
+                    <h3 className="text-xl md:text-xl font-bold text-white leading-tight mb-3" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}>
                       {module.title}
                     </h3>
 
                     {/* Progress Bar */}
                     <div className="space-y-3 mb-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-400">학습 진행도</span>
-                        <span className={`text-xs font-bold ${colors.text}`}>
+                        <span className="text-xs text-gray-300" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>학습 진행도</span>
+                        <span className={`text-xs font-bold ${colors.text}`} style={{ textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
                           {moduleProgress[module.id] || 0}%
                         </span>
                       </div>
@@ -775,9 +810,9 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                             animate={{
                               width: `${moduleProgress[module.id] || 0}%`,
                               boxShadow: [
-                                `0 0 10px ${colors.rgba}`,
-                                `0 0 20px ${colors.rgbaHeavy}`,
-                                `0 0 10px ${colors.rgba}`
+                                `0 0 8px ${colors.rgba}`,
+                                `0 0 15px ${colors.rgbaHeavy}`,
+                                `0 0 8px ${colors.rgba}`
                               ]
                             }}
                             transition={{
@@ -873,7 +908,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                           transition={{ duration: 0.3 }}
                           className="mt-3 pt-3 border-t border-white/10"
                         >
-                          <p className="text-xs text-gray-400 leading-relaxed">
+                          <p className="text-xs text-gray-300 leading-relaxed" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
                             {selectedProject.moduleUsage[module.id]}
                           </p>
                         </motion.div>
