@@ -159,11 +159,11 @@ export const ProjectsSection = ({ selectedProjectId, onProjectSelect }: Projects
                         e.stopPropagation();
                         onProjectSelect(project.id);
                         setTimeout(() => {
-                          const modulesSection = document.getElementById('modules');
-                          if (modulesSection) {
-                            modulesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          const projectDetail = document.getElementById(`project-detail-${project.id}`);
+                          if (projectDetail) {
+                            projectDetail.scrollIntoView({ behavior: 'smooth', block: 'center' });
                           }
-                        }, 300);
+                        }, 600);
                       }}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />

@@ -308,6 +308,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
         <AnimatePresence mode="wait">
           {selectedProject && (
             <motion.div
+              id={`project-detail-${selectedProject.id}`}
               key={selectedProject.id}
               initial={{ opacity: 0, y: -20, height: 0 }}
               animate={{ opacity: 1, y: 0, height: "auto" }}

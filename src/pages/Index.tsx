@@ -21,11 +21,11 @@ const Index = () => {
       setSelectedProjectId(projectId);
 
       setTimeout(() => {
-        const modulesSection = document.getElementById('modules');
-        if (modulesSection) {
-          modulesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const projectDetail = document.getElementById(`project-detail-${projectId}`);
+        if (projectDetail) {
+          projectDetail.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-      }, 300);
+      }, 600);
     }
   };
 
