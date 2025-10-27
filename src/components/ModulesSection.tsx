@@ -329,10 +329,8 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                 {/* Module Flow Visualization */}
                 <div className="mb-6">
                   <h4 className="text-sm font-bold text-primary mb-3">학습 흐름</h4>
-                  <div className="relative min-h-[120px] md:min-h-[180px] flex items-center justify-center py-3 px-2 md:py-6 md:px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20 overflow-x-auto scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
-                    <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-primary/10 to-transparent pointer-events-none z-10 md:hidden" />
-                    <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-primary/10 to-transparent pointer-events-none z-10 md:hidden" />
-                    <div className="flex items-center gap-2 md:gap-4 justify-start md:justify-center relative min-w-max px-1">
+                  <div className="relative min-h-[120px] md:min-h-[180px] flex items-center justify-center py-3 px-2 md:py-6 md:px-4 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/20">
+                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-4 justify-center relative w-full md:w-auto px-1">
                       {selectedProject.connectedModules.map((moduleId, index) => {
                         const module = modules.find(m => m.id === moduleId);
                         if (!module) return null;
@@ -364,7 +362,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     ease: "easeOut",
                                     delay: 0
                                   }}
-                                  className={`w-[110px] md:w-[180px] p-2 md:p-3 rounded-xl md:rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} flex-shrink-0`}
+                                  className={`w-full md:w-[180px] max-w-[280px] md:max-w-none p-3 md:p-3 rounded-xl md:rounded-2xl bg-gradient-to-br ${colors.bg} backdrop-blur-md border-2 ${colors.border} ${colors.glow} flex-shrink-0`}
                                   style={{
                                     boxShadow: `0 0 30px ${colors.rgba}`
                                   }}
@@ -384,7 +382,7 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                       initial={{ opacity: 0, y: 5 }}
                                       animate={{ opacity: 1, y: 0 }}
                                       transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
-                                      className="text-[10px] md:text-xs font-bold text-white leading-tight line-clamp-3"
+                                      className="text-xs md:text-xs font-bold text-white leading-tight line-clamp-3"
                                       style={{ wordBreak: 'keep-all' }}
                                     >
                                       {module.title}
@@ -413,8 +411,9 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                     animate={{ opacity: 1, scaleX: 1 }}
                                     exit={{ opacity: 0, scaleX: 0 }}
                                     transition={{ duration: 1, delay: index * 0.3, ease: "easeInOut" }}
-                                    className="flex items-center flex-shrink-0"
+                                    className="flex items-center justify-center flex-shrink-0"
                                   >
+                                    {/* Desktop: Horizontal arrow */}
                                     <motion.svg
                                       width="40"
                                       height="24"
@@ -440,25 +439,26 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
                                         transition={{ duration: 0.4, delay: 0.6, ease: "easeInOut" }}
                                       />
                                     </motion.svg>
+                                    {/* Mobile: Vertical arrow */}
                                     <motion.svg
-                                      width="20"
-                                      height="16"
-                                      viewBox="0 0 20 16"
+                                      width="24"
+                                      height="40"
+                                      viewBox="0 0 24 40"
                                       className="md:hidden"
                                     >
                                       <motion.path
-                                        d="M 0 8 L 15 8"
+                                        d="M 12 0 L 12 35"
                                         stroke={colors.rgbaHeavy}
-                                        strokeWidth="1.5"
+                                        strokeWidth="2"
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
                                         transition={{ duration: 1, ease: "easeInOut" }}
                                       />
                                       <motion.path
-                                        d="M 12 5 L 18 8 L 12 11"
+                                        d="M 8 30 L 12 38 L 16 30"
                                         stroke={colors.rgbaHeavy}
-                                        strokeWidth="1.5"
+                                        strokeWidth="2"
                                         fill="none"
                                         initial={{ pathLength: 0 }}
                                         animate={{ pathLength: 1 }}
