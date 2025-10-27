@@ -343,10 +343,10 @@ export const ModulesSection = ({ selectedProjectId, connectedModules, moduleConn
           className="text-center mb-20"
         >
           <h2 className="text-3xl md:text-6xl font-black mb-6 text-white">
-            학습 모듈
+            프로젝트 단위 모듈
           </h2>
           <p className="text-lg md:text-2xl text-gray-400 font-medium">
-            연결된 지식의 네트워크
+            연결된 프로젝트 모듈 네트워크
           </p>
         </motion.div>
 
